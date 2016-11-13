@@ -15,6 +15,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
     WP_CLI::add_command( 'pll cache',     Polylang_CLI\Commands\Cache::class );
     WP_CLI::add_command( 'pll doctor',    Polylang_CLI\Commands\Doctor::class );
+    WP_CLI::add_command( 'pll flag',      Polylang_CLI\Commands\Flag::class );
     WP_CLI::add_command( 'pll lang',      Polylang_CLI\Commands\Lang::class );
     WP_CLI::add_command( 'pll option',    Polylang_CLI\Commands\Option::class );
     WP_CLI::add_command( 'pll post',      Polylang_CLI\Commands\Post::class );
