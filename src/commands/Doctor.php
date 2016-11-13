@@ -125,7 +125,7 @@ class Doctor extends BaseCommand {
      *
      * ## EXAMPLES
      *
-     *     wp pll lang recount
+     *     wp pll doctor recount
      */
     public function recount() {
 
