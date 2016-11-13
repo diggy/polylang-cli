@@ -202,4 +202,60 @@ class Option extends BaseCommand
         return \WP_CLI::success( "Default language was set to {$language}" );
     }
 
+    /**
+     * Enable post meta syncing across languages.
+     *
+     * Accepted values:
+     *
+     * * taxonomies
+     * * post_meta
+     * * comment_status
+     * * ping_status
+     * * sticky_posts
+     * * post_date
+     * * post_format
+     * * post_parent
+     * * _wp_page_template
+     * * menu_order
+     * * _thumbnail_id
+     *
+     * ## OPTIONS
+     *
+     * <item>
+     * : Item, or comma-separated list of items, to sync. Required.
+     *
+     * ## EXAMPLES
+     *
+     *     $ wp pll option sync taxonomies,post_meta
+     *     Success: Polylang `sync` option updated.
+     */
+    public function sync( $args, $assoc_args ) {
+
+        # get args as array
+        $args = explode( ',', $args[0] );
+
+        # get list of syncable items (array key = input name, array value = translated item name)
+        $syncable = \PLL_Settings_Sync::list_metas_to_sync();
+
+        # validate args
+        foreach ( $args as $key ) {
+            if ( ! in_array( $key, array_keys( $syncable ) ) ) {
+                return \WP_CLI::error( sprintf( 'Invalid key: %s', $key ) );
+            }
+        }
+
+        # get current settings
+        $settings = (array) $this->pll->model->options['sync'];
+
+        # update current settings
+        $settings = array_merge( $settings, array_combine( $args, array_fill( 1, count( $args ), 1 ) ) );
+
+        $this->pll->model->options['sync'] = $settings;
+
+        # update options, default category and nav menu locations
+        $this->pll->model->update_default_lang( pll_default_language() );
+
+        \WP_CLI::success( 'Polylang `sync` option updated.' );
+    }
+
 }
