@@ -1,0 +1,12 @@
+.DS_Store
+.git
+.gitignore
+.editorconfig
+.travis.yml
+circle.yml
+bin/
+features/
+utils/
+*.zip
+*.tar.gz
+www/

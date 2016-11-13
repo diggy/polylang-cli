@@ -1,0 +1,20 @@
+{
+    "name": "diggy/polylang-cli",
+    "description": "CLI interface for the Polylang plugin",
+    "type": "wp-cli-package",
+    "homepage": "https://github.com/diggy/polylang-cli",
+    "license": "MIT",
+    "authors": [],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Polylang_CLI\\": "src"
+        },
+        "files": ["command.php"]
+    },
+    "require": {
+    },
+    "require-dev": {
+        "behat/behat": "~2.5"
+    }
+}
