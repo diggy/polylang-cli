@@ -3,6 +3,9 @@
 namespace Polylang_CLI\Commands;
 
 use \WP_CLI_Command;
+
+use \Polylang_CLI\Api\Api;
+
 use \Polylang_CLI\Traits\Utils;
 use \Polylang_CLI\Traits\SettingsErrors;
 
@@ -21,6 +24,7 @@ class BaseCommand extends WP_CLI_Command
     use SettingsErrors;
 
     protected $pll = null;
+    protected $api = null;
 
     protected $taxonomy      = 'language';
     protected $taxonomy_term = 'term_language';
@@ -77,6 +81,13 @@ class BaseCommand extends WP_CLI_Command
 
         # get Polylang instance
         $this->pll = \PLL();
+
+        # make Polylang API functions available
+        $this->api = new Api( PLL_INC . '/api.php' );
+
+        // $this->api->this_func( [ 'wreaks' => 'havoc' ] );
+        // var_dump( $this->api->pll_default_language( 'locale' ) ); // bad
+        // var_dump( $this->api->default_language( 'locale' ) ); // good
     }
 
 }
