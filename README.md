@@ -294,13 +294,13 @@ wp pll lang delete <language-code> [--keep_default=<bool>]
 **EXAMPLES**
 
     # delete the Spanish language
-    wp pll delete es
+    wp pll lang delete es
 
     # delete all languages except the default language
-    wp pll delete all
+    wp pll lang delete all
 
     # delete all languages including the default language
-    wp pll delete all --keep_default=0
+    wp pll lang delete all --keep_default=0
 
 
 
@@ -319,7 +319,7 @@ wp pll lang generate [--count=<number>]
 
 **EXAMPLES**
 
-    wp pll generate --count=25
+    wp pll lang generate --count=25
 
 
 
@@ -347,7 +347,7 @@ wp pll lang get <language-code> [--field=<field>] [--fields=<fields>] [--format=
 
 **EXAMPLES**
 
-    wp pll get en --format=json
+    wp pll lang get en --format=json
 
 
 
@@ -428,7 +428,7 @@ wp pll lang update <language-code> [--name=<name>] [--slug=<slug>] [--locale=<lo
 
 **EXAMPLES**
 
-    wp pll update en --name=English --order=15
+    wp pll lang update en --name=English --order=15
 
 
 
@@ -851,7 +851,7 @@ These fields are optionally available:
     [{"ID":1,"post_title":"Hello world!","post_name":"hello-world","post_date":"2015-06-20 09:00:10","post_status":"publish"},{"ID":1178,"post_title":"Markup: HTML Tags and Formatting","post_name":"markup-html-tags-and-formatting","post_date":"2013-01-11 20:22:19","post_status":"draft"}]
 
     # List all pages
-    $ wp pll post nl list --post_type=page --fields=post_title,post_status
+    $ wp pll post list nl --post_type=page --fields=post_title,post_status
     +-------------+-------------+
     | post_title  | post_status |
     +-------------+-------------+
@@ -859,11 +859,11 @@ These fields are optionally available:
     +-------------+-------------+
 
     # List ids of all pages and posts
-    $ wp pll post list --post_type=page,post --format=ids
+    $ wp pll post list es --post_type=page,post --format=ids
     15 25 34 37 198
 
     # List given posts
-    $ wp post list --post__in=1,3
+    $ wp pll post list nl --post__in=1,3
     +----+--------------+-------------+---------------------+-------------+
     | ID | post_title   | post_name   | post_date           | post_status |
     +----+--------------+-------------+---------------------+-------------+
@@ -939,6 +939,20 @@ wp pll post-type list
 
 
 
+### wp pll taxonomy
+
+Class Taxonomy
+
+~~~
+wp pll taxonomy 
+~~~
+
+
+
+
+
+
+
 ### wp pll taxonomy disable
 
 Disable translation for taxonomies
@@ -974,16 +988,6 @@ wp pll taxonomy enable <taxonomies>
 **EXAMPLES**
 
     wp pll taxonomy enable genre
-
-
-
-### wp pll taxonomy
-
-Class Taxonomy
-
-~~~
-wp pll taxonomy 
-~~~
 
 ## Installing
 
