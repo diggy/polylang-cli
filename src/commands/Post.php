@@ -164,9 +164,9 @@ class Post extends BaseCommand {
     }
 
 	/**
-     * Generate some posts.
+     * Generate some posts and their translations.
      *
-     * Creates a specified number of new posts with dummy data.
+     * Creates a specified number of sets of new posts with dummy data.
      *
      * ## OPTIONS
      *
@@ -236,10 +236,12 @@ class Post extends BaseCommand {
      */
     public function generate( $args, $assoc_args ) {
 
-        $languages = wp_list_pluck( $this->pll->model->get_languages_list(), 'slug' );
-        $default_language = pll_default_language();
+        $languages = $this->api->languages_list();
+        $default_language = $this->api->default_language();
 
-        $assoc_args['count'] = isset( $assoc_args['count'] ) ? $assoc_args['count'] : 3;
+        // @todo validate post type
+
+        $assoc_args['count'] = isset( $assoc_args['count'] ) ? intval( $assoc_args['count'] ) : 3;
         $assoc_args['count'] = count( $languages ) * $assoc_args['count'];
 
         ob_start();
@@ -258,10 +260,10 @@ class Post extends BaseCommand {
 
             foreach ( $ids[$i] as $lang => $post_id ) {
 
-                pll_set_post_language( $post_id, $lang );
+                $this->api->set_post_language( $post_id, $lang );
             }
 
-            pll_save_post_translations( $ids[$i] );
+            $this->api->save_post_translations( $ids[$i] );
         }
 
         \WP_CLI::success( sprintf( 'Generated %d posts.', $assoc_args['count'] ) );
