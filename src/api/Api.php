@@ -5,17 +5,19 @@ namespace Polylang_CLI\Api;
 class Api {
 
     protected $path = null;
+    protected $functions = array();
     protected $exceptions = array();
 
     public function __construct( $path )
     {
         $this->path = $path;
+        $this->functions = $this->functions();
         $this->exceptions = array( 'pll__', 'pll_e', 'PLL' );
     }
 
     public function __call( $func, $args )
     {
-        if ( ! in_array( $func, $this->functions() ) )
+        if ( ! in_array( $func, $this->functions ) )
             return \WP_CLI::error( "$func is not a Polylang API function" );
 
         \WP_CLI::debug(
