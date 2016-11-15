@@ -16,5 +16,18 @@
     },
     "require-dev": {
         "behat/behat": "~2.5"
+    },
+    "extra": {
+        "commands": [
+            "pll api",
+            "pll cache",
+            "pll doctor",
+            "pll flag",
+            "pll lang",
+            "pll option",
+            "pll post",
+            "pll post-type",
+            "pll taxonomy"
+        ]
     }
 }

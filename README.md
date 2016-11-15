@@ -9,7 +9,127 @@ Quick links: [Using](#using) | [Installing](#installing) | [Contributing](#contr
 
 ## Using
 
+This package implements the following commands:
 
+### wp pll api
+
+Class Api
+
+~~~
+wp pll api 
+~~~
+
+
+
+
+
+
+
+### wp pll cache
+
+Class Cache
+
+~~~
+wp pll cache 
+~~~
+
+
+
+
+
+
+
+### wp pll doctor
+
+Class Doctor
+
+~~~
+wp pll doctor 
+~~~
+
+
+
+
+
+
+
+### wp pll flag
+
+Class Flag
+
+~~~
+wp pll flag 
+~~~
+
+
+
+
+
+
+
+### wp pll lang
+
+Class Lang
+
+~~~
+wp pll lang 
+~~~
+
+
+
+
+
+
+
+### wp pll option
+
+Class Option
+
+~~~
+wp pll option 
+~~~
+
+
+
+
+
+
+
+### wp pll post
+
+Class Post
+
+~~~
+wp pll post 
+~~~
+
+
+
+
+
+
+
+### wp pll post-type
+
+Class PostType
+
+~~~
+wp pll post-type 
+~~~
+
+
+
+
+
+
+
+### wp pll taxonomy
+
+Class Taxonomy
+
+~~~
+wp pll taxonomy 
+~~~
 
 ## Installing
 
