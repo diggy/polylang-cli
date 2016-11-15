@@ -13,6 +13,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
     // WP_CLI::add_command( 'pll',        Polylang_CLI\Cli::class );
 
+    WP_CLI::add_command( 'pll api',       Polylang_CLI\Commands\Api::class );
     WP_CLI::add_command( 'pll cache',     Polylang_CLI\Commands\Cache::class );
     WP_CLI::add_command( 'pll doctor',    Polylang_CLI\Commands\Doctor::class );
     WP_CLI::add_command( 'pll flag',      Polylang_CLI\Commands\Flag::class );
