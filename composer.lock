@@ -237,12 +237,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "ddb26174398f48486ac4231dc4f4cb27c3acba71"
+                "reference": "dfdad5556befe30d409f719b08dc5e84a7b3714f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/ddb26174398f48486ac4231dc4f4cb27c3acba71",
-                "reference": "ddb26174398f48486ac4231dc4f4cb27c3acba71",
+                "url": "https://api.github.com/repos/symfony/console/zipball/dfdad5556befe30d409f719b08dc5e84a7b3714f",
+                "reference": "dfdad5556befe30d409f719b08dc5e84a7b3714f",
                 "shasum": ""
             },
             "require": {
@@ -290,7 +290,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-04 17:49:05"
+            "time": "2016-11-14 16:15:57"
         },
         {
             "name": "symfony/debug",
@@ -576,12 +576,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "53ad9faffe141fbe8f98cd6a7fd9a5e84513f56c"
+                "reference": "e79d363049d1c2128f133a2667e4f4190904f7f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/53ad9faffe141fbe8f98cd6a7fd9a5e84513f56c",
-                "reference": "53ad9faffe141fbe8f98cd6a7fd9a5e84513f56c",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/e79d363049d1c2128f133a2667e4f4190904f7f4",
+                "reference": "e79d363049d1c2128f133a2667e4f4190904f7f4",
                 "shasum": ""
             },
             "require": {
@@ -593,7 +593,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "1.3-dev"
                 }
             },
             "autoload": {
@@ -627,7 +627,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2016-08-30 17:06:17"
+            "time": "2016-11-14 01:06:16"
         },
         {
             "name": "symfony/translation",
@@ -635,12 +635,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "ddadff0f4a23701a21f13d005202b2de914803c0"
+                "reference": "30a3552f917d2a2047b36dc44e1c10ca681371cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/ddadff0f4a23701a21f13d005202b2de914803c0",
-                "reference": "ddadff0f4a23701a21f13d005202b2de914803c0",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/30a3552f917d2a2047b36dc44e1c10ca681371cc",
+                "reference": "30a3552f917d2a2047b36dc44e1c10ca681371cc",
                 "shasum": ""
             },
             "require": {
@@ -691,7 +691,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-06 16:21:30"
+            "time": "2016-11-14 16:15:57"
         },
         {
             "name": "symfony/yaml",
@@ -699,12 +699,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "58666e4ac3a2d378798f020308b35a75ffbeaafb"
+                "reference": "befb26a3713c97af90d25dd12e75621ef14d91ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/58666e4ac3a2d378798f020308b35a75ffbeaafb",
-                "reference": "58666e4ac3a2d378798f020308b35a75ffbeaafb",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/befb26a3713c97af90d25dd12e75621ef14d91ff",
+                "reference": "befb26a3713c97af90d25dd12e75621ef14d91ff",
                 "shasum": ""
             },
             "require": {
@@ -740,7 +740,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-03 07:52:58"
+            "time": "2016-11-14 16:15:57"
         }
     ],
     "aliases": [],
