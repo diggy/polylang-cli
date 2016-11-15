@@ -118,7 +118,7 @@ class Lang extends BaseCommand
      *
      * ## EXAMPLES
      *
-     *     wp pll get en --format=json
+     *     wp pll lang get en --format=json
      */
     public function get( $args, $assoc_args ) {
 
@@ -223,7 +223,7 @@ class Lang extends BaseCommand
      *
      * ## EXAMPLES
      *
-     *     wp pll update en --name=English --order=15
+     *     wp pll lang update en --name=English --order=15
      */
     public function update( $args, $assoc_args ) {
 
@@ -286,13 +286,13 @@ class Lang extends BaseCommand
      * ## EXAMPLES
      *
      *     # delete the Spanish language
-     *     wp pll delete es
+     *     wp pll lang delete es
      *
      *     # delete all languages except the default language
-     *     wp pll delete all
+     *     wp pll lang delete all
      *
      *     # delete all languages including the default language
-     *     wp pll delete all --keep_default=0
+     *     wp pll lang delete all --keep_default=0
      */
     public function delete( $args, $assoc_args ) {
 
@@ -368,7 +368,7 @@ class Lang extends BaseCommand
      *
      * ## EXAMPLES
      *
-     *     wp pll generate --count=25
+     *     wp pll lang generate --count=25
      */
     public function generate( $args, $assoc_args ) {
 
