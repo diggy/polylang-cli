@@ -25,6 +25,26 @@ wp pll api
 
 
 
+### wp pll api list
+
+List Polylang procedural API functions.
+
+~~~
+wp pll api list [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	[--format=<format>]
+		Accepted values: table, csv, json, count, yaml. Default: table
+
+**EXAMPLES**
+
+    $ wp pll api list
+    $ wp pll api list --format=csv
+
+
+
 ### wp pll cache
 
 Class Cache
@@ -36,6 +56,48 @@ wp pll cache
 
 
 
+
+
+
+### wp pll cache clear
+
+Clears the Polylang languages cache.
+
+~~~
+wp pll cache clear 
+~~~
+
+**EXAMPLES**
+
+    $ wp pll cache clear
+    Success: Languages cache cleared.
+
+    $ wp pll cache clear --quiet
+
+
+
+### wp pll cache get
+
+Gets the Polylang languages cache.
+
+~~~
+wp pll cache get [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	[--format=<format>]
+		Accepted values: table, csv, json, count, yaml. Default: table
+
+**EXAMPLES**
+
+    $ wp pll cache get --format=json
+    Success: There are 1 items in the languages cache:
+    [{"term_id":2,"name":"Nederlands","slug":"nl","term_group":0,"term_taxonomy_id":2,"taxonomy":"language","description":"nl_NL","parent":0,"count":6259,"tl_term_id":3,"tl_term_taxonomy_id":3,"tl_count":42,"locale":"nl_NL","is_rtl":0,"flag_url":"","flag":"","home_url":"http:\/\/example.dev\/nl\/","search_url":"http:\/\/example.dev\/nl\/","host":null,"mo_id":"3","page_on_front":false,"page_for_posts":false,"filter":"raw","flag_code":""}]
+
+    $ wp pll cache get --format=csv --quiet
+    term_id,name,slug,term_group,term_taxonomy_id,taxonomy,description,parent,count,tl_term_id,tl_term_taxonomy_id,tl_count,locale,is_rtl,flag_url,flag,home_url,search_url,host,mo_id,page_on_front,page_for_posts,filter,flag_code
+    2,Nederlands,nl,0,2,language,nl_NL,0,10,3,3,42,nl_NL,0,,,http://example.dev/nl/,http://example.dev/nl/,,3,,,raw,
 
 
 
@@ -53,6 +115,69 @@ wp pll doctor
 
 
 
+### wp pll doctor check
+
+List untranslated post and term objects (translatable).
+
+~~~
+wp pll doctor check [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	[--format=<format>]
+		Render output in a particular format.
+		---
+		default: table
+		options:
+		  - table
+		  - csv
+		  - json
+		  - count
+		  - yaml
+		---
+
+**EXAMPLES**
+
+    wp pll doctor check
+
+
+
+### wp pll doctor recount
+
+Recalculate number of posts assigned to each language taxonomy term.
+
+~~~
+wp pll doctor recount 
+~~~
+
+In instances where manual updates are made to the terms assigned to
+posts in the database, the number of posts associated with a term
+can become out-of-sync with the actual number of posts.
+
+This command runs wp_update_term_count() on the language taxonomy's terms
+to bring the count back to the correct value.
+
+**EXAMPLES**
+
+    wp pll doctor recount
+
+
+
+### wp pll doctor translate
+
+Translate untranslated posts and taxonomies in bulk
+
+~~~
+wp pll doctor translate 
+~~~
+
+**EXAMPLES**
+
+    wp pll doctor translate
+
+
+
 ### wp pll flag
 
 Class Flag
@@ -64,6 +189,26 @@ wp pll flag
 
 
 
+
+
+
+### wp pll flag list
+
+List Polylang flags.
+
+~~~
+wp pll flag list [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	[--format=<format>]
+		Accepted values: table, csv, json, count, yaml. Default: table
+
+**EXAMPLES**
+
+    $ wp pll flag list
+    $ wp pll flag list --format=csv
 
 
 
@@ -81,6 +226,232 @@ wp pll lang
 
 
 
+### wp pll lang create
+
+Create a language.
+
+~~~
+wp pll lang create <name> <language-code> <locale> [--rtl=<bool>] [--order=<int>] [--flag=<string>] [--no_default_cat=<bool>]
+~~~
+
+**OPTIONS**
+
+	<name>
+		Language name (used only for display). Required.
+
+	<language-code>
+		Language code (slug, ideally 2-letters ISO 639-1 language code). Required.
+
+	<locale>
+		WordPress locale. Required.
+
+	[--rtl=<bool>]
+		Right-to-left or left-to-right. Optional. Default: false
+
+	[--order=<int>]
+		Language order. Optional.
+
+	[--flag=<string>]
+		Country code, see flags.php. Optional.
+
+	[--no_default_cat=<bool>]
+		If set, no default category will be created for this language. Optional.
+
+**EXAMPLES**
+
+    $ wp pll lang create Français fr fr_FR
+
+    $ wp pll lang create Arabic ar ar_AR --rtl=true --order=3
+
+    $ wp pll lang create --prompt
+    1/7 <name>: Français
+    2/7 <language-code>: fr
+    3/7 <locale>: fr_FR
+    4/7 [--rtl=<bool>]: 0
+    5/7 [--order=<int>]: 5
+    6/7 [--flag=<string>]: fr
+    7/7 [--no_default_cat=<bool>]:
+    Success: Language added.
+
+
+
+### wp pll lang delete
+
+Delete a language.
+
+~~~
+wp pll lang delete <language-code> [--keep_default=<bool>]
+~~~
+
+**OPTIONS**
+
+	<language-code>
+		Comma-separated slugs of the languages to delete. Pass `all` to delete all currently install languages.
+
+	[--keep_default=<bool>]
+		Whether to keep the default language. Default: true
+
+**EXAMPLES**
+
+    # delete the Spanish language
+    wp pll delete es
+
+    # delete all languages except the default language
+    wp pll delete all
+
+    # delete all languages including the default language
+    wp pll delete all --keep_default=0
+
+
+
+### wp pll lang generate
+
+Generate some languages.
+
+~~~
+wp pll lang generate [--count=<number>]
+~~~
+
+**OPTIONS**
+
+	[--count=<number>]
+		How many languages to generate. Default: 10
+
+**EXAMPLES**
+
+    wp pll generate --count=25
+
+
+
+### wp pll lang get
+
+Get a language
+
+~~~
+wp pll lang get <language-code> [--field=<field>] [--fields=<fields>] [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	<language-code>
+		ID of the term to get
+
+	[--field=<field>]
+		Instead of returning the whole term, returns the value of a single field.
+
+	[--fields=<fields>]
+		Limit the output to specific fields. Defaults to all fields.
+
+	[--format=<format>]
+		Accepted values: table, json, csv, yaml. Default: table
+
+**EXAMPLES**
+
+    wp pll get en --format=json
+
+
+
+### wp pll lang list
+
+List terms in a taxonomy.
+
+~~~
+wp pll lang list [--<field>=<value>] [--field=<field>] [--fields=<fields>] [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	[--<field>=<value>]
+		Filter by one or more fields (see get_terms() $args parameter for a list of fields).
+
+	[--field=<field>]
+		Prints the value of a single field for each term.
+
+	[--fields=<fields>]
+		Limit the output to specific object fields.
+
+	[--format=<format>]
+		Accepted values: table, csv, json, count, yaml. Default: table
+
+**AVAILABLE FIELDS**
+
+These fields will be displayed by default for each term:
+
+* term_id
+* term_taxonomy_id
+* name
+* slug
+* description
+* parent
+* count
+
+There are no optionally available fields.
+
+**EXAMPLES**
+
+    wp pll lang list --format=csv
+
+    wp pll lang list --fields=name,slug
+
+
+
+### wp pll lang update
+
+Update a language.
+
+~~~
+wp pll lang update <language-code> [--name=<name>] [--slug=<slug>] [--locale=<locale>] [--rtl=<bool>] [--order=<int>] [--flag=<string>]
+~~~
+
+**OPTIONS**
+
+	<language-code>
+		Language code (slug) for the language to update. Required.
+
+	[--name=<name>]
+		A new name for the language (used only for display). Optional.
+
+	[--slug=<slug>]
+		A new language code for the language (ideally 2-letters ISO 639-1 language code). Optional.
+
+	[--locale=<locale>]
+		Optional. A new WordPress locale for the language.
+
+	[--rtl=<bool>]
+		Optional. RTL or LTR, 1 or 0
+
+	[--order=<int>]
+		Optional. A new order (term_group) value for the language.
+
+	[--flag=<string>]
+		Optional. A new flag (country code) for the language, see flags.php.
+
+**EXAMPLES**
+
+    wp pll update en --name=English --order=15
+
+
+
+### wp pll lang url
+
+Get language url
+
+~~~
+wp pll lang url <language-code>
+~~~
+
+**OPTIONS**
+
+	<language-code>
+		The language code (slug) to get the URL for. Required.
+
+**EXAMPLES**
+
+    wp pll lang url en
+    wp pll lang url es
+
+
+
 ### wp pll option
 
 Class Option
@@ -92,6 +463,169 @@ wp pll option
 
 
 
+
+
+
+### wp pll option default
+
+Gets or sets the default language
+
+~~~
+wp pll option default [<language-code>]
+~~~
+
+**OPTIONS**
+
+	[<language-code>]
+		Optional. The language code (slug) to set as default.
+
+**EXAMPLES**
+
+  wp polylang default
+  wp polylang default nl
+
+
+
+### wp pll option get
+
+Get Polylang settings.
+
+~~~
+wp pll option get <option_name>
+~~~
+
+**OPTIONS**
+
+	<option_name>
+		Option name. Use the options subcommand to get a list of accepted values. Required.
+
+**EXAMPLES**
+
+    wp pll option get default_lang
+
+
+
+### wp pll option list
+
+List Polylang settings
+
+~~~
+wp pll option list [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	[--format=<format>]
+		Accepted values: table, csv, json, count, yaml. Default: table
+
+**EXAMPLES**
+
+    wp pll option list
+    wp pll option list --format=csv
+
+
+
+### wp pll option reset
+
+Reset Polylang settings
+
+~~~
+wp pll option reset 
+~~~
+
+**EXAMPLES**
+
+    wp pll option reset
+
+
+
+### wp pll option sync
+
+Enable post meta syncing across languages.
+
+~~~
+wp pll option sync <item>
+~~~
+
+Accepted values:
+
+* taxonomies
+* post_meta
+* comment_status
+* ping_status
+* sticky_posts
+* post_date
+* post_format
+* post_parent
+* _wp_page_template
+* menu_order
+* _thumbnail_id
+
+**OPTIONS**
+
+	<item>
+		Item, or comma-separated list of items, to sync. Required.
+
+**EXAMPLES**
+
+    $ wp pll option sync taxonomies,post_meta
+    Success: Polylang `sync` option updated.
+
+
+
+### wp pll option unsync
+
+Disable post meta syncing across languages.
+
+~~~
+wp pll option unsync <item>
+~~~
+
+Accepted values:
+
+* taxonomies
+* post_meta
+* comment_status
+* ping_status
+* sticky_posts
+* post_date
+* post_format
+* post_parent
+* _wp_page_template
+* menu_order
+* _thumbnail_id
+
+**OPTIONS**
+
+	<item>
+		Item, or comma-separated list of items, to unsync. Required.
+
+**EXAMPLES**
+
+    $ wp pll option unsync post_format,_wp_page_template
+    Success: Polylang `sync` option updated.
+
+
+
+### wp pll option update
+
+Update Polylang settings.
+
+~~~
+wp pll option update <option_name> <new_value>
+~~~
+
+**OPTIONS**
+
+	<option_name>
+		Option name. Use the options subcommand to get a list of accepted values. Required.
+
+	<new_value>
+		New value for the option. Required.
+
+**EXAMPLES**
+
+    wp pll option update default_lang nl
 
 
 
@@ -109,6 +643,236 @@ wp pll post
 
 
 
+### wp pll post count
+
+Count posts for a language
+
+~~~
+wp pll post count <language-code> [--post_type=<post_type>]
+~~~
+
+**OPTIONS**
+
+	<language-code>
+		The language code (slug) to get the post count for. Required.
+
+	[--post_type=<post_type>]
+		One or more post types to get the count for for. Default: post. Optional.
+
+**EXAMPLES**
+
+    wp pll post count nl
+    wp pll post count es --post_type=page
+
+
+
+### wp pll post generate
+
+Generate some posts and their translations.
+
+~~~
+wp pll post generate [--count=<number>] [--post_type=<type>] [--post_status=<status>] [--post_author=<login>] [--post_date=<yyyy-mm-dd>] [--post_content] [--max_depth=<number>] [--format=<format>]
+~~~
+
+Creates a specified number of sets of new posts with dummy data.
+
+**OPTIONS**
+
+	[--count=<number>]
+		How many posts to generate?
+		---
+		default: 5
+		---
+
+	[--post_type=<type>]
+		The type of the generated posts.
+		---
+		default: post
+		---
+
+	[--post_status=<status>]
+		The status of the generated posts.
+		---
+		default: publish
+		---
+
+	[--post_author=<login>]
+		The author of the generated posts.
+		---
+		default:
+		---
+
+	[--post_date=<yyyy-mm-dd>]
+		The date of the generated posts. Default: current date
+
+	[--post_content]
+		If set, the command reads the post_content from STDIN.
+
+	[--max_depth=<number>]
+		For hierarchical post types, generate child posts down to a certain depth.
+		---
+		default: 1
+		---
+
+	[--format=<format>]
+		Render output in a particular format.
+		---
+		default: ids
+		options:
+		  - progress
+		  - ids
+		---
+
+**EXAMPLES**
+
+    # Generate posts.
+    $ wp pll post generate --count=10 --post_type=page --post_date=1999-01-04
+    Generating posts  100% [================================================] 0:01 / 0:04
+
+    # Generate posts with fetched content.
+    $ curl http://loripsum.net/api/5 | wp pll post generate --post_content --count=10
+      % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                     Dload  Upload   Total   Spent    Left  Speed
+    100  2509  100  2509    0     0    616      0  0:00:04  0:00:04 --:--:--   616
+    Generating posts  100% [================================================] 0:01 / 0:04
+
+    # Add meta to every generated posts.
+    $ wp pll post generate --format=ids | xargs -d ' ' -I % wp post meta add % foo bar
+    Success: Added custom field.
+    Success: Added custom field.
+    Success: Added custom field.
+
+
+
+### wp pll post get
+
+Get post for a language.
+
+~~~
+wp pll post get <post_id> [<language-code>]
+~~~
+
+**OPTIONS**
+
+	<post_id>
+		Post ID of the post to get. Required.
+
+	[<language-code>]
+		The language code (slug) to get the post ID for. Optional.
+
+**EXAMPLES**
+
+    wp pll post get 2
+    wp pll post get 67 es
+
+
+
+### wp pll post list
+
+Get a list of posts in a language.
+
+~~~
+wp pll post list <language-code> [--<field>=<value>] [--field=<field>] [--fields=<fields>] [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	<language-code>
+		The language code (slug) to get the post count for. Required.
+
+	[--<field>=<value>]
+		One or more args to pass to WP_Query.
+
+	[--field=<field>]
+		Prints the value of a single field for each post.
+
+	[--fields=<fields>]
+		Limit the output to specific object fields.
+
+	[--format=<format>]
+		Render output in a particular format.
+		---
+		default: table
+		options:
+		  - table
+		  - csv
+		  - ids
+		  - json
+		  - count
+		  - yaml
+		---
+
+**AVAILABLE FIELDS**
+
+These fields will be displayed by default for each post:
+
+* ID
+* post_title
+* post_name
+* post_date
+* post_status
+
+These fields are optionally available:
+
+* post_author
+* post_date_gmt
+* post_content
+* post_excerpt
+* comment_status
+* ping_status
+* post_password
+* to_ping
+* pinged
+* post_modified
+* post_modified_gmt
+* post_content_filtered
+* post_parent
+* guid
+* menu_order
+* post_type
+* post_mime_type
+* comment_count
+* filter
+* url
+
+**EXAMPLES**
+
+    wp pll post list nl
+
+    # List post
+    $ wp pll post list es --field=ID
+    568
+    829
+    1329
+    1695
+
+    # List posts in JSON
+    $ wp pll post list en-gb --post_type=post --posts_per_page=5 --format=json
+    [{"ID":1,"post_title":"Hello world!","post_name":"hello-world","post_date":"2015-06-20 09:00:10","post_status":"publish"},{"ID":1178,"post_title":"Markup: HTML Tags and Formatting","post_name":"markup-html-tags-and-formatting","post_date":"2013-01-11 20:22:19","post_status":"draft"}]
+
+    # List all pages
+    $ wp pll post nl list --post_type=page --fields=post_title,post_status
+    +-------------+-------------+
+    | post_title  | post_status |
+    +-------------+-------------+
+    | Sample Page | publish     |
+    +-------------+-------------+
+
+    # List ids of all pages and posts
+    $ wp pll post list --post_type=page,post --format=ids
+    15 25 34 37 198
+
+    # List given posts
+    $ wp post list --post__in=1,3
+    +----+--------------+-------------+---------------------+-------------+
+    | ID | post_title   | post_name   | post_date           | post_status |
+    +----+--------------+-------------+---------------------+-------------+
+    | 3  | Lorem Ipsum  | lorem-ipsum | 2016-06-01 14:34:36 | publish     |
+    | 1  | Hello world! | hello-world | 2016-06-01 14:31:12 | publish     |
+    +----+--------------+-------------+---------------------+-------------+
+
+
+
 ### wp pll post-type
 
 Class PostType
@@ -120,6 +884,96 @@ wp pll post-type
 
 
 
+
+
+
+### wp pll post-type disable
+
+Disable translation for post types.
+
+~~~
+wp pll post-type disable <post_types>
+~~~
+
+**OPTIONS**
+
+	<post_types>
+		One or a comma-separated list of post types to disable translation for.
+
+**EXAMPLES**
+
+    wp pll post-type disable book
+
+
+
+### wp pll post-type enable
+
+Enable translation for post types.
+
+~~~
+wp pll post-type enable <post_types>
+~~~
+
+**OPTIONS**
+
+	<post_types>
+		One or a comma-separated list of post types to enable translation for.
+
+**EXAMPLES**
+
+    wp pll post-type enable book
+
+
+
+### wp pll post-type list
+
+List post types with their translation status.
+
+~~~
+wp pll post-type list 
+~~~
+
+**EXAMPLES**
+
+    wp pll post-type list
+
+
+
+### wp pll taxonomy disable
+
+Disable translation for taxonomies
+
+~~~
+wp pll taxonomy disable <taxonomies>
+~~~
+
+**OPTIONS**
+
+	<taxonomies>
+		Taxonomy or comma-separated list of taxonomies to disable translation for.
+
+**EXAMPLES**
+
+    wp pll taxonomy disable genre
+
+
+
+### wp pll taxonomy enable
+
+Enable translation for taxonomies
+
+~~~
+wp pll taxonomy enable <taxonomies>
+~~~
+
+**OPTIONS**
+
+	<taxonomies>
+		Taxonomy or comma-separated list of taxonomies to enable translation for.
+
+**EXAMPLES**
+
+    wp pll taxonomy enable genre
 
 
 
