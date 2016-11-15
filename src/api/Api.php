@@ -4,37 +4,43 @@ namespace Polylang_CLI\Api;
 
 class Api {
 
-    protected $path = null;
-    protected $functions = array();
-    protected $exceptions = array();
+    protected $path            = null;
+    protected $functions       = array();
+    protected $exceptions      = array();
+    protected $debug_backtrace = null;
 
     public function __construct( $path )
     {
-        $this->path = $path;
-        $this->functions = $this->functions();
-        $this->exceptions = array( 'pll__', 'pll_e', 'PLL' );
+        $this->path            = $path;
+        $this->functions       = $this->functions();
+        $this->exceptions      = array( 'pll__', 'pll_e', 'PLL' );
     }
 
     public function __call( $func, $args )
     {
         if ( ! in_array( $func, $this->functions ) )
-            return \WP_CLI::error( "$func is not a Polylang API function" );
+            return \WP_CLI::error( "$func is not a Polylang API function." );
+
+        $this->debug_backtrace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 3 );
 
         \WP_CLI::debug(
             sprintf(
-                "Calling '%s' object method '%s' with args %s",
-                ( new \ReflectionClass( $this ) )->getShortName(), $func, json_encode( $args )
+                "Calling %s::__call('%s') from %s::%s with %d args: %s",
+                $this->debug_backtrace[1]['class'],
+                $this->debug_backtrace[1]['function'],
+                $this->debug_backtrace[2]['class'],
+                $this->debug_backtrace[2]['function'],
+                count( $args ),
+                json_encode( $args )
             ),
             __NAMESPACE__
         );
 
-        foreach ( $this->exceptions as $f ) {
-            if ( $f == $func ) {
-                return call_user_func_array( $f, $args );
-            }
-        }
+        // \WP_CLI::debug(  ( new \Exception() )->getTraceAsString() );
 
-        return call_user_func_array( "pll_$func", $args );
+        $func = in_array( $func, $this->exceptions ) ? $func : "pll_$func";
+
+        return is_callable( $func ) ? call_user_func_array( $func, $args ) : \WP_CLI::error( "$func is not callable." );
     }
 
     public function functions()
@@ -51,7 +57,7 @@ class Api {
 
         $functions = array_merge( $functions, $this->exceptions );
 
-        \WP_CLI::debug( sprintf( "Made available %d Polylang API functions", count( $functions ) ), __NAMESPACE__ );
+        \WP_CLI::debug( sprintf( "Made available %d Polylang API functions.", count( $functions ) ), __NAMESPACE__ );
 
         return $functions;
     }
