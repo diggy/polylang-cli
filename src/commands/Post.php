@@ -134,7 +134,7 @@ class Post extends BaseCommand {
      *     [{"ID":1,"post_title":"Hello world!","post_name":"hello-world","post_date":"2015-06-20 09:00:10","post_status":"publish"},{"ID":1178,"post_title":"Markup: HTML Tags and Formatting","post_name":"markup-html-tags-and-formatting","post_date":"2013-01-11 20:22:19","post_status":"draft"}]
      *
      *     # List all pages
-     *     $ wp pll post nl list --post_type=page --fields=post_title,post_status
+     *     $ wp pll post list nl --post_type=page --fields=post_title,post_status
      *     +-------------+-------------+
      *     | post_title  | post_status |
      *     +-------------+-------------+
@@ -142,11 +142,11 @@ class Post extends BaseCommand {
      *     +-------------+-------------+
      *
      *     # List ids of all pages and posts
-     *     $ wp pll post list --post_type=page,post --format=ids
+     *     $ wp pll post list es --post_type=page,post --format=ids
      *     15 25 34 37 198
      *
      *     # List given posts
-     *     $ wp post list --post__in=1,3
+     *     $ wp pll post list nl --post__in=1,3
      *     +----+--------------+-------------+---------------------+-------------+
      *     | ID | post_title   | post_name   | post_date           | post_status |
      *     +----+--------------+-------------+---------------------+-------------+
