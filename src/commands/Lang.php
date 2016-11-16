@@ -88,7 +88,7 @@ class Lang extends BaseCommand
      */
     public function url( $args ) {
 
-        $term_id = $this->_get_term_id_by_slug( $args[0] );
+        $term_id = $this->get_lang_id_by_slug( $args[0] );
 
         if ( empty( $term_id ) ) {
             return \WP_CLI::error( sprintf( 'Invalid language code: %s', $args[0] ) );
@@ -122,7 +122,7 @@ class Lang extends BaseCommand
      */
     public function get( $args, $assoc_args ) {
 
-        $term_id = $this->_get_term_id_by_slug( $args[0] );
+        $term_id = $this->get_lang_id_by_slug( $args[0] );
 
         \WP_CLI::run_command( array( 'term', 'get', $this->taxonomy, $term_id ), $assoc_args );
     }
@@ -227,7 +227,7 @@ class Lang extends BaseCommand
      */
     public function update( $args, $assoc_args ) {
 
-        $term_id = $this->_get_term_id_by_slug( $args[0] );
+        $term_id = $this->get_lang_id_by_slug( $args[0] );
 
         # check if we have a valid language code
         if ( empty( $term_id ) ) {
@@ -301,7 +301,7 @@ class Lang extends BaseCommand
         $slugs = explode( ',', $args[0] );
 
         if ( count( $slugs ) === 1 && $slugs[0] == 'all' ) {
-            if ( empty( $this->_get_term_id_by_slug( $slugs[0] ) ) ) {
+            if ( empty( $this->get_lang_id_by_slug( $slugs[0] ) ) ) {
                 $slugs = wp_list_pluck( $this->pll->model->get_languages_list(), 'slug' );
             }
         }
@@ -321,7 +321,7 @@ class Lang extends BaseCommand
                 continue;
             }
 
-            $term_id = $this->_get_term_id_by_slug( $slug );
+            $term_id = $this->get_lang_id_by_slug( $slug );
 
             if ( empty( $term_id ) ) {
                 $settings_errors['error'][] = sprintf( 'Invalid language code: %s.', $slug );
@@ -452,7 +452,7 @@ class Lang extends BaseCommand
             );
 
             # wish PLL()->model->add_language() returned term ID instead of true
-            $term_ids[] = $this->_get_term_id_by_slug( $slug );
+            $term_ids[] = $this->get_lang_id_by_slug( $slug );
 
             // $this->get_settings_errors();
 

@@ -11,7 +11,7 @@ trait Utils {
      * @param  string        $slug The language code (slug) to get the term ID for.
      * @return boolean|array       Term ID on success, boolean false on failure.
      */
-    protected function _get_term_id_by_slug( $slug ) {
+    protected function get_lang_id_by_slug( $slug ) {
 
         $languages = wp_list_pluck( $this->pll->model->get_languages_list(), 'term_id', 'slug' );
 
