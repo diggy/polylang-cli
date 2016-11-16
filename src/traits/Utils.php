@@ -5,19 +5,6 @@ namespace Polylang_CLI\Traits;
 trait Utils {
 
     /**
-     * Gets list of installed languages as PLL_Language objects
-     *
-     * @access protected
-     * @return boolean|array
-     */
-     /*
-    protected function _get_languages() {
-
-        return $this->pll->model->get_languages_list();
-    }
-    */
-
-    /**
      * Gets term ID by slug
      *
      * @access protected
@@ -29,6 +16,18 @@ trait Utils {
         $languages = wp_list_pluck( $this->pll->model->get_languages_list(), 'term_id', 'slug' );
 
         return isset( $languages[$slug] ) ? $languages[$slug] : 0;
+    }
+
+    /**
+     * Gets WP_CLI flag value
+     *
+     * @access private
+     * @param
+     * @return
+     */
+    protected function get_flag_value( $assoc_args, $flag, $default = null ) {
+
+        return \WP_CLI\Utils\get_flag_value( $assoc_args, $flag, $default );
     }
 
     /**
