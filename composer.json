@@ -57,7 +57,9 @@
             "pll post-type list",
             "pll taxonomy",
             "pll taxonomy disable",
-            "pll taxonomy enable"
+            "pll taxonomy enable",
+            "pll term",
+            "pll term get"
         ]
     }
 }

@@ -989,6 +989,63 @@ wp pll taxonomy enable <taxonomies>
 
     wp pll taxonomy enable genre
 
+
+
+### wp pll term
+
+Class Term
+
+~~~
+wp pll term 
+~~~
+
+
+
+
+
+
+
+### wp pll term get
+
+Get details about a translated term.
+
+~~~
+wp pll term get <taxonomy> <term-id> [--field=<field>] [--fields=<fields>] [--format=<format>] [--api]
+~~~
+
+**OPTIONS**
+
+	<taxonomy>
+		Taxonomy of the term to get
+
+	<term-id>
+		ID of the term to get
+
+	[--field=<field>]
+		Instead of returning the whole term, returns the value of a single field.
+
+	[--fields=<fields>]
+		Limit the output to specific fields. Defaults to all fields.
+
+	[--format=<format>]
+		Render output in a particular format.
+		---
+		default: table
+		options:
+		  - table
+		  - csv
+		  - json
+		  - yaml
+		---
+
+	[--api]
+		Use the Polylang API function pll_get_term_translations()
+
+**EXAMPLES**
+
+    # Get details about a category with term ID 18.
+    $ wp pll term get category 18
+
 ## Installing
 
 Installing this package requires WP-CLI v0.23.0 or greater. Update to the latest stable release with `wp cli update`.
