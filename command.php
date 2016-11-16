@@ -22,5 +22,6 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
     WP_CLI::add_command( 'pll post',      Polylang_CLI\Commands\Post::class );
     WP_CLI::add_command( 'pll post-type', Polylang_CLI\Commands\PostType::class );
     WP_CLI::add_command( 'pll taxonomy',  Polylang_CLI\Commands\Taxonomy::class );
+    WP_CLI::add_command( 'pll term',      Polylang_CLI\Commands\Term::class );
 
 }
