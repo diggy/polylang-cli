@@ -52,7 +52,7 @@ class Post extends BaseCommand {
 
         $language = $this->pll->model->get_language( $args[0] );
 
-        return \WP_CLI::success( sprintf( 'Post count: %d', $this->pll->model->count_posts( $language, $assoc_args ) ) );
+        return \WP_CLI::success( sprintf( 'Post count: %d', $this->api->count_posts( $language, $assoc_args ) ) );
     }
 
     /**
