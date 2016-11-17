@@ -94,4 +94,98 @@ class Term extends BaseCommand {
         $formatter->display_items( $obj_array );
     }
 
+    /**
+     * Generate some taxonomy terms and their translations.
+     *
+     * Creates a specified number of sets of new terms and their translations with dummy data.
+     *
+     * ## OPTIONS
+     *
+     * <taxonomy>
+     * : The taxonomy for the generated terms.
+     *
+     * [--count=<number>]
+     * : How many sets of terms to generate?
+     * ---
+     * default: 5
+     * ---
+     *
+     * [--max_depth=<number>]
+     * : Generate child terms down to a certain depth.
+     * ---
+     * default: 1
+     * ---
+     *
+     * [--format=<format>]
+     * : Render output in a particular format.
+     * ---
+     * default: table
+     * options:
+     *   - table
+     *   - csv
+     *   - json
+     *   - yaml
+     *   - ids
+     * ---
+     *
+     * ## EXAMPLES
+     *
+     *     # Generate some post categories, and translations.
+     *     $ wp pll term generate category --count=3 --format=ids
+     *     115 116 117 118 119 120
+     */
+    public function generate( $args, $assoc_args ) {
+
+        list ( $taxonomy ) = $args;
+
+        if ( ! $this->api->is_translated_taxonomy( $taxonomy ) ) {
+            return \WP_CLI::error( 'Polylang does not manage languages and translations for this taxonomy.' );
+        }
+
+        $languages = $this->api->languages_list();
+
+        $count = $this->get_flag_value( $assoc_args, 'count' );
+        $count = ( $count < 1 ) ? 1 : absint( $count );
+        $count = $count * count( $languages );
+
+        ob_start();
+
+        \WP_CLI::run_command(
+            array( 'term', 'generate', $taxonomy ),
+            array_merge( $assoc_args, array( 'count' => $count, 'format' => 'ids' ) )
+        );
+
+        $ids = ob_get_contents();
+
+        ob_get_clean();
+
+        $term_ids = wp_parse_id_list( $ids );
+
+        $terms = array_chunk( $term_ids, count( $languages ) );
+
+        foreach ( $terms as $i => $chunk ) {
+
+            $terms[$i] = array_combine( $languages, $chunk );
+
+            foreach ( $terms[$i] as $lang => $term_id ) {
+
+                $this->api->set_term_language( $term_id, $lang );
+            }
+
+            $this->api->save_term_translations( $terms[$i] );
+        }
+
+        $format = $this->get_flag_value( $assoc_args, 'format' );
+
+        if ( 'ids' !== $format ) {
+
+            return \WP_CLI::run_command(
+                array( 'term', 'list', $taxonomy ),
+                array( 'format' => $format, 'include' => implode( ',', $term_ids ) )
+            );
+        }
+
+        echo implode( ' ', $term_ids );
+    }
+
 }
