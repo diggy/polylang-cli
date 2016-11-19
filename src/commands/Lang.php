@@ -263,7 +263,6 @@ class Lang extends BaseCommand
         # check if language valid
         if ( ! $valid ) {
             $this->settings_errors( 'error' );
-            return;
         }
 
         # update the language
@@ -301,7 +300,7 @@ class Lang extends BaseCommand
 
         $slugs = explode( ',', $args[0] );
 
-        if ( count( $slugs ) === 1 && $slugs[0] == 'all' ) {
+        if ( count( $slugs ) === 1 && $slugs[0] === 'all' ) {
             if ( empty( $this->get_lang_id_by_slug( $slugs[0] ) ) ) {
                 $slugs = wp_list_pluck( $this->pll->model->get_languages_list(), 'slug' );
             }
@@ -373,14 +372,15 @@ class Lang extends BaseCommand
      */
     public function generate( $args, $assoc_args ) {
 
-        # parse assoc args
-        extract( array_merge( array( 'count' => 10 ), $assoc_args ), EXTR_SKIP );
         if ( ! defined ( 'PLL_SETTINGS_INC' ) ) {
             $this->cli->error( sprintf( 'The %s constant is not defined.', 'PLL_SETTINGS_INC' ) );
         }
 
         # get predefined languages
         require( PLL_SETTINGS_INC . '/languages.php' );
+
+        # parse assoc args
+        extract( array_merge( array( 'count' => 10 ), $assoc_args ), EXTR_SKIP );
 
         # check count
         if ( $count > count( $languages ) ) {
