@@ -18,7 +18,10 @@ class Post extends BaseCommand {
      * : Post ID of the post to get. Required.
      *
      * [<language-code>]
-     * : The language code (slug) to get the post ID for. Optional.
+     * : The language code (slug) to get the post ID for, when using the --api flag. Optional.
+     *
+     * [--api]
+     * : Use the Polylang API function pll_get_post()
      *
      * ## EXAMPLES
      *
@@ -27,9 +30,28 @@ class Post extends BaseCommand {
      */
     public function get( $args, $assoc_args ) {
 
-        $slug = isset( $args[1] ) && $args[1] ? $args[1] : '';
+        list( $post_id ) = $args;
 
-        return \WP_CLI::success( sprintf( 'Post ID: %d', pll_get_post( $args[0], $slug ) ) );
+        if ( ! $post = get_post( $post_id ) ) {
+            $this->cli->error( sprintf( '%d is not a valid post object', $post_id ) );
+        }
+
+        if ( ! $this->api->is_translated_post_type( $post->post_type ) ) {
+            $this->cli->error( 'Polylang does not manage languages and translations for this post type.' );
+        }
+
+        if ( $this->cli->get_flag_value( $assoc_args, 'api' ) ) {
+
+            # second param of pll_get_post() is empty string by default
+            $slug = isset( $args[1] ) && $args[1] ? $args[1] : '';
+
+            echo $this->api->get_post( $args[0], $slug );
+
+        } else {
+
+            var_dump( $this->api->get_post_translations( $post_id ) );
+
+        }
     }
 
     /**
