@@ -5,6 +5,7 @@ namespace Polylang_CLI\Commands;
 use \WP_CLI_Command;
 
 use \Polylang_CLI\Api\Api;
+use \Polylang_CLI\Api\Cli;
 
 use \Polylang_CLI\Traits\Utils;
 use \Polylang_CLI\Traits\SettingsErrors;
@@ -72,6 +73,7 @@ class BaseCommand extends WP_CLI_Command
         if ( version_compare( WP_CLI_VERSION, '0.24.0', '<' ) ) {
             return \WP_CLI::error( sprintf( 'This WP-CLI package requires WP-CLI version %s or higher. Please visit %s', '0.24.0', 'http://wp-cli.org/#updating' ) );
         }
+        $this->cli = new Cli();
 
         if ( ! defined( 'POLYLANG_VERSION' ) ) {
             return \WP_CLI::error( sprintf( 'This WP-CLI command requires the Polylang plugin: %s', 'wp plugin install polylang && wp plugin activate polylang' ) );
