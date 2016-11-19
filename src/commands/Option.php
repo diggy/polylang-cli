@@ -42,7 +42,7 @@ class Option extends BaseCommand
             $this->cli->error( 'The option `polylang` is empty or does not exist.' );
         }
 
-        $formatter = $this->cli->get_formatter( $assoc_args, array_keys( $option ) );
+        $formatter = $this->cli->formatter( $assoc_args, array_keys( $option ) );
 
         $formatter->display_items( array( (object) $option ) );
     }

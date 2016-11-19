@@ -40,7 +40,7 @@ class Post extends BaseCommand {
             $this->cli->error( 'Polylang does not manage languages and translations for this post type.' );
         }
 
-        if ( $this->cli->get_flag_value( $assoc_args, 'api' ) ) {
+        if ( $this->cli->flag( $assoc_args, 'api' ) ) {
 
             # second param of pll_get_post() is empty string by default
             $slug = isset( $args[1] ) && $args[1] ? $args[1] : '';
@@ -181,7 +181,7 @@ class Post extends BaseCommand {
 
         $assoc_args['lang'] = $args[0];
 
-        $this->cli->run_command( array( 'post', 'list' ), $assoc_args );
+        $this->cli->command( array( 'post', 'list' ), $assoc_args );
     }
 
 	/**
@@ -260,7 +260,7 @@ class Post extends BaseCommand {
         $languages = $this->api->languages_list();
         $default_language = $this->api->default_language();
 
-        if ( ! $this->api->is_translated_post_type( $this->cli->get_flag_value( $assoc_args, 'post_type' ) ) ) {
+        if ( ! $this->api->is_translated_post_type( $this->cli->flag( $assoc_args, 'post_type' ) ) ) {
 
             $this->cli->error( 'Polylang does not manage languages and translations for this post type.' );
         }
@@ -270,7 +270,7 @@ class Post extends BaseCommand {
 
         ob_start();
 
-        $this->cli->run_command( array( 'post', 'generate' ), $assoc_args );
+        $this->cli->command( array( 'post', 'generate' ), $assoc_args );
 
         $ids = ob_get_clean();
 

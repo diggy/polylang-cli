@@ -33,7 +33,7 @@ class Cache extends BaseCommand {
 
         $this->cli->success( sprintf( 'There are %d items in the languages cache:', count( (array) $transient ) ) );
 
-        $formatter = $this->cli->get_formatter( $assoc_args, array_keys( $transient[0] ) );
+        $formatter = $this->cli->formatter( $assoc_args, array_keys( $transient[0] ) );
 
         $formatter->display_items( $transient );
     }

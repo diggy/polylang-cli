@@ -51,7 +51,7 @@ class Flag extends BaseCommand {
             $flag_objects[] = $flag_object;
         }
 
-        $formatter = $this->cli->get_formatter( $assoc_args, array( 'file', 'name' ) );
+        $formatter = $this->cli->formatter( $assoc_args, array( 'file', 'name' ) );
 
         $formatter->display_items( $flag_objects );
     }

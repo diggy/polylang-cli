@@ -59,7 +59,7 @@ class Term extends BaseCommand {
 
         $obj_array = array();
 
-        if ( $this->cli->get_flag_value( $assoc_args, 'api' ) ) {
+        if ( $this->cli->flag( $assoc_args, 'api' ) ) {
 
             foreach ( $terms as $slug => $term_id ) {
                 $obj = new \stdClass();
@@ -68,7 +68,7 @@ class Term extends BaseCommand {
                 $obj_array[$term_id] = $obj;
             }
 
-            $formatter = $this->cli->get_formatter( $assoc_args, array( 'slug', 'term_id' ), 'ID' );
+            $formatter = $this->cli->formatter( $assoc_args, array( 'slug', 'term_id' ), 'ID' );
 
         } else {
 
@@ -88,7 +88,7 @@ class Term extends BaseCommand {
                 $obj_array[$term_id] = $term;
             }
 
-            $formatter = $this->cli->get_formatter( $assoc_args, $this->fields_term, 'term' );
+            $formatter = $this->cli->formatter( $assoc_args, $this->fields_term, 'term' );
         }
 
         $formatter->display_items( $obj_array );
@@ -144,13 +144,13 @@ class Term extends BaseCommand {
 
         $languages = $this->api->languages_list();
 
-        $count = $this->cli->get_flag_value( $assoc_args, 'count' );
+        $count = $this->cli->flag( $assoc_args, 'count' );
         $count = ( $count < 1 ) ? 1 : absint( $count );
         $count = $count * count( $languages );
 
         ob_start();
 
-        \WP_CLI::run_command(
+        $this->cli->command(
             array( 'term', 'generate', $taxonomy ),
             array_merge( $assoc_args, array( 'count' => $count, 'format' => 'ids' ) )
         );
@@ -173,11 +173,11 @@ class Term extends BaseCommand {
             $this->api->save_term_translations( $terms[$i] );
         }
 
-        $format = $this->cli->get_flag_value( $assoc_args, 'format' );
+        $format = $this->cli->flag( $assoc_args, 'format' );
 
         if ( 'ids' !== $format ) {
 
-            return \WP_CLI::run_command(
+            return $this->cli->command(
                 array( 'term', 'list', $taxonomy ),
                 array( 'format' => $format, 'include' => implode( ',', $term_ids ) )
             );

@@ -52,7 +52,7 @@ class Doctor extends BaseCommand {
 
                 case 'post' :
 
-                    $this->cli->run_command( array( $type, 'list' ),
+                    $this->cli->command( array( $type, 'list' ),
                         array(
                             'post_type' => implode( ',', $this->pll->model->get_translated_post_types() ),
                             'post__in' => implode( ',', $object_ids ),
@@ -64,7 +64,7 @@ class Doctor extends BaseCommand {
 
                 case 'term' :
 
-                    $formatter = $this->cli->get_formatter( $assoc_args, $this->fields_term, 'term' );
+                    $formatter = $this->cli->formatter( $assoc_args, $this->fields_term, 'term' );
 
                     $terms = get_terms( array(
                         'taxonomy'   => null,
@@ -134,7 +134,7 @@ class Doctor extends BaseCommand {
      */
     public function recount() {
 
-        $this->cli->run_command( array( 'term', 'recount', $this->taxonomy ) );
+        $this->cli->command( array( 'term', 'recount', $this->taxonomy ) );
     }
 
 }

@@ -52,7 +52,7 @@ class Lang extends BaseCommand
      */
     public function list_( $args, $assoc_args ) {
 
-        // WP_CLI::run_command( array( 'term', 'list', $this->taxonomy ), $assoc_args );
+        // $this->cli->command( array( 'term', 'list', $this->taxonomy ), $assoc_args );
 
         $languages  = $this->pll->model->get_languages_list();
 
@@ -60,7 +60,7 @@ class Lang extends BaseCommand
         $properties = array_intersect_key( array_flip( $this->fields_language ), $properties );
 
         # invoke formatter
-        $formatter = $this->cli->get_formatter( $assoc_args, array_keys( $properties ), 'language' );
+        $formatter = $this->cli->formatter( $assoc_args, array_keys( $properties ), 'language' );
 
         # force LTR for table and csv display, see https://github.com/wp-cli/wp-cli/issues/3038
         foreach ( $languages as $language ) {
@@ -95,7 +95,7 @@ class Lang extends BaseCommand
             $this->cli->error( sprintf( 'Invalid language code: %s', $args[0] ) );
         }
 
-        $this->cli->run_command( array( 'term', 'url', $this->taxonomy, $term_id ) );
+        $this->cli->command( array( 'term', 'url', $this->taxonomy, $term_id ) );
     }
 
     /* CRUD METHODS ***********************************************************/
@@ -125,7 +125,7 @@ class Lang extends BaseCommand
 
         $term_id = $this->get_lang_id_by_slug( $args[0] );
 
-        $this->cli->run_command( array( 'term', 'get', $this->taxonomy, $term_id ), $assoc_args );
+        $this->cli->command( array( 'term', 'get', $this->taxonomy, $term_id ), $assoc_args );
     }
 
     /**
@@ -309,7 +309,7 @@ class Lang extends BaseCommand
         $default = $this->api->default_language();
 
         # init progress bar
-        $notify = $this->cli->progress_bar( 'Deleting languages', count( $slugs ) );
+        $notify = $this->cli->progress( 'Deleting languages', count( $slugs ) );
 
         $i = 0;
 
@@ -396,7 +396,7 @@ class Lang extends BaseCommand
         $installed_locales = wp_list_pluck( $this->pll->model->get_languages_list(), 'locale' );
 
         # init progress bar
-        $notify = $this->cli->progress_bar( 'Generating languages', $count );
+        $notify = $this->cli->progress( 'Generating languages', $count );
 
         # init checklist
         $checklist = $term_ids = array();
@@ -475,7 +475,7 @@ class Lang extends BaseCommand
         $notify->finish();
 
         # list the newly created languages
-        $this->cli->run_command( array( 'pll', 'lang', 'list'), array( 'include' => $term_ids ) ); // @todo allow list to display selection
+        $this->cli->command( array( 'pll', 'lang', 'list'), array( 'include' => $term_ids ) ); // @todo allow list to display selection
 
         # success message
         $this->cli->success( sprintf( 'Generated %1$d of %2$d languages. New term IDs: %3$s', (int) $i, (int) $count, implode( ',', $term_ids ) ) );

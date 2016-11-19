@@ -4,7 +4,7 @@ namespace Polylang_CLI\Api;
 
 class Cli {
 
-    public function run_command( $args, $assoc_args = array() )
+    public function command( $args, $assoc_args = array() )
     {
         \WP_CLI::run_command( $args, $assoc_args );
     }
@@ -15,7 +15,7 @@ class Cli {
      * @param
      * @return
      */
-    public function get_flag_value( $assoc_args, $flag, $default = null ) {
+    public function flag( $assoc_args, $flag, $default = null ) {
 
         return \WP_CLI\Utils\get_flag_value( $assoc_args, $flag, $default );
     }
@@ -26,7 +26,7 @@ class Cli {
      * @param
      * @return
      */
-    public function progress_bar( $message, $count ) {
+    public function progress( $message, $count ) {
         return \WP_CLI\Utils\make_progress_bar( $message, $count );
     }
 
@@ -36,7 +36,7 @@ class Cli {
      * @param
      * @return
      */
-    public function get_formatter( &$assoc_args, $fields = null, $prefix = false ) {
+    public function formatter( &$assoc_args, $fields = null, $prefix = false ) {
 
         return new \WP_CLI\Formatter( $assoc_args, $fields, $prefix );
     }
