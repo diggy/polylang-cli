@@ -235,7 +235,7 @@ class Lang extends BaseCommand
         }
 
         # get the language
-        $object = $this->pll->model->get_language( (int) $term_id );
+        $object = $this->pll->model->get_language( $term_id );
 
         # modify array item
         if ( isset( $assoc_args['order'] ) ) {
