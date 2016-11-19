@@ -9,6 +9,16 @@ namespace Polylang_CLI\Commands;
  */
 class Option extends BaseCommand
 {
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->options_default = \PLL_Install::get_default_options();
+
+        # get list of syncable items (array key = input name, array value = translated item name)
+        $this->options_sync    = \PLL_Settings_Sync::list_metas_to_sync();
+    }
+
     /**
      * List Polylang settings
      *
