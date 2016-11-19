@@ -59,7 +59,6 @@ class Term extends BaseCommand {
 
         $obj_array = array();
 
-        if ( $this->get_flag_value( $assoc_args, 'api' ) ) {
         if ( $this->cli->get_flag_value( $assoc_args, 'api' ) ) {
 
             foreach ( $terms as $slug => $term_id ) {
@@ -156,9 +155,7 @@ class Term extends BaseCommand {
             array_merge( $assoc_args, array( 'count' => $count, 'format' => 'ids' ) )
         );
 
-        $ids = ob_get_contents();
-
-        ob_get_clean();
+        $ids = ob_get_clean();
 
         $term_ids = wp_parse_id_list( $ids );
 
