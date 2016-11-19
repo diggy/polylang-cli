@@ -33,7 +33,6 @@ class Option extends BaseCommand
      *     wp pll option list --format=csv
      *
      * @subcommand list
-     * @alias export
      */
     public function list_( $args, $assoc_args ) {
 
