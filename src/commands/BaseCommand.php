@@ -68,6 +68,8 @@ class BaseCommand extends \WP_CLI_Command
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->cli = new Cli();
 
         # check if Polylang plugin is installed
@@ -79,8 +81,6 @@ class BaseCommand extends \WP_CLI_Command
         if ( version_compare( POLYLANG_VERSION, '2.0.7', '<' ) ) {
             return $this->cli->error( sprintf( 'This WP-CLI command requires Polylang version %s or higher: %s', '2.0.7', 'wp plugin update polylang' ) );
         }
-
-        parent::__construct();
 
         # get Polylang instance
         $this->pll = \PLL();
