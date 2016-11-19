@@ -52,7 +52,7 @@ class Post extends BaseCommand {
 
         $language = $this->pll->model->get_language( $args[0] );
 
-        return \WP_CLI::success( sprintf( 'Post count: %d', $this->api->count_posts( $language, $assoc_args ) ) );
+        $this->cli->success( sprintf( 'Post count: %d', $this->api->count_posts( $language, $assoc_args ) ) );
     }
 
     /**
@@ -160,7 +160,7 @@ class Post extends BaseCommand {
 
         $assoc_args['lang'] = $args[0];
 
-        \WP_CLI::run_command( array( 'post', 'list' ), $assoc_args );
+        $this->cli->run_command( array( 'post', 'list' ), $assoc_args );
     }
 
 	/**
@@ -246,11 +246,9 @@ class Post extends BaseCommand {
 
         ob_start();
 
-        \WP_CLI::run_command( array( 'post', 'generate' ), $assoc_args );
+        $this->cli->run_command( array( 'post', 'generate' ), $assoc_args );
 
-        $ids = ob_get_contents();
-
-        ob_get_clean();
+        $ids = ob_get_clean();
 
         $ids = array_chunk( explode( ' ', $ids ), count( $languages ) );
 
@@ -266,7 +264,7 @@ class Post extends BaseCommand {
             $this->api->save_post_translations( $ids[$i] );
         }
 
-        \WP_CLI::success( sprintf( 'Generated %d posts.', $assoc_args['count'] ) );
+        $this->cli->success( sprintf( 'Generated %d posts.', $assoc_args['count'] ) );
     }
 
 }
