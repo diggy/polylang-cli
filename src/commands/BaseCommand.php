@@ -73,11 +73,11 @@ class BaseCommand extends WP_CLI_Command
         $this->cli = new Cli();
 
         if ( ! defined( 'POLYLANG_VERSION' ) ) {
-            return \WP_CLI::error( sprintf( 'This WP-CLI command requires the Polylang plugin: %s', 'wp plugin install polylang && wp plugin activate polylang' ) );
+            return $this->cli->error( sprintf( 'This WP-CLI command requires the Polylang plugin: %s', 'wp plugin install polylang && wp plugin activate polylang' ) );
         }
 
         if ( version_compare( POLYLANG_VERSION, '2.0.7', '<' ) ) {
-            return \WP_CLI::error( sprintf( 'This WP-CLI command requires Polylang version %s or higher: %s', '2.0.7', 'wp plugin update polylang' ) );
+            return $this->cli->error( sprintf( 'This WP-CLI command requires Polylang version %s or higher: %s', '2.0.7', 'wp plugin update polylang' ) );
         }
 
         parent::__construct();

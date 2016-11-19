@@ -38,7 +38,7 @@ trait SettingsErrors {
 
             foreach ( $messages as $message ) {
 
-                \WP_CLI::$func( $message );
+                $this->cli->$func( $message );
             }
         }
     }

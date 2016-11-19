@@ -35,7 +35,7 @@ class Doctor extends BaseCommand {
         $untranslated = $this->pll->model->get_objects_with_no_lang();
 
         if ( empty( $untranslated ) ) {
-            return \WP_CLI::success( 'All translatable post and term objects are assigned to a language.' );
+            return $this->cli->success( 'All translatable post and term objects are assigned to a language.' );
         }
 
         foreach ( $untranslated as $type => $object_ids ) {
@@ -46,20 +46,25 @@ class Doctor extends BaseCommand {
 
             $type = rtrim( $type, 's' );
 
-            \WP_CLI::warning( sprintf( "%d untranslated %s objects:", count( $object_ids ), $type ) );
+            $this->cli->warning( sprintf( "%d untranslated %s objects:", count( $object_ids ), $type ) );
 
             switch ( $type ) :
 
                 case 'post' :
 
-                    \WP_CLI::run_command( array( $type, 'list' ), array( 'post_type' => implode( ',', $this->pll->model->get_translated_post_types() ), 'post__in' => implode( ',', $object_ids ), 'format' => $assoc_args['format'] ) );
+                    $this->cli->run_command( array( $type, 'list' ),
+                        array(
+                            'post_type' => implode( ',', $this->pll->model->get_translated_post_types() ),
+                            'post__in' => implode( ',', $object_ids ),
+                            'format' => $assoc_args['format']
+                        )
+                    );
 
                     break;
 
                 case 'term' :
 
-                    //$formatter = new \WP_CLI\Formatter( $assoc_args, array( 'term_id', 'name', 'slug' ) );
-                    $formatter = $this->get_formatter( $assoc_args );
+                    $formatter = $this->cli->get_formatter( $assoc_args, $this->fields_term, 'term' );
 
                     $terms = get_terms( array(
                         'taxonomy'   => null,
@@ -73,7 +78,7 @@ class Doctor extends BaseCommand {
 
                 default :
 
-                    \WP_CLI::error( sprintf( 'Invalid type: %s', $type ) );
+                    $this->cli->error( sprintf( 'Invalid type: %s', $type ) );
 
             endswitch;
         }
@@ -109,7 +114,7 @@ class Doctor extends BaseCommand {
                 }
             }
 
-            \WP_CLI::success( sprintf( 'Assigned %d posts and %d terms to the default language %s.', $posts, $terms, $default_lang ) );
+            $this->cli->success( sprintf( 'Assigned %d posts and %d terms to the default language %s.', $posts, $terms, $default_lang ) );
         }
     }
 
@@ -129,7 +134,7 @@ class Doctor extends BaseCommand {
      */
     public function recount() {
 
-        \WP_CLI::run_command( array( 'term', 'recount', $this->taxonomy ) );
+        $this->cli->run_command( array( 'term', 'recount', $this->taxonomy ) );
     }
 
 }

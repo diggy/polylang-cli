@@ -7,7 +7,7 @@ trait Cpt {
     private function manage( $action, $type, $data )
     {
         if ( empty( $data ) ) {
-            return \WP_CLI::error( 'Specify one or more post types and/or taxonomies you want to enable translation for.' );
+            $this->cli->error( 'Specify one or more post types and/or taxonomies you want to enable translation for.' );
         }
 
         $input = explode( ',', $data );
@@ -71,7 +71,7 @@ trait Cpt {
         # don't use flush_rewrite_rules as we don't have the right links model and permastruct
         delete_option( 'rewrite_rules' );
 
-        return \WP_CLI::success( sprintf( 'Polylang `%s` option updated', $type ) );
+        $this->cli->success( sprintf( 'Polylang `%s` option updated', $type ) );
 
 /*
         ob_start();

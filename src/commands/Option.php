@@ -30,10 +30,10 @@ class Option extends BaseCommand
         $option = get_option( 'polylang' );
 
         if ( empty( $option ) ) {
-            return \WP_CLI::error( 'The option `polylang` is empty or does not exist.' );
+            $this->cli->error( 'The option `polylang` is empty or does not exist.' );
         }
 
-        $formatter = new \WP_CLI\Formatter( $assoc_args, array_keys( $option ) );
+        $formatter = $this->cli->get_formatter( $assoc_args, array_keys( $option ) );
 
         $formatter->display_items( array( (object) $option ) );
     }
@@ -50,7 +50,7 @@ class Option extends BaseCommand
         $option = get_option( 'polylang' );
 
         if ( empty( $option ) ) {
-            return \WP_CLI::error( 'The option `polylang` is empty or does not exist.' );
+            $this->cli->error( 'The option `polylang` is empty or does not exist.' );
         }
 
         # get default options
@@ -68,7 +68,7 @@ class Option extends BaseCommand
         $this->pll->model->update_default_lang( $options['default_lang'] );
 
         # success!
-        return \WP_CLI::success( 'Reset the `polylang` option to factory settings.' );
+        $this->cli->success( 'Reset the `polylang` option to factory settings.' );
     }
 
     /**
@@ -90,15 +90,15 @@ class Option extends BaseCommand
 
         # check if option exists
         if ( empty( $option ) ) {
-            return \WP_CLI::error( 'The option `polylang` is empty or does not exist.' );
+            $this->cli->error( 'The option `polylang` is empty or does not exist.' );
         }
 
         # check if valid option name
         if ( ! in_array( $args[0], array_merge( array_keys( \PLL_Install::get_default_options() ), array( 'default_lang' ) ) ) ) {
-            return \WP_CLI::error( sprintf( 'Invalid option name: %s', $args[0] ) );
+            $this->cli->error( sprintf( 'Invalid option name: %s', $args[0] ) );
         }
 
-        return \WP_CLI::success( sprintf( 'The value of %s is %s', $args[0], maybe_serialize( $option[$args[0]] ) ) );
+        $this->cli->success( sprintf( 'The value of %s is %s', $args[0], maybe_serialize( $option[$args[0]] ) ) );
     }
 
     /**
@@ -123,17 +123,17 @@ class Option extends BaseCommand
 
         # check if option exists
         if ( empty( $option ) ) {
-            return \WP_CLI::error( 'The option `polylang` is empty or does not exist.' );
+            $this->cli->error( 'The option `polylang` is empty or does not exist.' );
         }
 
         # check if valid option name
         if ( ! in_array( $args[0], array_merge( array_keys( \PLL_Install::get_default_options() ), array( 'default_lang' ) ) ) ) {
-            return \WP_CLI::error( sprintf( 'Invalid option name: %s', $args[0] ) );
+            $this->cli->error( sprintf( 'Invalid option name: %s', $args[0] ) );
         }
 
         # disallow changing PLL version
         if ( 'version' === $args[0] ) {
-            return \WP_CLI::error( "You're not allowed to change the Polylang version." );
+            $this->cli->error( "You're not allowed to change the Polylang version." );
         }
 
         # change default language
@@ -148,7 +148,7 @@ class Option extends BaseCommand
         $this->pll->model->update_default_lang( pll_default_language() );
 
         # success!
-        return \WP_CLI::success( sprintf( 'The value of %s was set to %s', $args[0], maybe_serialize( $args[1] ) ) );
+        $this->cli->success( sprintf( 'The value of %s was set to %s', $args[0], maybe_serialize( $args[1] ) ) );
     }
 
     /**
@@ -171,7 +171,7 @@ class Option extends BaseCommand
     public function default_( $args, $assoc_args = array() )
     {
         if ( ! $languages = $this->pll->model->get_languages_list() ) {
-            return \WP_CLI::warning( "No languages are currently configured." );
+            return $this->cli->warning( "No languages are currently configured." );
         }
 
         # get the default language
@@ -179,7 +179,7 @@ class Option extends BaseCommand
 
         # if no language provided, return the default language
         if ( empty( $args ) ) {
-            return \WP_CLI::success( "{$default} is currently the default language" );
+            return $this->cli->success( "{$default} is currently the default language" );
         }
 
         # sanitize user input
@@ -187,19 +187,19 @@ class Option extends BaseCommand
 
         # check if submitted language is already the default
         if ( empty( $language ) || $default === $language ) {
-            return \WP_CLI::warning( "{$default} is currently the default language");
+            return $this->cli->warning( "{$default} is currently the default language");
         }
 
         # check if submitted language is installed
         if ( ! in_array( $language, wp_list_pluck( $languages, 'slug' ) ) ) {
-            return \WP_CLI::error( "The language '$language' is currently not installed" );
+            $this->cli->error( "The language '$language' is currently not installed" );
         }
 
         # set the default language
         $this->pll->model->update_default_lang( $language );
 
         # this can't go wrong
-        return \WP_CLI::success( "Default language was set to {$language}" );
+        $this->cli->success( "Default language was set to {$language}" );
     }
 
     /**
@@ -243,7 +243,7 @@ class Option extends BaseCommand
             # update options, default category and nav menu locations
             $this->pll->model->update_default_lang( pll_default_language() );
 
-            return \WP_CLI::success( 'Polylang `sync` option updated.' );
+            return $this->cli->success( 'Polylang `sync` option updated.' );
         }
 
         # get args as array
@@ -252,7 +252,7 @@ class Option extends BaseCommand
         # validate args
         foreach ( $args as $key ) {
             if ( ! in_array( $key, array_keys( $syncable ) ) ) {
-                return \WP_CLI::error( sprintf( 'Invalid key: %s', $key ) );
+                $this->cli->error( sprintf( 'Invalid key: %s', $key ) );
             }
         }
 
@@ -267,7 +267,7 @@ class Option extends BaseCommand
         # update options, default category and nav menu locations
         $this->pll->model->update_default_lang( pll_default_language() );
 
-        \WP_CLI::success( 'Polylang `sync` option updated.' );
+        $this->cli->success( 'Polylang `sync` option updated.' );
     }
 
     /**
@@ -308,7 +308,7 @@ class Option extends BaseCommand
             # update options, default category and nav menu locations
             $this->pll->model->update_default_lang( pll_default_language() );
 
-            return \WP_CLI::success( 'Polylang `sync` option updated.' );
+            return $this->cli->success( 'Polylang `sync` option updated.' );
         }
 
         # get args as array
@@ -320,7 +320,7 @@ class Option extends BaseCommand
         # validate args
         foreach ( $args as $key ) {
             if ( ! in_array( $key, array_keys( $syncable ) ) ) {
-                return \WP_CLI::error( sprintf( 'Invalid key: %s', $key ) );
+                return $this->cli->error( sprintf( 'Invalid key: %s', $key ) );
             }
         }
 
@@ -335,7 +335,7 @@ class Option extends BaseCommand
         # update options, default category and nav menu locations
         $this->pll->model->update_default_lang( pll_default_language() );
 
-        \WP_CLI::success( 'Polylang `sync` option updated.' );
+        $this->cli->success( 'Polylang `sync` option updated.' );
     }
 
 }

@@ -70,7 +70,7 @@ class PostType extends BaseCommand
             $obj->translated = ( isset( $translated[$post_type] ) ) ? '1' : '';
         }
 
-        $formatter = new \WP_CLI\Formatter( $assoc_args, array( 'name', 'public', 'hierarchical', 'translated' ) );
+        $formatter = $this->cli->get_formatter( $assoc_args, array( 'name', 'public', 'hierarchical', 'translated' ), 'post' );
 
         $formatter->display_items( $post_types );
     }

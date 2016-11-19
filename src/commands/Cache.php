@@ -31,9 +31,9 @@ class Cache extends BaseCommand {
 
         $transient = get_transient( 'pll_languages_list' );
 
-        \WP_CLI::success( sprintf( 'There are %d items in the languages cache:', count( (array) $transient ) ) );
+        $this->cli->success( sprintf( 'There are %d items in the languages cache:', count( (array) $transient ) ) );
 
-        $formatter = new \WP_CLI\Formatter( $assoc_args, array_keys( $transient[0] ) );
+        $formatter = $this->cli->get_formatter( $assoc_args, array_keys( $transient[0] ) );
 
         $formatter->display_items( $transient );
     }
@@ -54,6 +54,6 @@ class Cache extends BaseCommand {
 
         $this->pll->model->clean_languages_cache();
 
-        \WP_CLI::success( 'Languages cache cleared.' );
+        $this->cli->success( 'Languages cache cleared.' );
     }
 }

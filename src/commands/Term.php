@@ -52,7 +52,7 @@ class Term extends BaseCommand {
         $term = get_term_by( 'id', $term_id, $taxonomy );
 
         if ( ! $term ) {
-            \WP_CLI::error( "Term doesn't exist." );
+            $this->cli->error( "Term doesn't exist." );
         }
 
         $terms = $this->api->get_term_translations( $term_id );
@@ -60,6 +60,7 @@ class Term extends BaseCommand {
         $obj_array = array();
 
         if ( $this->get_flag_value( $assoc_args, 'api' ) ) {
+        if ( $this->cli->get_flag_value( $assoc_args, 'api' ) ) {
 
             foreach ( $terms as $slug => $term_id ) {
                 $obj = new \stdClass();
@@ -68,7 +69,7 @@ class Term extends BaseCommand {
                 $obj_array[$term_id] = $obj;
             }
 
-            $formatter = new \WP_CLI\Formatter( $assoc_args, array( 'slug', 'term_id' ), 'ID' );
+            $formatter = $this->cli->get_formatter( $assoc_args, array( 'slug', 'term_id' ), 'ID' );
 
         } else {
 
@@ -88,7 +89,7 @@ class Term extends BaseCommand {
                 $obj_array[$term_id] = $term;
             }
 
-            $formatter = $this->get_formatter( $assoc_args );
+            $formatter = $this->cli->get_formatter( $assoc_args, $this->fields_term, 'term' );
         }
 
         $formatter->display_items( $obj_array );
@@ -139,12 +140,12 @@ class Term extends BaseCommand {
         list ( $taxonomy ) = $args;
 
         if ( ! $this->api->is_translated_taxonomy( $taxonomy ) ) {
-            return \WP_CLI::error( 'Polylang does not manage languages and translations for this taxonomy.' );
+            $this->cli->error( 'Polylang does not manage languages and translations for this taxonomy.' );
         }
 
         $languages = $this->api->languages_list();
 
-        $count = $this->get_flag_value( $assoc_args, 'count' );
+        $count = $this->cli->get_flag_value( $assoc_args, 'count' );
         $count = ( $count < 1 ) ? 1 : absint( $count );
         $count = $count * count( $languages );
 
@@ -175,7 +176,7 @@ class Term extends BaseCommand {
             $this->api->save_term_translations( $terms[$i] );
         }
 
-        $format = $this->get_flag_value( $assoc_args, 'format' );
+        $format = $this->cli->get_flag_value( $assoc_args, 'format' );
 
         if ( 'ids' !== $format ) {
 

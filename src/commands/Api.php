@@ -38,7 +38,7 @@ class Api extends BaseCommand {
             $api_functions[] = $obj;
         }
 
-        $formatter = new \WP_CLI\Formatter( $assoc_args, array( 'function' ) );
+        $formatter = $this->cli->get_formatter( $assoc_args, array( 'function' ) );
 
         $formatter->display_items( $api_functions );
     }

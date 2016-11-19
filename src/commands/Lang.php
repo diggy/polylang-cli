@@ -60,7 +60,7 @@ class Lang extends BaseCommand
         $properties = array_intersect_key( array_flip( $this->fields_language ), $properties );
 
         # invoke formatter
-        $formatter = new \WP_CLI\Formatter( $assoc_args, array_keys( $properties ), 'language' );
+        $formatter = $this->cli->get_formatter( $assoc_args, array_keys( $properties ), 'language' );
 
         # force LTR for table and csv display, see https://github.com/wp-cli/wp-cli/issues/3038
         foreach ( $languages as $language ) {
@@ -91,10 +91,10 @@ class Lang extends BaseCommand
         $term_id = $this->get_lang_id_by_slug( $args[0] );
 
         if ( empty( $term_id ) ) {
-            return \WP_CLI::error( sprintf( 'Invalid language code: %s', $args[0] ) );
+            $this->cli->error( sprintf( 'Invalid language code: %s', $args[0] ) );
         }
 
-        \WP_CLI::run_command( array( 'term', 'url', $this->taxonomy, $term_id ) );
+        $this->cli->run_command( array( 'term', 'url', $this->taxonomy, $term_id ) );
     }
 
     /* CRUD METHODS ***********************************************************/
@@ -124,7 +124,7 @@ class Lang extends BaseCommand
 
         $term_id = $this->get_lang_id_by_slug( $args[0] );
 
-        \WP_CLI::run_command( array( 'term', 'get', $this->taxonomy, $term_id ), $assoc_args );
+        $this->cli->run_command( array( 'term', 'get', $this->taxonomy, $term_id ), $assoc_args );
     }
 
     /**
@@ -231,7 +231,7 @@ class Lang extends BaseCommand
 
         # check if we have a valid language code
         if ( empty( $term_id ) ) {
-            return \WP_CLI::error( sprintf( 'Invalid language code. Run `%s` to get a list of valid language codes.', 'wp pll list' ) );
+            $this->cli->error( sprintf( 'Invalid language code. Run `%s` to get a list of valid language codes.', 'wp pll lang list --field=locale' ) );
         }
 
         # get the language
@@ -309,7 +309,7 @@ class Lang extends BaseCommand
         $default = pll_default_language();
 
         # init progress bar
-        $notify = \WP_CLI\Utils\make_progress_bar( 'Deleting languages', count( $slugs ) );
+        $notify = $this->cli->progress_bar( 'Deleting languages', count( $slugs ) );
 
         $i = 0;
 
@@ -353,7 +353,7 @@ class Lang extends BaseCommand
 
         $func = ( $i == count( $slugs ) ) ? 'success' : ( ( $i > 0 ) ? 'warning' : 'error' );
 
-        \WP_CLI::$func( sprintf( '%d of %d languages deleted', $i, count( $slugs ) ) );
+        $this->cli->$func( sprintf( '%d of %d languages deleted', $i, count( $slugs ) ) );
     }
 
     /* MISCELLANEOUS METHODS **************************************************/
@@ -380,7 +380,7 @@ class Lang extends BaseCommand
 
         # check count
         if ( $count > count( $languages ) ) {
-            \WP_CLI::error( sprintf( 'Count value exceeds limit. There are only %d languages available.', count( $languages ) ) );
+            $this->cli->error( sprintf( 'Count value exceeds limit. There are only %d languages available.', count( $languages ) ) );
         }
 
         global $wpdb;
@@ -392,7 +392,7 @@ class Lang extends BaseCommand
         $installed_locales = wp_list_pluck( $this->pll->model->get_languages_list(), 'locale' );
 
         # init progress bar
-        $notify = \WP_CLI\Utils\make_progress_bar( 'Generating languages', $count );
+        $notify = $this->cli->progress_bar( 'Generating languages', $count );
 
         # init checklist
         $checklist = $term_ids = array();
@@ -471,10 +471,10 @@ class Lang extends BaseCommand
         $notify->finish();
 
         # list the newly created languages
-        \WP_CLI::run_command( array( 'pll', 'lang', 'list'), array( 'include' => $term_ids ) ); // @todo allow list to display selection
+        $this->cli->run_command( array( 'pll', 'lang', 'list'), array( 'include' => $term_ids ) ); // @todo allow list to display selection
 
         # success message
-        \WP_CLI::success( sprintf( 'Generated %1$d of %2$d languages. New term IDs: %3$s', (int) $i, (int) $count, implode( ',', $term_ids ) ) );
+        $this->cli->success( sprintf( 'Generated %1$d of %2$d languages. New term IDs: %3$s', (int) $i, (int) $count, implode( ',', $term_ids ) ) );
     }
 
 }
