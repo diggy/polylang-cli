@@ -9,7 +9,7 @@ trait SettingsErrors {
      *
      * @access protected
      * @param  string $func WP_CLI method to run. Accepted values are `error` and `success`. Default: success.
-     * @return void
+     * @return array
      */
     protected function get_settings_errors( $func = 'success' ) {
 
