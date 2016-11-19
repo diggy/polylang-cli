@@ -64,10 +64,15 @@ class Api {
 
     private function functions_raw()
     {
-        // $content = file_get_contents( $this->path );
-        // preg_match_all( "/(function )(\S*\()/", $content, $matches );
-        // return array_map( 'rtrim', $matches[2], array_fill( 0, count( $matches[2] ), '(' ) );
+        $content = file_get_contents( $this->path );
 
+        preg_match_all( "/(function )(\S*\()/", $content, $matches ); // @todo fixme
+
+        return array_map( 'rtrim', $matches[2], array_fill( 0, count( $matches[2] ), '(' ) );
+    }
+
+    private function functions_xref()
+    {
         return array(
             'pll_the_languages',
             'pll_current_language',
