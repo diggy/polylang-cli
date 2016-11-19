@@ -97,7 +97,7 @@ class Doctor extends BaseCommand {
 
         if ( empty( $arsg[0] ) ) {
 
-            $default_lang = pll_default_language();
+            $default_lang = $this->api->default_language();
 
             $posts = $terms = 0;
 

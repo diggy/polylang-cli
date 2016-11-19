@@ -62,7 +62,7 @@ trait Cpt {
         $this->pll->model->options = $settings->options;
 
         # update options, default category and nav menu locations
-        $this->pll->model->update_default_lang( pll_default_language() );
+        $this->pll->model->update_default_lang( $this->api->default_language() );
 
         # refresh language cache in case home urls have been modified
         $settings->model->clean_languages_cache();

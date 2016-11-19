@@ -306,7 +306,7 @@ class Lang extends BaseCommand
             }
         }
 
-        $default = pll_default_language();
+        $default = $this->api->default_language();
 
         # init progress bar
         $notify = $this->cli->progress_bar( 'Deleting languages', count( $slugs ) );

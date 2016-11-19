@@ -145,7 +145,7 @@ class Option extends BaseCommand
         # update Polylang options
         // update_option( 'polylang', array_merge( $option, array( $args[0] => $args[1] ) ) );
         $this->pll->model->options = array_merge( $option, array( $args[0] => $args[1] ) );
-        $this->pll->model->update_default_lang( pll_default_language() );
+        $this->pll->model->update_default_lang( $this->api->default_language() );
 
         # success!
         $this->cli->success( sprintf( 'The value of %s was set to %s', $args[0], maybe_serialize( $args[1] ) ) );
@@ -175,7 +175,7 @@ class Option extends BaseCommand
         }
 
         # get the default language
-        $default = pll_default_language();
+        $default = $this->api->default_language();
 
         # if no language provided, return the default language
         if ( empty( $args ) ) {
@@ -241,7 +241,7 @@ class Option extends BaseCommand
             $this->pll->model->options['sync'] = array_fill_keys( array_keys( $syncable ), 1 );
 
             # update options, default category and nav menu locations
-            $this->pll->model->update_default_lang( pll_default_language() );
+            $this->pll->model->update_default_lang( $this->api->default_language() );
 
             return $this->cli->success( 'Polylang `sync` option updated.' );
         }
@@ -265,7 +265,7 @@ class Option extends BaseCommand
         $this->pll->model->options['sync'] = $settings;
 
         # update options, default category and nav menu locations
-        $this->pll->model->update_default_lang( pll_default_language() );
+        $this->pll->model->update_default_lang( $this->api->default_language() );
 
         $this->cli->success( 'Polylang `sync` option updated.' );
     }
@@ -306,7 +306,7 @@ class Option extends BaseCommand
             $this->pll->model->options['sync'] = array();
 
             # update options, default category and nav menu locations
-            $this->pll->model->update_default_lang( pll_default_language() );
+            $this->pll->model->update_default_lang( $this->api->default_language() );
 
             return $this->cli->success( 'Polylang `sync` option updated.' );
         }
@@ -333,7 +333,7 @@ class Option extends BaseCommand
         $this->pll->model->options['sync'] = $settings;
 
         # update options, default category and nav menu locations
-        $this->pll->model->update_default_lang( pll_default_language() );
+        $this->pll->model->update_default_lang( $this->api->default_language() );
 
         $this->cli->success( 'Polylang `sync` option updated.' );
     }
