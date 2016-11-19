@@ -51,4 +51,29 @@ class Taxonomy extends BaseCommand
         return $this->manage( explode( '::', __METHOD__ )[1], 'post_types', $args[0] );
     }
 
+    /**
+     * List taxonomies with their translation status.
+     *
+     * ## EXAMPLES
+     *
+     *     wp pll taxonomy list
+     *
+     * @subcommand list
+     */
+    public function list_( $args, $assoc_args ) {
+
+        $taxonomies = get_taxonomies( $assoc_args, 'objects' );
+
+        $translated = $this->pll->model->get_translated_taxonomies();
+
+        foreach ( $taxonomies as $taxonomy => $obj ) {
+
+            $obj->translated = ( isset( $translated[$taxonomy] ) ) ? '1' : '';
+        }
+
+        $formatter = $this->cli->formatter( $assoc_args, array( 'name', '_builtin', 'public', 'hierarchical', 'translated' ), 'name' );
+
+        $formatter->display_items( $taxonomies );
+    }
+
 }
