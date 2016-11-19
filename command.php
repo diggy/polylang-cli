@@ -19,6 +19,16 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
     require __DIR__ . '/vendor/autoload.php';
 
+    WP_CLI::add_hook( 'before_wp_load', function() {
+        WP_CLI::add_wp_hook( 'init', function() {
+            # make sure polylang_mo post type is always registered
+            if ( ! post_type_exists( 'polylang_mo' ) ) {
+                $labels = array( 'name' => __( 'Strings translations', 'polylang' ) );
+                register_post_type( 'polylang_mo', array( 'labels' => $labels, 'rewrite' => false, 'query_var' => false, '_pll' => true ) );
+            }
+        });
+    });
+
     // WP_CLI::add_command( 'pll',        Polylang_CLI\Cli::class );
 
     WP_CLI::add_command( 'pll api',       Polylang_CLI\Commands\Api::class );
