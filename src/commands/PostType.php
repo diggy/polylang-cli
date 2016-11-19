@@ -63,6 +63,7 @@ class PostType extends BaseCommand
     public function list_( $args, $assoc_args ) {
 
         $post_types = get_post_types( $assoc_args, 'objects' );
+
         $translated = $this->pll->model->get_translated_post_types();
 
         foreach ( $post_types as $post_type => $obj ) {
