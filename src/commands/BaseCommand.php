@@ -2,8 +2,6 @@
 
 namespace Polylang_CLI\Commands;
 
-use \WP_CLI_Command;
-
 use \Polylang_CLI\Api\Api;
 use \Polylang_CLI\Api\Cli;
 
@@ -19,7 +17,7 @@ if( ! defined( 'PLL_SETTINGS' ) ) define( 'PLL_SETTINGS', true );
  *
  * @package Polylang_CLI
  */
-class BaseCommand extends WP_CLI_Command
+class BaseCommand extends \WP_CLI_Command
 {
     use Utils;
     use SettingsErrors;
