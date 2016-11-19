@@ -5,6 +5,7 @@ namespace Polylang_CLI\Commands;
 use \Polylang_CLI\Api\Api;
 use \Polylang_CLI\Api\Cli;
 
+use \Polylang_CLI\Traits\Properties;
 use \Polylang_CLI\Traits\Utils;
 use \Polylang_CLI\Traits\SettingsErrors;
 
@@ -19,52 +20,7 @@ if( ! defined( 'PLL_SETTINGS' ) ) define( 'PLL_SETTINGS', true );
  */
 class BaseCommand extends \WP_CLI_Command
 {
-    use Utils;
-    use SettingsErrors;
-
-    protected $pll = null;
-    protected $api = null;
-
-    protected $taxonomy      = 'language';
-    protected $taxonomy_term = 'term_language';
-
-    protected $fields_term = array(
-        'term_id',
-        'term_taxonomy_id',
-        'name',
-        'slug',
-        'description',
-        'parent',
-        'count',
-        'term_group',
-    );
-
-    protected $fields_language = array(
-        'term_id',
-        'name',
-        'slug',
-        'term_group',
-        //'term_taxonomy_id',
-        //'taxonomy',
-        //'description',
-        //'parent',
-        'count',
-        //'tl_term_id',
-        //'tl_term_taxonomy_id',
-        //'tl_count',
-        'locale',
-        'is_rtl',
-        //'flag_url',
-        //'flag',
-        //'home_url',
-        //'search_url',
-        //'host' ,
-        //'mo_id',
-        //'page_on_front',
-        //'page_for_posts',
-        //'filter',
-        'flag_code',
-    );
+    use Properties, Utils, SettingsErrors;
 
     public function __construct()
     {
