@@ -26,6 +26,7 @@ class BaseCommand extends \WP_CLI_Command
     {
         parent::__construct();
 
+        # invoke WP_CLI wrapper
         $this->cli = new Cli();
 
         # check if Polylang plugin is installed
