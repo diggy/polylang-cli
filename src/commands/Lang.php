@@ -64,7 +64,8 @@ class Lang extends BaseCommand
 
         # force LTR for table and csv display, see https://github.com/wp-cli/wp-cli/issues/3038
         foreach ( $languages as $language ) {
-            if ( \wp_validate_boolean( $language->is_rtl ) ) {
+
+            if ( wp_validate_boolean( $language->is_rtl ) ) {
                 $language->name = "\xe2\x80\x8e" . $language->name;
             }
         }
