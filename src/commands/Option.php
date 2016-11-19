@@ -65,7 +65,7 @@ class Option extends BaseCommand
         # get default options
         $options = $this->options_default;
 
-        # get default language
+        # get default language @todo review
         $options['default_lang'] = isset( $option['default_lang'] )
             ? $option['default_lang']
             : wp_list_pluck( $this->pll->model->get_languages_list(), 'slug' )[0];
