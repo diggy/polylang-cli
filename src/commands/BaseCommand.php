@@ -34,8 +34,8 @@ class BaseCommand extends \WP_CLI_Command
         }
 
         # check Polylang required version
-        if ( version_compare( POLYLANG_VERSION, '2.0.7', '<' ) ) {
-            return $this->cli->error( sprintf( 'This WP-CLI command requires Polylang version %s or higher: %s', '2.0.7', 'wp plugin update polylang' ) );
+        if ( version_compare( POLYLANG_VERSION, '2.0.9', '<' ) ) {
+            return $this->cli->error( sprintf( 'This WP-CLI command requires Polylang version %s or higher: %s', '2.0.9', 'wp plugin update polylang' ) );
         }
 
         # get Polylang instance (global)
