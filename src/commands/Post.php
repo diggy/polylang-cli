@@ -239,7 +239,10 @@ class Post extends BaseCommand {
         $languages = $this->api->languages_list();
         $default_language = $this->api->default_language();
 
-        // @todo validate post type
+        if ( ! $this->api->is_translated_post_type( $this->cli->get_flag_value( $assoc_args, 'post_type' ) ) ) {
+
+            $this->cli->error( 'Polylang does not manage languages and translations for this post type.' );
+        }
 
         $assoc_args['count'] = isset( $assoc_args['count'] ) ? intval( $assoc_args['count'] ) : 3;
         $assoc_args['count'] = count( $languages ) * $assoc_args['count'];
