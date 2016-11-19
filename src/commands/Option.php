@@ -63,7 +63,7 @@ class Option extends BaseCommand
         }
 
         # get default options
-        $options = \PLL_Install::get_default_options();
+        $options = $this->options_default;
 
         # get default language
         $options['default_lang'] = isset( $option['default_lang'] )
@@ -103,7 +103,7 @@ class Option extends BaseCommand
         }
 
         # check if valid option name
-        if ( ! in_array( $args[0], array_merge( array_keys( \PLL_Install::get_default_options() ), array( 'default_lang' ) ) ) ) {
+        if ( ! in_array( $args[0], array_merge( array_keys( $this->options_default ), array( 'default_lang' ) ) ) ) {
             $this->cli->error( sprintf( 'Invalid option name: %s', $args[0] ) );
         }
 
@@ -136,7 +136,7 @@ class Option extends BaseCommand
         }
 
         # check if valid option name
-        if ( ! in_array( $args[0], array_merge( array_keys( \PLL_Install::get_default_options() ), array( 'default_lang' ) ) ) ) {
+        if ( ! in_array( $args[0], array_merge( array_keys( $this->options_default ), array( 'default_lang' ) ) ) ) {
             $this->cli->error( sprintf( 'Invalid option name: %s', $args[0] ) );
         }
 
@@ -242,12 +242,9 @@ class Option extends BaseCommand
      */
     public function sync( $args, $assoc_args ) {
 
-        # get list of syncable items (array key = input name, array value = translated item name)
-        $syncable = \PLL_Settings_Sync::list_metas_to_sync();
-
         if ( $args[0] === 'all' ) {
 
-            $this->pll->model->options['sync'] = array_fill_keys( array_keys( $syncable ), 1 );
+            $this->pll->model->options['sync'] = array_fill_keys( array_keys( $this->options_sync ), 1 );
 
             # update options, default category and nav menu locations
             $this->pll->model->update_default_lang( $this->api->default_language() );
@@ -260,7 +257,7 @@ class Option extends BaseCommand
 
         # validate args
         foreach ( $args as $key ) {
-            if ( ! in_array( $key, array_keys( $syncable ) ) ) {
+            if ( ! in_array( $key, array_keys( $this->options_sync ) ) ) {
                 $this->cli->error( sprintf( 'Invalid key: %s', $key ) );
             }
         }
@@ -323,12 +320,9 @@ class Option extends BaseCommand
         # get args as array
         $args = explode( ',', $args[0] );
 
-        # get list of syncable items (array key = input name, array value = translated item name)
-        $syncable = \PLL_Settings_Sync::list_metas_to_sync();
-
         # validate args
         foreach ( $args as $key ) {
-            if ( ! in_array( $key, array_keys( $syncable ) ) ) {
+            if ( ! in_array( $key, array_keys( $this->options_sync ) ) ) {
                 return $this->cli->error( sprintf( 'Invalid key: %s', $key ) );
             }
         }
