@@ -13,7 +13,7 @@ trait Cpt {
         $input = explode( ',', $data );
 
         # invoke Polylang settings module
-        $settings = new \PLL_Settings_CPT( $this->pll );
+        $this->options_cpt = $settings = new \PLL_Settings_CPT( $this->pll );
 
         # set current module
         $settings->module = 'cpt';
