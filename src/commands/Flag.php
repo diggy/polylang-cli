@@ -26,6 +26,10 @@ class Flag extends BaseCommand {
      */
     public function list_( $args, $assoc_args )
     {
+        if ( ! defined ( 'PLL_SETTINGS_INC' ) ) {
+            $this->cli->error( sprintf( 'The %s constant is not defined.', 'PLL_SETTINGS_INC' ) );
+        }
+
         /*
          * Get predefined flags info
          *

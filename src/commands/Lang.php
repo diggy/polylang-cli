@@ -374,6 +374,9 @@ class Lang extends BaseCommand
 
         # parse assoc args
         extract( array_merge( array( 'count' => 10 ), $assoc_args ), EXTR_SKIP );
+        if ( ! defined ( 'PLL_SETTINGS_INC' ) ) {
+            $this->cli->error( sprintf( 'The %s constant is not defined.', 'PLL_SETTINGS_INC' ) );
+        }
 
         # get predefined languages
         require( PLL_SETTINGS_INC . '/languages.php' );
