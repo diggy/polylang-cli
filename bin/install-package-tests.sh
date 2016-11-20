@@ -37,7 +37,7 @@ install_db() {
 
 install_polylang() {
     php $WP_CLI_BIN_DIR/wp core download
-    php $WP_CLI_BIN_DIR/wp core config --dbname=wp_cli_test --dbuser=root --dbpass=root
+    php $WP_CLI_BIN_DIR/wp core config --dbname=wp_cli_test --dbuser=wp_cli_test --dbpass=password1
     php $WP_CLI_BIN_DIR/wp core install --url=polylang-cli.dev --title="Polylang CLI" --admin_user=admin --admin_password=root --admin_email=wordpress@polylang-cli.dev
     php $WP_CLI_BIN_DIR/wp plugin install polylang && php $WP_CLI_BIN_DIR/wp plugin activate polylang
 }
