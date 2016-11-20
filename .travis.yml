@@ -29,7 +29,6 @@ env:
 
 before_script:
   - composer validate
-  - mkdir -p $WP_TEST_DIR
   - bash bin/install-package-tests.sh
 
 script: ./vendor/bin/behat --strict
