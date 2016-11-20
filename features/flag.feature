@@ -8,254 +8,254 @@ Feature: Manage Polylang flags
     When I run `wp pll flag list`
     Then STDOUT should contain:
       """
-      file name
-      ad Andorra
-      ae UnitedArabEmirates
-      af Afghanistan
-      ag AntiguaandBarbuda
-      ai Anguilla
-      al Albania
-      am Armenia
-      an NetherlandsAntilles
-      ao Angola
-      ar Argentina
-      arab Arableague
-      as AmericanSamoa
-      at Austria
-      au Australia
-      aw Aruba
-      ax ÅlandIslands
-      az Azerbaijan
-      ba BosniaandHerzegovina
-      basque BasqueCountry
-      bb Barbados
-      bd Bangladesh
-      be Belgium
-      bf BurkinaFaso
-      bg Bulgaria
-      bh Bahrain
-      bi Burundi
-      bj Benin
-      bm Bermuda
-      bn Brunei
-      bo Bolivia
-      br Brazil
-      bs Bahamas
-      bt Bhutan
-      bw Botswana
-      by Belarus
-      bz Belize
-      ca Canada
-      catalonia Catalonia
-      cc Cocos
-      cd DemocraticRepublicoftheCongo
-      cf CentralAfricanRepublic
-      cg Congo
-      ch Switzerland
-      ci IvoryCoast
-      ck CookIslands
-      cl Chile
-      cm Cameroon
-      cn China
-      co Colombia
-      cr CostaRica
-      cu Cuba
-      cv CapeVerde
-      cx ChristmasIsland
-      cy Cyprus
-      cz CzechRepublic
-      de Germany
-      dj Djibouti
-      dk Denmark
-      dm Dominica
-      do DominicanRepublic
-      dz Algeria
-      ec Ecuador
-      ee Estonia
-      eg Egypt
-      eh WesternSahara
-      england England
-      er Eritrea
-      es Spain
-      esperanto Esperanto
-      et Ethiopia
-      fi Finland
-      fj Fiji
-      fk FalklandIslands
-      fm Micronesia
-      fo FaroeIslands
-      fr France
-      ga Gabon
-      galicia Galicia
-      gb UnitedKingdom
-      gd Grenada
-      ge Georgia
-      gh Ghana
-      gi Gibraltar
-      gl Greenland
-      gm Gambia
-      gn Guinea
-      gp Guadeloupe
-      gq EquatorialGuinea
-      gr Greece
-      gs SouthGeorgiaandtheSouthSandwichIslands
-      gt Guatemala
-      gu Guam
-      gw Guinea-Bissau
-      gy Guyana
-      hk HongKong
-      hm HeardIslandandMcDonaldIslands
-      hn Honduras
-      hr Croatia
-      ht Haiti
-      hu Hungary
-      id Indonesia
-      ie RepublicofIreland
-      il Israel
-      in India
-      io BritishIndianOceanTerritory
-      iq Iraq
-      ir Iran
-      is Iceland
-      it Italy
-      jm Jamaica
-      jo Jordan
-      jp Japan
-      ke Kenya
-      kg Kyrgyzstan
-      kh Cambodia
-      ki Kiribati
-      km Comoros
-      kn SaintKittsandNevis
-      kp NorthKorea
-      kr SouthKorea
-      kurdistan Kurdistan
-      kw Kuwait
-      ky CaymanIslands
-      kz Kazakhstan
-      la Laos
-      lb Lebanon
-      lc SaintLucia
-      li Liechtenstein
-      lk SriLanka
-      lr Liberia
-      ls Lesotho
-      lt Lithuania
-      lu Luxembourg
-      lv Latvia
-      ly Libya
-      ma Morocco
-      mc Monaco
-      md Moldova
-      me Montenegro
-      mg Madagascar
-      mh MarshallIslands
-      mk Macedonia
-      ml Mali
-      mm Myanmar
-      mn Mongolia
-      mo Macao
-      mp NorthernMarianaIslands
-      mq Martinique
-      mr Mauritania
-      ms Montserrat
-      mt Malta
-      mu Mauritius
-      mv Maldives
-      mw Malawi
-      mx Mexico
-      my Malaysia
-      mz Mozambique
-      na Namibia
-      nc NewCaledonia
-      ne Niger
-      nf NorfolkIsland
-      ng Nigeria
-      ni Nicaragua
-      nl Netherlands
-      no Norway
-      np Nepal
-      nr Nauru
-      nu Niue
-      nz NewZealand
-      occitania Occitania
-      om Oman
-      pa Panama
-      pe Peru
-      pf FrenchPolynesia
-      pg PapuaNewGuinea
-      ph Philippines
-      pk Pakistan
-      pl Poland
-      pm SaintPierreandMiquelon
-      pn Pitcairn
-      pr PuertoRico
-      ps PalestinianTerritory
-      pt Portugal
-      pw Belau
-      py Paraguay
-      qa Qatar
-      quebec Quebec
-      ro Romania
-      rs Serbia
-      ru Russia
-      rw Rwanda
-      sa SaudiArabia
-      sb SolomonIslands
-      sc Seychelles
-      scotland Scotland
-      sd Sudan
-      se Sweden
-      sg Singapore
-      sh SaintHelena
-      si Slovenia
-      sk Slovakia
-      sl SierraLeone
-      sm SanMarino
-      sn Senegal
-      so Somalia
-      sr Suriname
-      ss SouthSudan
-      st SãoToméandPríncipe
-      sv ElSalvador
-      sy Syria
-      sz Swaziland
-      tc TurksandCaicosIslands
-      td Chad
-      tf FrenchSouthernTerritories
-      tg Togo
-      th Thailand
-      tibet Tibet
-      tj Tajikistan
-      tk Tokelau
-      tl Timor-Leste
-      tm Turkmenistan
-      tn Tunisia
-      to Tonga
-      tr Turkey
-      tt TrinidadandTobago
-      tv Tuvalu
-      tw Taiwan
-      tz Tanzania
-      ua Ukraine
-      ug Uganda
-      us UnitedStates
-      uy Uruguay
-      uz Uzbekistan
-      va Vatican
-      vc SaintVincentandtheGrenadines
-      ve Venezuela
-      veneto Veneto
-      vg BritishVirginIslands
-      vi UnitedStatesVirginIslands
-      vn Vietnam
-      vu Vanuatu
-      wales Wales
-      wf WallisandFutuna
-      ws WesternSamoa
-      ye Yemen
-      yt Mayotte
-      za SouthAfrica
-      zm Zambia
-      zw Zimbabwe
+      file	name
+      ad	Andorra
+      ae	United Arab Emirates
+      af	Afghanistan
+      ag	Antigua and Barbuda
+      ai	Anguilla
+      al	Albania
+      am	Armenia
+      an	Netherlands Antilles
+      ao	Angola
+      ar	Argentina
+      arab	Arab league
+      as	American Samoa
+      at	Austria
+      au	Australia
+      aw	Aruba
+      ax	Åland Islands
+      az	Azerbaijan
+      ba	Bosnia and Herzegovina
+      basque	Basque Country
+      bb	Barbados
+      bd	Bangladesh
+      be	Belgium
+      bf	Burkina Faso
+      bg	Bulgaria
+      bh	Bahrain
+      bi	Burundi
+      bj	Benin
+      bm	Bermuda
+      bn	Brunei
+      bo	Bolivia
+      br	Brazil
+      bs	Bahamas
+      bt	Bhutan
+      bw	Botswana
+      by	Belarus
+      bz	Belize
+      ca	Canada
+      catalonia	Catalonia
+      cc	Cocos
+      cd	Democratic Republic of the Congo
+      cf	Central African Republic
+      cg	Congo
+      ch	Switzerland
+      ci	Ivory Coast
+      ck	Cook Islands
+      cl	Chile
+      cm	Cameroon
+      cn	China
+      co	Colombia
+      cr	Costa Rica
+      cu	Cuba
+      cv	Cape Verde
+      cx	Christmas Island
+      cy	Cyprus
+      cz	Czech Republic
+      de	Germany
+      dj	Djibouti
+      dk	Denmark
+      dm	Dominica
+      do	Dominican Republic
+      dz	Algeria
+      ec	Ecuador
+      ee	Estonia
+      eg	Egypt
+      eh	Western Sahara
+      england	England
+      er	Eritrea
+      es	Spain
+      esperanto	Esperanto
+      et	Ethiopia
+      fi	Finland
+      fj	Fiji
+      fk	Falkland Islands
+      fm	Micronesia
+      fo	Faroe Islands
+      fr	France
+      ga	Gabon
+      galicia	Galicia
+      gb	United Kingdom
+      gd	Grenada
+      ge	Georgia
+      gh	Ghana
+      gi	Gibraltar
+      gl	Greenland
+      gm	Gambia
+      gn	Guinea
+      gp	Guadeloupe
+      gq	Equatorial Guinea
+      gr	Greece
+      gs	South Georgia and the South Sandwich Islands
+      gt	Guatemala
+      gu	Guam
+      gw	Guinea-Bissau
+      gy	Guyana
+      hk	Hong Kong
+      hm	Heard Island and McDonald Islands
+      hn	Honduras
+      hr	Croatia
+      ht	Haiti
+      hu	Hungary
+      id	Indonesia
+      ie	Republic of Ireland
+      il	Israel
+      in	India
+      io	British Indian Ocean Territory
+      iq	Iraq
+      ir	Iran
+      is	Iceland
+      it	Italy
+      jm	Jamaica
+      jo	Jordan
+      jp	Japan
+      ke	Kenya
+      kg	Kyrgyzstan
+      kh	Cambodia
+      ki	Kiribati
+      km	Comoros
+      kn	Saint Kitts and Nevis
+      kp	North Korea
+      kr	South Korea
+      kurdistan	Kurdistan
+      kw	Kuwait
+      ky	Cayman Islands
+      kz	Kazakhstan
+      la	Laos
+      lb	Lebanon
+      lc	Saint Lucia
+      li	Liechtenstein
+      lk	Sri Lanka
+      lr	Liberia
+      ls	Lesotho
+      lt	Lithuania
+      lu	Luxembourg
+      lv	Latvia
+      ly	Libya
+      ma	Morocco
+      mc	Monaco
+      md	Moldova
+      me	Montenegro
+      mg	Madagascar
+      mh	Marshall Islands
+      mk	Macedonia
+      ml	Mali
+      mm	Myanmar
+      mn	Mongolia
+      mo	Macao
+      mp	Northern Mariana Islands
+      mq	Martinique
+      mr	Mauritania
+      ms	Montserrat
+      mt	Malta
+      mu	Mauritius
+      mv	Maldives
+      mw	Malawi
+      mx	Mexico
+      my	Malaysia
+      mz	Mozambique
+      na	Namibia
+      nc	New Caledonia
+      ne	Niger
+      nf	Norfolk Island
+      ng	Nigeria
+      ni	Nicaragua
+      nl	Netherlands
+      no	Norway
+      np	Nepal
+      nr	Nauru
+      nu	Niue
+      nz	New Zealand
+      occitania	Occitania
+      om	Oman
+      pa	Panama
+      pe	Peru
+      pf	French Polynesia
+      pg	Papua New Guinea
+      ph	Philippines
+      pk	Pakistan
+      pl	Poland
+      pm	Saint Pierre and Miquelon
+      pn	Pitcairn
+      pr	Puerto Rico
+      ps	Palestinian Territory
+      pt	Portugal
+      pw	Belau
+      py	Paraguay
+      qa	Qatar
+      quebec	Quebec
+      ro	Romania
+      rs	Serbia
+      ru	Russia
+      rw	Rwanda
+      sa	Saudi Arabia
+      sb	Solomon Islands
+      sc	Seychelles
+      scotland	Scotland
+      sd	Sudan
+      se	Sweden
+      sg	Singapore
+      sh	Saint Helena
+      si	Slovenia
+      sk	Slovakia
+      sl	Sierra Leone
+      sm	San Marino
+      sn	Senegal
+      so	Somalia
+      sr	Suriname
+      ss	South Sudan
+      st	São Tomé and Príncipe
+      sv	El Salvador
+      sy	Syria
+      sz	Swaziland
+      tc	Turks and Caicos Islands
+      td	Chad
+      tf	French Southern Territories
+      tg	Togo
+      th	Thailand
+      tibet	Tibet
+      tj	Tajikistan
+      tk	Tokelau
+      tl	Timor-Leste
+      tm	Turkmenistan
+      tn	Tunisia
+      to	Tonga
+      tr	Turkey
+      tt	Trinidad and Tobago
+      tv	Tuvalu
+      tw	Taiwan
+      tz	Tanzania
+      ua	Ukraine
+      ug	Uganda
+      us	United States
+      uy	Uruguay
+      uz	Uzbekistan
+      va	Vatican
+      vc	Saint Vincent and the Grenadines
+      ve	Venezuela
+      veneto	Veneto
+      vg	British Virgin Islands
+      vi	United States Virgin Islands
+      vn	Vietnam
+      vu	Vanuatu
+      wales	Wales
+      wf	Wallis and Futuna
+      ws	Western Samoa
+      ye	Yemen
+      yt	Mayotte
+      za	South Africa
+      zm	Zambia
+      zw	Zimbabwe
       """
