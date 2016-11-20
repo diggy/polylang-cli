@@ -9,8 +9,8 @@
 
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
-    if ( version_compare( PHP_VERSION, '5.4', '<' ) ) {
-        return WP_CLI::error( sprintf( 'This WP-CLI package requires PHP version %s or higher.', '5.4' ) );
+    if ( version_compare( PHP_VERSION, '5.5', '<' ) ) {
+        return WP_CLI::error( sprintf( 'This WP-CLI package requires PHP version %s or higher.', '5.5' ) );
     }
 
     if ( version_compare( WP_CLI_VERSION, '0.24.0', '<' ) ) {
