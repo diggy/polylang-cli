@@ -54,6 +54,21 @@ class Taxonomy extends BaseCommand
     /**
      * List taxonomies with their translation status.
      *
+     * ## OPTIONS
+     *
+     * [--format=<format>]
+     * : Render output in a particular format.
+     * ---
+     * default: table
+     * options:
+     *   - table
+     *   - csv
+     *   - ids
+     *   - json
+     *   - count
+     *   - yaml
+     * ---
+     *
      * ## EXAMPLES
      *
      *     wp pll taxonomy list
@@ -62,7 +77,18 @@ class Taxonomy extends BaseCommand
      */
     public function list_( $args, $assoc_args ) {
 
+        $formatter = $this->cli->formatter( $assoc_args, array( 'name', '_builtin', 'public', 'hierarchical', 'translated' ), 'name' );
+
+        if ( isset( $assoc_args['object_type'] ) ) {
+            $assoc_args['object_type'] = array( $assoc_args['object_type'] );
+        }
+
         $taxonomies = get_taxonomies( $assoc_args, 'objects' );
+
+        $taxonomies = array_map( function( $taxonomy ) {
+            $taxonomy->object_type = implode( ', ', $taxonomy->object_type );
+            return $taxonomy;
+        }, $taxonomies );
 
         $translated = $this->pll->model->get_translated_taxonomies();
 
@@ -70,8 +96,6 @@ class Taxonomy extends BaseCommand
 
             $obj->translated = ( isset( $translated[$taxonomy] ) ) ? '1' : '';
         }
-
-        $formatter = $this->cli->formatter( $assoc_args, array( 'name', '_builtin', 'public', 'hierarchical', 'translated' ), 'name' );
 
         $formatter->display_items( $taxonomies );
     }
