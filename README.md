@@ -749,7 +749,7 @@ Creates a specified number of sets of new posts with dummy data.
 Get post for a language.
 
 ~~~
-wp pll post get <post_id> [<language-code>]
+wp pll post get <post_id> [<language-code>] [--api]
 ~~~
 
 **OPTIONS**
@@ -758,7 +758,10 @@ wp pll post get <post_id> [<language-code>]
 		Post ID of the post to get. Required.
 
 	[<language-code>]
-		The language code (slug) to get the post ID for. Optional.
+		The language code (slug) to get the post ID for, when using the --api flag. Optional.
+
+	[--api]
+		Use the Polylang API function pll_get_post()
 
 **EXAMPLES**
 
@@ -867,7 +870,6 @@ These fields are optionally available:
     +----+--------------+-------------+---------------------+-------------+
     | ID | post_title   | post_name   | post_date           | post_status |
     +----+--------------+-------------+---------------------+-------------+
-    | 3  | Lorem Ipsum  | lorem-ipsum | 2016-06-01 14:34:36 | publish     |
     | 1  | Hello world! | hello-world | 2016-06-01 14:31:12 | publish     |
     +----+--------------+-------------+---------------------+-------------+
 
