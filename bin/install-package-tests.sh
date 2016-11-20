@@ -36,10 +36,10 @@ install_db() {
 }
 
 install_polylang() {
-    cd $HOME
+    cd $PACKAGE_DIR
+    php $WP_CLI_BIN_DIR/wp core version --extra
     php $WP_CLI_BIN_DIR/wp plugin install polylang
     php $WP_CLI_BIN_DIR/wp plugin activate polylang
-    php $WP_CLI_BIN_DIR/wp core version --extra
     php $WP_CLI_BIN_DIR/wp pll lang create Dutch nl nl_NL
     php $WP_CLI_BIN_DIR/wp pll doctor translate
     php $WP_CLI_BIN_DIR/wp eval 'echo ABSPATH;'
