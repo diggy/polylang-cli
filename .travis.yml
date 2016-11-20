@@ -12,7 +12,6 @@ branches:
 env:
   global:
     - WP_CLI_BIN_DIR=/tmp/wp-cli-phar
-    - WP_TEST_URL=http://polylang-cli.dev
   matrix:
     - WP_VERSION=latest
 
