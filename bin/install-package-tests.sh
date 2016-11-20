@@ -35,6 +35,11 @@ install_db() {
 	mysql -e 'GRANT ALL PRIVILEGES ON wp_cli_test.* TO "wp_cli_test"@"localhost" IDENTIFIED BY "password1"' -uroot
 }
 
+install_polylang() {
+      wp plugin install polylang && wp plugin activate polylang
+}
+
 install_wp_cli
 download_behat
 install_db
+install_polylang
