@@ -49,7 +49,7 @@ class FeatureContext extends BehatContext implements ClosuredContextInterface {
 
 	private $running_procs = array();
 
-	public $variables = array( 'RUN_DIR' => '/home/travis/build/diggy/polylang-cli' );
+	public $variables = array();
 
 	/**
 	 * Get the environment variables required for launched `wp` processes
@@ -323,6 +323,6 @@ class FeatureContext extends BehatContext implements ClosuredContextInterface {
 			'admin_password' => 'password1'
 		);
 
-		$this->proc( 'wp core install', $install_args, $subdir )->run_check();
+		$this->proc( 'wp core install && wp plugin install polylang && wp plugin activate polylang && wp pll lang create Dutch nl nl_NL && wp pll doctor translate', $install_args, $subdir )->run_check();
 	}
 }
