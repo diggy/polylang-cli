@@ -36,7 +36,7 @@ install_db() {
 }
 
 install_polylang() {
-      php wp-cli.phar plugin install polylang && php wp-cli.phar plugin activate polylang
+      php $WP_CLI_BIN_DIR/wp/wp-cli.phar plugin install polylang && php $WP_CLI_BIN_DIR/wp/wp-cli.phar plugin activate polylang
 }
 
 install_wp_cli
