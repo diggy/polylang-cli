@@ -28,6 +28,7 @@ env:
 before_script:
   - composer validate
   - bash bin/install-package-tests.sh
-  - wp-cli.phar plugin install polylang && wp-cli.phar plugin activate polylang
+  - chmod +x /tmp/wp-cli-phar/wp-cli.phar && mv /tmp/wp-cli-phar/wp-cli.phar /tmp/wp-cli-phar/wp
+  - wp plugin install polylang && wp plugin activate polylang
 
 script: ./vendor/bin/behat --strict
