@@ -1,4 +1,2 @@
-path:
-  - /home/travis/build/diggy/polylang-cli
 require:
   - command.php
