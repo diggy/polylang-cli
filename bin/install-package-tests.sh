@@ -35,20 +35,6 @@ install_db() {
     mysql -e 'GRANT ALL PRIVILEGES ON wp_cli_test.* TO "wp_cli_test"@"localhost" IDENTIFIED BY "password1"' -uroot
 }
 
-install_polylang() {
-    php $WP_CLI_BIN_DIR/wp core download --locale=nl_NL
-    php $WP_CLI_BIN_DIR/wp core config --dbname=wp_cli_test --dbuser=wp_cli_test --dbpass=password1
-    php $WP_CLI_BIN_DIR/wp core install --url=http://polylang-cli.dev --title="Polylang CLI" --admin_user=admin --admin_password=root --admin_email=wordpress@polylang-cli.dev
-    php $WP_CLI_BIN_DIR/wp core version --extra
-    php $WP_CLI_BIN_DIR/wp plugin install polylang
-    php $WP_CLI_BIN_DIR/wp plugin activate polylang
-    php $WP_CLI_BIN_DIR/wp pll lang create Dutch nl nl_NL
-    php $WP_CLI_BIN_DIR/wp pll doctor translate
-    php $WP_CLI_BIN_DIR/wp eval 'echo ABSPATH;'
-    php $WP_CLI_BIN_DIR/wp eval 'echo POLYLANG_VERSION;'
-}
-
 install_wp_cli
 download_behat
 install_db
-#install_polylang
