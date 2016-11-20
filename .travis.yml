@@ -21,12 +21,15 @@ cache:
 env:
   global:
     - WP_CLI_BIN_DIR=/tmp/wp-cli-phar
+    - WP_TEST_DIR=/tmp/wordpress/
+    - WP_TEST_URL=http://polylang-cli.dev
   matrix:
     - WP_VERSION=latest
     - WP_VERSION=trunk
 
 before_script:
   - composer validate
+  - mkdir -p $WP_TEST_DIR
   - bash bin/install-package-tests.sh
 
 script: ./vendor/bin/behat --strict

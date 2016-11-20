@@ -1,2 +1,5 @@
+# Global parameter defaults
+path: tmp/wordpress
+url: http://polylang-cli.dev
 require:
   - command.php
