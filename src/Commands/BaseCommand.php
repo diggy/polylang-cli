@@ -28,17 +28,17 @@ class BaseCommand extends \WP_CLI_Command
 
         # invoke WP_CLI wrapper
         $this->cli = new Cli();
-/*
+
         # check if Polylang plugin is installed
         if ( ! defined( 'POLYLANG_VERSION' ) ) {
-            return $this->cli->error( sprintf( 'This WP-CLI command requires the Polylang plugin: %s', 'wp plugin install polylang && wp plugin activate polylang' ) );
+            return $this->cli->error( sprintf( 'This WP-CLI command requires the Polylang plugin: %s (%s)', 'wp plugin install polylang && wp plugin activate polylang', ABSPATH ) );
         }
 
         # check Polylang required version
         if ( version_compare( POLYLANG_VERSION, '2.0.9', '<' ) ) {
             return $this->cli->error( sprintf( 'This WP-CLI command requires Polylang version %s or higher: %s', '2.0.9', 'wp plugin update polylang' ) );
         }
-*/
+
         # get Polylang instance (global)
         $this->pll = \PLL();
 
