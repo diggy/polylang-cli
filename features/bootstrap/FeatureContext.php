@@ -168,6 +168,7 @@ class FeatureContext extends BehatContext implements ClosuredContextInterface {
 		$this->drop_db();
 		$this->set_cache_dir();
 		$this->variables['CORE_CONFIG_SETTINGS'] = Utils\assoc_args_to_str( self::$db_settings );
+		$this->extras();
 	}
 
 	public function getStepDefinitionResources() {
@@ -323,6 +324,11 @@ class FeatureContext extends BehatContext implements ClosuredContextInterface {
 			'admin_password' => 'password1'
 		);
 
-		$this->proc( 'wp core install && wp plugin install polylang && wp plugin activate polylang && wp pll lang create Dutch nl nl_NL && wp pll doctor translate', $install_args, $subdir )->run_check();
+		$this->proc( 'wp core install', $install_args, $subdir )->run_check();
 	}
+
+    public function extras()
+    {
+		$this->proc( 'wp plugin install polylang && wp plugin activate polylang && wp pll lang create Dutch nl nl_NL && wp pll doctor translate' )->run_check();
+    }
 }
