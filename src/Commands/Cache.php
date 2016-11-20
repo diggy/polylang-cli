@@ -52,6 +52,8 @@ class Cache extends BaseCommand {
      */
     public function clear() {
 
+        return $this->cli->error( ABSPATH );
+
         $this->pll->model->clean_languages_cache();
 
         $this->cli->success( 'Languages cache cleared.' );
