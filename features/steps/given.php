@@ -46,6 +46,7 @@ $steps->Given( '/^a database$/',
 $steps->Given( '/^a WP install$/',
 	function ( $world ) {
 		$world->install_wp();
+        $world->extras();
 	}
 );
 

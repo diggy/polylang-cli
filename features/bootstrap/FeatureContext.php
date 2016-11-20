@@ -327,7 +327,7 @@ class FeatureContext extends BehatContext implements ClosuredContextInterface {
 		$this->proc( 'wp core install', $install_args, $subdir )->run_check();
 	}
 
-    public function extras( $subdir )
+    public function extras( $subdir = '' )
     {
 		$this->proc( 'wp plugin install polylang', array(), $subdir )->run_check();
         $this->proc( 'wp plugin activate polylang', array(), $subdir )->run_check();
