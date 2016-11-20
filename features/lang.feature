@@ -14,5 +14,5 @@ Feature: Manage Polylang languages
       When I run `wp pll lang url nl`
       Then STDOUT should contain:
         """
-        http://polylang-cli.dev/nl/
+        http://example.com/?lang=nl
         """
