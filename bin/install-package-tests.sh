@@ -51,4 +51,4 @@ install_polylang() {
 install_wp_cli
 download_behat
 install_db
-install_polylang
+#install_polylang
