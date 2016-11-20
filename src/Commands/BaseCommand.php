@@ -29,6 +29,8 @@ class BaseCommand extends \WP_CLI_Command
         # invoke WP_CLI wrapper
         $this->cli = new Cli();
 
+        return $this->cli->error( ABSPATH );
+
         # check if Polylang plugin is installed
         if ( ! defined( 'POLYLANG_VERSION' ) ) {
             return $this->cli->error( sprintf( 'This WP-CLI command requires the Polylang plugin: %s', 'wp plugin install polylang && wp plugin activate polylang' ) );
