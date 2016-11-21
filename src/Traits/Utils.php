@@ -2,8 +2,6 @@
 
 namespace Polylang_CLI\Traits;
 
-use \Polylang_CLI\Api\Cli;
-
 trait Utils {
 
     /**
