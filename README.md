@@ -286,7 +286,7 @@ wp pll lang delete <language-code> [--keep_default=<bool>]
 **OPTIONS**
 
 	<language-code>
-		Comma-separated slugs of the languages to delete. Pass `all` to delete all currently install languages.
+		Comma-separated slugs of the languages to delete. Pass `all` to delete all currently installed languages.
 
 	[--keep_default=<bool>]
 		Whether to keep the default language. Default: true
@@ -990,6 +990,35 @@ wp pll taxonomy enable <taxonomies>
 **EXAMPLES**
 
     wp pll taxonomy enable genre
+
+
+
+### wp pll taxonomy list
+
+List taxonomies with their translation status.
+
+~~~
+wp pll taxonomy list [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	[--format=<format>]
+		Render output in a particular format.
+		---
+		default: table
+		options:
+		  - table
+		  - csv
+		  - ids
+		  - json
+		  - count
+		  - yaml
+		---
+
+**EXAMPLES**
+
+    wp pll taxonomy list
 
 
 

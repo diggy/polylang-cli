@@ -58,6 +58,7 @@
             "pll taxonomy",
             "pll taxonomy disable",
             "pll taxonomy enable",
+            "pll taxonomy list",
             "pll term",
             "pll term get"
         ]
