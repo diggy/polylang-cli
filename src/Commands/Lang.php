@@ -278,7 +278,7 @@ class Lang extends BaseCommand
      * ## OPTIONS
      *
      * <language-code>
-     * : Comma-separated slugs of the languages to delete. Pass `all` to delete all currently install languages.
+     * : Comma-separated slugs of the languages to delete. Pass `all` to delete all currently installed languages.
      *
      * [--keep_default=<bool>]
      * : Whether to keep the default language. Default: true
