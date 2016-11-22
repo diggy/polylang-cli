@@ -11,7 +11,7 @@ Feature: Manage Polylang languages
       Success: Language added.
       """
 
-    When I run `wp pll lang create Nederlands nl nl_NL`
+    When I try `wp pll lang create Nederlands nl nl_NL`
     Then STDERR should be:
       """
       Error: The language code must be unique
