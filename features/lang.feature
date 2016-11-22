@@ -12,7 +12,7 @@ Feature: Manage Polylang languages
     """
 
     When I run `wp pll lang create Nederlands nl nl_NL`
-    Then STDOUT should contain:
+    Then STDOUT should be:
     """
     Error: The language code must be unique
     """
