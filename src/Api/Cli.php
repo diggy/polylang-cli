@@ -116,4 +116,22 @@ class Cli {
         \WP_CLI::error( $message );
     }
 
+    /**
+     * Display informational message without prefix.
+     *
+     * Message is written to STDOUT, or discarded when `--quiet` flag is supplied.
+     *
+     * ```
+     * # `wp cli update` lets user know of each step in the update process.
+     * WP_CLI::log( sprintf( 'Downloading from %s...', $download_url ) );
+     * ```
+     *
+     * @access public
+     * @param string $message Message to write to STDOUT.
+     */
+    public function log( $message ) {
+
+        \WP_CLI::log( $message );
+    }
+
 }
