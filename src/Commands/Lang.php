@@ -98,7 +98,7 @@ class Lang extends BaseCommand
         // WP-CLI 0.26.0-alpha-40e8b72 or higher
         // $this->get( array( $args[0] ), array( 'field' => 'url' ) );
 
-        \WP_CLI::log( get_term_link( $term_id ) );
+        $this->cli->log( get_term_link( $term_id ) );
     }
 
     /* CRUD METHODS ***********************************************************/
