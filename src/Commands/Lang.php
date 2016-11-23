@@ -95,7 +95,10 @@ class Lang extends BaseCommand
             $this->cli->error( sprintf( 'Invalid language code: %s', $args[0] ) );
         }
 
-        $this->cli->command( array( 'term', 'url', $this->taxonomy, $term_id ) );
+        // WP-CLI 0.26.0-alpha-40e8b72 or higher
+        // $this->get( array( $args[0] ), array( 'field' => 'url' ) );
+
+        \WP_CLI::log( get_term_link( $term_id ) );
     }
 
     /* CRUD METHODS ***********************************************************/
