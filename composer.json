@@ -4,7 +4,14 @@
     "type": "wp-cli-package",
     "homepage": "https://github.com/diggy/polylang-cli",
     "license": "MIT",
-    "authors": [],
+    "authors": [
+        {
+            "name": "Peter J. Herrel",
+            "email": "peterherrel@gmail.com",
+            "homepage": "https://github.com/diggy",
+            "role": "Developer"
+        }
+    ],
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
