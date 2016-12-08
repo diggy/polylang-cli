@@ -2,10 +2,11 @@ Feature: Manage Polylang languages
 
   Background:
     Given a WP install
-    When I run `wp core version`
-    Then save STDOUT as {WP_VERSION}
 
   Scenario: Language CRUD commands
+    Given a WP install
+    And I run `wp core version`
+    And save STDOUT as {WP_VERSION}
 
     When I run `wp pll lang create afrikaans af af`
     Then STDOUT should contain:
