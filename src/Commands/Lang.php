@@ -198,7 +198,7 @@ class Lang extends BaseCommand
 
         $this->settings_errors( $result );
 
-        return ( $result === 'success' ) ? $this->cli->runcommand( "core language install $locale", array( 'exit_error' => false ) ) : false;
+        return ( $result === 'success' ) ? $this->cli->command( array( 'core', 'language', 'install', $locale ) ) : false;
     }
 
     /**
