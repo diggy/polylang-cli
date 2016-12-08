@@ -2,6 +2,8 @@ Feature: Manage Polylang languages
 
   Background:
     Given a WP install
+    When I run `wp core version`
+    Then save STDOUT as {WP_VERSION}
 
   Scenario: Language CRUD commands
 
