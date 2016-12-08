@@ -5,10 +5,15 @@ Feature: Manage Polylang languages
 
   Scenario: Language CRUD commands
 
-    When I run `wp pll lang create Arabic ar ar`
+    When I run `wp pll lang create afrikaans af af`
     Then STDOUT should contain:
       """
       Success: Language added.
+      Downloaden vertaling van https://downloads.wordpress.org/translation/core/{WP_VERSION}/af.zip...
+      Uitpakken update...
+      De laatste versie installeren...
+      Vertaling succesvol bijgewerkt.
+      Success: Language installed.
       """
 
     When I try `wp pll lang create Nederlands nl nl_NL`
@@ -17,10 +22,18 @@ Feature: Manage Polylang languages
       Error: The language code must be unique
       """
 
+    When I try `wp pll lang create "Nederlands (BE)" nl-be nl_NL`
+    Then STDOUT should contain:
+      """
+      Success: Language added.
+      Warning: Language already installed.
+      """
+
     When I run `wp pll lang create Klingon klingon tlh`
     Then STDOUT should contain:
       """
       Success: Language added.
+      Error: Language 'tlh' not found.
       """
 
     When I run `wp pll lang get nl --format=json`
