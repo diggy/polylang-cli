@@ -5,7 +5,7 @@ namespace Polylang_CLI\Api;
 class Cli {
 
     /**
-     * Runs a WP_CLI command.
+     * Run a given command within the current process using the same global.
      *
      * @param array $args Positional arguments including command name
      * @param array $assoc_args
@@ -13,6 +13,29 @@ class Cli {
     public function command( $args, $assoc_args = array() ) {
 
         \WP_CLI::run_command( $args, $assoc_args );
+    }
+
+    /**
+     * Runs a WP_CLI command.
+     *
+     * Optionally:
+     *
+     * * launch: Launch a new child process, or run the command in the current process.
+     * * exit_error: Prevent halting script execution on error.
+     * * return: Capture and return STDOUT, or full details about command execution. (use 'all' for full object.)
+     * * parse: Parse JSON output if the command rendered it.
+     *
+     * @link https://wp-cli.org/docs/internal-api/wp-cli-runcommand/
+     *
+     * @access public
+     *
+     * @param string $command WP-CLI command to run, including arguments.
+     * @param array $options Configuration options for command execution.
+     * @return mixed
+     */
+    public function runcommand( $command, $options = array() ) {
+
+        \WP_CLI::runcommand( $command, $options );
     }
 
     /**
