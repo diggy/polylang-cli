@@ -40,7 +40,7 @@ Feature: Manage Polylang languages
       """
       Success: Language added.
       """
-    And STDERR should contain:
+    Then STDERR should be:
       """
       Error: Language 'tlh' not found.
       """
