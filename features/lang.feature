@@ -35,12 +35,12 @@ Feature: Manage Polylang languages
       """
     And the return code should be 0
 
-    When I run `wp pll lang create Klingon klingon tlh`
+    When I try `wp pll lang create Klingon klingon tlh`
     Then STDOUT should contain:
       """
       Success: Language added.
       """
-    Then STDERR should be:
+    And STDERR should be:
       """
       Error: Language 'tlh' not found.
       """
