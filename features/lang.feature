@@ -44,7 +44,6 @@ Feature: Manage Polylang languages
       """
       Error: Language 'tlh' not found.
       """
-    And the return code should be 1
 
     When I run `wp pll lang get nl --format=json`
     Then STDOUT should contain:
