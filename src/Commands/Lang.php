@@ -305,55 +305,49 @@ class Lang extends BaseCommand
 
         $slugs = explode( ',', $args[0] );
 
-        if ( count( $slugs ) === 1 && $slugs[0] === 'all' ) {
-            if ( empty( $this->get_lang_id_by_slug( $slugs[0] ) ) ) {
-                $slugs = wp_list_pluck( $this->pll->model->get_languages_list(), 'slug' );
-            }
+        $all_slugs = wp_list_pluck( $this->pll->model->get_languages_list(), 'locale', 'slug' );
+
+        $slugs = ( $slugs[0] === 'all' ) ? $all_slugs : array_intersect_key( $all_slugs, array_flip( $slugs ) );
+
+        if ( empty( $slugs ) ) {
+            $this->cli->error( 'Please enter 1 or more valid language codes. Run `wp pll lang list` to get a list of installed languages.' );
         }
 
         $default = $this->api->default_language();
 
-        # init progress bar
-        $notify = $this->cli->progress( 'Deleting languages', count( $slugs ) );
-
         $i = 0;
 
-        $settings_errors = array();
-
-        foreach ( $slugs as $slug ) {
+        foreach ( $slugs as $slug => $locale ) {
 
             if ( $slug == $default && ! empty( $assoc_args['keep_default'] ) ) {
+                $this->cli->log( sprintf( 'Notice: Keeping default language %s (%s).', $slug, $locale ) );
                 continue;
             }
 
             $term_id = $this->get_lang_id_by_slug( $slug );
 
             if ( empty( $term_id ) ) {
-                $settings_errors['error'][] = sprintf( 'Invalid language code: %s.', $slug );
+                $this->cli->warning( sprintf( 'Invalid language code: %s (%s).', $slug, $locale ) );
                 continue;
             }
 
             $this->pll->model->delete_language( $term_id );
 
             foreach ( $this->get_settings_errors()['success'] as $msg ) {
-                $settings_errors['success'][] = $msg;
+                $this->cli->success( sprintf( '%s %s (%s)', $msg, $slug, $locale ) );
             }
 
             # We need to clear the settings errors to prevent loop from breaking
             # Polylang uses wp settings errors to display admin messages
             $this->clear_settings_errors();
 
-            $notify->tick();
+            # uninstall core language files
+            $this->cli->runcommand(
+                "core language uninstall $locale",
+                array( 'return' => false, 'launch' => true, 'exit_error' => false )
+            );
 
             $i++;
-        }
-
-        $notify->finish();
-
-        foreach ( $settings_errors as $result => $messages ) {
-            foreach ( $messages as $message ) {
-                echo ucfirst( $result ) . ": $message\n";
-            }
         }
 
         $func = ( $i == count( $slugs ) ) ? 'success' : ( ( $i > 0 ) ? 'warning' : 'error' );
