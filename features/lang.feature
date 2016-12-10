@@ -28,8 +28,12 @@ Feature: Manage Polylang languages
     Then STDOUT should contain:
       """
       Success: Language added.
+      """
+    And STDERR should be:
+      """
       Warning: Language already installed.
       """
+    And the return code should be 0
 
     When I run `wp pll lang create Klingon klingon tlh`
     Then STDOUT should contain:
