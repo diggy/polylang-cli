@@ -40,10 +40,11 @@ Feature: Manage Polylang languages
       """
       Success: Language added.
       """
-    And STDERR should be:
+    And STDERR should contain:
       """
       Error: Language 'tlh' not found.
       """
+    And the return code should be 1
 
     When I run `wp pll lang get nl --format=json`
     Then STDOUT should contain:
