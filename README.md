@@ -778,6 +778,8 @@ Get a list of posts in a language.
 wp pll post list <language-code> [--<field>=<value>] [--field=<field>] [--fields=<fields>] [--format=<format>]
 ~~~
 
+NB: Like Polylang, this command passes a `lang` parameter to WP_Query, i.e. `wp post list --lang=<language-code>`.
+
 **OPTIONS**
 
 	<language-code>
@@ -1079,7 +1081,7 @@ wp pll term get <taxonomy> <term-id> [--field=<field>] [--fields=<fields>] [--fo
 
 ## Installing
 
-Installing this package requires WP-CLI v0.23.0 or greater. Update to the latest stable release with `wp cli update`.
+Installing this package requires WP-CLI v1.0.0 or greater. Update to the latest stable release with `wp cli update`.
 
 Once you've done so, you can install this package with `wp package install diggy/polylang-cli`.
 
