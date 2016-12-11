@@ -165,7 +165,7 @@ class Doctor extends BaseCommand {
         # prune superfluous language files
         if ( ! empty( $locales_orphan ) ) {
 
-            \WP_CLI::confirm( sprintf( "%d superfluous core language packs were detected (%s).\nUninstall these language files?", count( $locales_orphan ), implode( ', ', $locales_orphan ) ), $assoc_args );
+            $this->cli->confirm( sprintf( "%d superfluous core language packs were detected (%s).\nUninstall these language files?", count( $locales_orphan ), implode( ', ', $locales_orphan ) ), $assoc_args );
 
             foreach( $locales_orphan as $locale ) {
 
@@ -179,7 +179,7 @@ class Doctor extends BaseCommand {
         # install missing language files
         if ( ! empty( $locales_missing ) ) {
 
-            \WP_CLI::confirm( sprintf( "%d core language packs are missing (%s).\nInstall missing language files?", count( $locales_missing ), implode( ', ', $locales_missing ) ), $assoc_args );
+            $this->cli->confirm( sprintf( "%d core language packs are missing (%s).\nInstall missing language files?", count( $locales_missing ), implode( ', ', $locales_missing ) ), $assoc_args );
 
             foreach( $locales_missing as $locale ) {
 
@@ -203,7 +203,7 @@ class Doctor extends BaseCommand {
 
         if ( ! empty( $locales_outdated ) ) {
 
-            \WP_CLI::confirm( sprintf( "%d core language packs have updates available (%s).\nUpdate outdated language files?", count( $locales_outdated ), implode( ', ', $locales_outdated ) ), $assoc_args );
+            $this->cli->confirm( sprintf( "%d core language packs have updates available (%s).\nUpdate outdated language files?", count( $locales_outdated ), implode( ', ', $locales_outdated ) ), $assoc_args );
 
             $this->cli->runcommand(
                 "core language update",
