@@ -6,6 +6,7 @@ Feature: Manage Polylang languages
     And I run `wp core version`
     And save STDOUT as {WP_VERSION}
 
+  @core-language
   Scenario: Language CRUD commands
 
     When I run `wp pll lang create afrikaans af af`
