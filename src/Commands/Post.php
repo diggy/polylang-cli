@@ -10,7 +10,7 @@ namespace Polylang_CLI\Commands;
 class Post extends BaseCommand {
 
     /**
-     * Get post for a language.
+     * List a post and its translations, or get a post for a language.
      *
      * ## OPTIONS
      *
@@ -25,8 +25,8 @@ class Post extends BaseCommand {
      *
      * ## EXAMPLES
      *
-     *     wp pll post get 2
-     *     wp pll post get 67 es
+     *     wp pll post get 12
+     *     wp pll post get 1 es --api
      */
     public function get( $args, $assoc_args ) {
 
@@ -43,14 +43,26 @@ class Post extends BaseCommand {
         if ( $this->cli->flag( $assoc_args, 'api' ) ) {
 
             # second param of pll_get_post() is empty string by default
-            $slug = isset( $args[1] ) && $args[1] ? $args[1] : '';
+            $slug = isset( $args[1] ) && $args[1] ? $args[1] : $this->api->default_language();
 
-            echo $this->api->get_post( $args[0], $slug );
+            if ( empty( $translation = $this->api->get_post( $args[0], $slug ) ) ) {
+
+                $this->cli->error( sprintf( "Post %d has not yet been translated to %s.", $post_id, $slug ) );
+
+            } else {
+
+                $this->cli->runcommand(
+                    sprintf( 'post get %d', $translation ),
+                    array( 'return' => false, 'launch' => false, 'exit_error' => false )
+                );
+            }
 
         } else {
 
-            var_dump( $this->api->get_post_translations( $post_id ) );
-
+            $this->cli->runcommand(
+                sprintf( 'post list --post__in=%s', implode( ',', $this->api->get_post_translations( $post_id ) ) ),
+                array( 'return' => false, 'launch' => false, 'exit_error' => false )
+            );
         }
     }
 
