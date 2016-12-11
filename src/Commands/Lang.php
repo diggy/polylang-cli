@@ -197,7 +197,7 @@ class Lang extends BaseCommand
 
         # install core language files
         $this->cli->runcommand(
-            "core language install $locale",
+            "core language install $locale --prompt=0",
             array( 'return' => false, 'launch' => true, 'exit_error' => false )
         );
     }
