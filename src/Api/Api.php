@@ -4,14 +4,16 @@ namespace Polylang_CLI\Api;
 
 class Api {
 
-    protected $path            = null;
+    protected static $path     = null;
+
     protected $functions       = array();
     protected $exceptions      = array();
     protected $debug_backtrace = null;
 
     public function __construct( $path )
     {
-        $this->path            = $path;
+        self::$path            = $path;
+
         $this->functions       = $this->functions();
         $this->exceptions      = array( 'pll__', 'pll_e', 'PLL' );
     }
@@ -47,7 +49,7 @@ class Api {
     {
         $functions = array();
 
-        foreach ( $raw = $this->functions_raw() as $i => $func ) {
+        foreach ( $raw = self::functions_raw() as $i => $func ) {
 
             if ( in_array( $func, $this->exceptions ) )
                 continue;
@@ -62,16 +64,16 @@ class Api {
         return $functions;
     }
 
-    private function functions_raw()
+    public static function functions_raw()
     {
-        $content = file_get_contents( $this->path );
+        $content = file_get_contents( self::$path );
 
         preg_match_all( "/(function )(\S*\()/", $content, $matches ); // @todo fixme
 
         return array_map( 'rtrim', $matches[2], array_fill( 0, count( $matches[2] ), '(' ) );
     }
 
-    private function functions_xref()
+    public static function functions_xref()
     {
         return array(
             'pll_the_languages',
