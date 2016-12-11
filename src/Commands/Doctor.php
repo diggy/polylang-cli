@@ -215,4 +215,19 @@ class Doctor extends BaseCommand {
         $this->cli->log( 'All done.' );
     }
 
+    /**
+     * Detect changes in Polylang API functions
+     *
+     * ## EXAMPLES
+     *
+     *     wp pll doctor api
+     */
+    public function api () {
+
+        $raw = \Polylang_CLI\Api\Api::functions_raw();
+        $ref = \Polylang_CLI\Api\Api::functions_xref();
+
+        return ( $raw == $ref ) ? $this->cli->success( 'There are no Polylang API changes.' ) : $this->cli->warning( 'Polylang API changes detected.' );
+    }
+
 }
