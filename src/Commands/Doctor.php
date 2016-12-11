@@ -137,4 +137,82 @@ class Doctor extends BaseCommand {
         $this->cli->command( array( 'term', 'recount', $this->taxonomy ) );
     }
 
+    /**
+     * Mass install, update and prune core, theme and plugin language files
+     *
+     * ## EXAMPLES
+     *
+     *     wp pll doctor language
+     */
+    public function language() {
+
+        $languages   = wp_list_pluck( $this->pll->model->get_languages_list(), 'locale', 'slug' );
+        $locales_pll = array_unique( array_values( $languages ) );
+
+        # see WP_CLI\CommandWithTranslation::get_all_languages()
+        $locales_core   = wp_get_installed_translations( 'core' );
+        $locales_core   = ! empty( $locales_core['default'] ) ? array_keys( $locales_core['default'] ) : array();
+        $locales_core[] = 'en_US';
+
+        $locales_orphan  = array_diff( $locales_core, $locales_pll );
+        $locales_missing = array_diff( $locales_pll, $locales_core );
+
+        # unset WP default locale
+        if ( ( $key = array_search( 'en_US', $locales_orphan ) ) !== false ) {
+            unset( $locales_orphan[$key] );
+        }
+
+        # prune superfluous language files
+        if ( ! empty( $locales_orphan ) ) {
+
+            \WP_CLI::confirm( sprintf( "%d superfluous core language packs were detected (%s).\nUninstall these language files?", count( $locales_orphan ), implode( ', ', $locales_orphan ) ), $assoc_args );
+
+            foreach( $locales_orphan as $locale ) {
+
+                $this->cli->runcommand(
+                    "core language uninstall $locale",
+                    array( 'return' => false, 'launch' => true, 'exit_error' => false )
+                );
+            }
+        }
+
+        # install missing language files
+        if ( ! empty( $locales_missing ) ) {
+
+            \WP_CLI::confirm( sprintf( "%d core language packs are missing (%s).\nInstall missing language files?", count( $locales_missing ), implode( ', ', $locales_missing ) ), $assoc_args );
+
+            foreach( $locales_missing as $locale ) {
+
+                $this->cli->runcommand(
+                    "core language install $locale",
+                    array( 'return' => false, 'launch' => true, 'exit_error' => false )
+                );
+            }
+        }
+
+        # update outdated language files (core, themes and plugins)
+        $this->cli->log( 'Searching for updates...' );
+
+        ob_start();
+
+        $this->cli->command( array( 'core', 'language', 'list' ), array( 'field' => 'language', 'update' => 'available', 'format' => 'json' ) );
+
+        $locales_outdated = ob_get_clean();
+
+        $locales_outdated = json_decode( $locales_outdated );
+
+        if ( ! empty( $locales_outdated ) ) {
+
+            \WP_CLI::confirm( sprintf( "%d core language packs have updates available (%s).\nUpdate outdated language files?", count( $locales_outdated ), implode( ', ', $locales_outdated ) ), $assoc_args );
+
+            $this->cli->runcommand(
+                "core language update",
+                array( 'return' => false, 'launch' => true, 'exit_error' => false )
+            );
+        }
+
+        # done
+        $this->cli->log( 'All done.' );
+    }
+
 }
