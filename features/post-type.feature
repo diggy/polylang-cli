@@ -1,3 +1,4 @@
+@pll-post-type
 Feature: Inspect and manage post type translation status
 
   Background:

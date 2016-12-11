@@ -1,3 +1,4 @@
+@pll-flag
 Feature: Manage Polylang flags
 
   Background:

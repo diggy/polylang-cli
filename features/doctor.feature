@@ -1,3 +1,4 @@
+@pll-doctor
 Feature: Troubleshoot Polylang
 
   Background:

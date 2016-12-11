@@ -1,3 +1,4 @@
+@pll-taxonomy
 Feature: Manage Polylang taxonomies
 
   Background:
