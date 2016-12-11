@@ -1,3 +1,4 @@
+@pll-lang
 Feature: Manage Polylang languages
 
   Background:

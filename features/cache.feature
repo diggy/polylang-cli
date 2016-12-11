@@ -1,3 +1,4 @@
+@pll-cache
 Feature: Manage Polylang cache
 
   Background:

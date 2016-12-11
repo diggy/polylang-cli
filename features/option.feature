@@ -1,3 +1,4 @@
+@pll-option
 Feature: Manage Polylang settings
 
   Background:

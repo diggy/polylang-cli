@@ -1,3 +1,4 @@
+@pll-api
 Feature: Inspect the Polylang API
 
   Background:
