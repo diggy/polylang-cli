@@ -58,6 +58,22 @@ class Cli {
     }
 
     /**
+     * Ask for confirmation before running an operation.
+     *
+     * If 'y' is provided to the question, the script execution continues. If
+     * 'n' or any other response is provided to the question, script exits.
+     *
+     * @access public
+     *
+     * @param string $question   Question to display before the prompt.
+     * @param array  $assoc_args Skips prompt if 'yes' is provided.
+     */
+    public function confirm( $question, $assoc_args = array() ) {
+
+        \WP_CLI::confirm( $question, $assoc_args );
+    }
+
+    /**
      * Create a progress bar to display percent completion of a given operation.
      *
      * Progress bar is written to STDOUT, and disabled when command is piped. Progress
