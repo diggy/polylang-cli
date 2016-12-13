@@ -26,6 +26,7 @@ if ( file_exists( __DIR__ . '/utils.php' ) ) {
 			putenv( 'WP_CLI_CONFIG_PATH=' . $project_config );
 		}
 	}
+	require_once __DIR__ . '/../../vendor/autoload.php';
 // Inside WP-CLI
 } else {
 	require_once __DIR__ . '/../../php/utils.php';

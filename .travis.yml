@@ -37,7 +37,6 @@ matrix:
 
 before_script:
   - composer validate
-  - composer install --no-interaction --prefer-dist
   - bash bin/install-package-tests.sh
 
 script: ./vendor/bin/behat --strict
