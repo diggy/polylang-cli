@@ -17,6 +17,10 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
         return WP_CLI::error( sprintf( 'This WP-CLI package requires WP-CLI version %s or higher. Please visit %s', '1.0.0', 'https://wp-cli.org/#updating' ) );
     }
 
+    if ( getenv( 'TRAVIS' ) ) {
+        require __DIR__ . '/vendor/autoload.php';
+    }
+
     WP_CLI::add_hook( 'before_wp_load', function() {
         WP_CLI::add_wp_hook( 'init', function() {
             # make sure polylang_mo post type is always registered
