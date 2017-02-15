@@ -32,5 +32,9 @@ Feature: Inspect the Polylang API
       count_posts
       pll__
       pll_e
+      pll_esc_html__
+      pll_esc_attr__
+      pll_esc_html_e
+      pll_esc_attr_e
       PLL
       """
