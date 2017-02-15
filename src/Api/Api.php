@@ -12,11 +12,22 @@ class Api {
 
     public function __construct( $path )
     {
-        self::$path            = $path;
+        self::$path = $path;
 
-        $this->functions       = $this->functions();
-        $this->exceptions      = array( 'pll__', 'pll_e', 'PLL' );
+        $this->functions = $this->functions();
+
+        $this->exceptions = array(
+            'pll__',
+            'pll_e',
+            'pll_esc_html__',
+            'pll_esc_attr__',
+            'pll_esc_html_e',
+            'pll_esc_attr_e',
+            'PLL'
+        );
     }
+
+
 
     public function __call( $func, $args )
     {
@@ -76,29 +87,33 @@ class Api {
     public static function functions_xref()
     {
         return array(
-            'pll_the_languages',
-            'pll_current_language',
-            'pll_default_language',
-            'pll_get_post',
-            'pll_get_term',
-            'pll_home_url',
-            'pll_register_string',
-            'pll__',
-            'pll_e',
-            'pll_translate_string',
-            'pll_is_translated_post_type',
-            'pll_is_translated_taxonomy',
-            'pll_languages_list',
-            'pll_set_post_language',
-            'pll_set_term_language',
-            'pll_save_post_translations',
-            'pll_save_term_translations',
-            'pll_get_post_language',
-            'pll_get_term_language',
-            'pll_get_post_translations',
-            'pll_get_term_translations',
-            'pll_count_posts',
-            'PLL',
+             'pll_the_languages'
+            ,'pll_current_language'
+            ,'pll_default_language'
+            ,'pll_get_post'
+            ,'pll_get_term'
+            ,'pll_home_url'
+            ,'pll_register_string'
+            ,'pll__'
+            ,'pll_esc_html__'
+            ,'pll_esc_attr__'
+            ,'pll_e'
+            ,'pll_esc_html_e'
+            ,'pll_esc_attr_e'
+            ,'pll_translate_string'
+            ,'pll_is_translated_post_type'
+            ,'pll_is_translated_taxonomy'
+            ,'pll_languages_list'
+            ,'pll_set_post_language'
+            ,'pll_set_term_language'
+            ,'pll_save_post_translations'
+            ,'pll_save_term_translations'
+            ,'pll_get_post_language'
+            ,'pll_get_term_language'
+            ,'pll_get_post_translations'
+            ,'pll_get_term_translations'
+            ,'pll_count_posts'
+            ,'PLL'
         );
     }
 
