@@ -17,7 +17,30 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
         return WP_CLI::error( sprintf( 'This WP-CLI package requires WP-CLI version %s or higher. Please visit %s', '1.0.0', 'https://wp-cli.org/#updating' ) );
     }
 
-    require __DIR__ . '/vendor/autoload.php';
+    # api, cli
+    require __DIR__ . '/src/Api/Api.php';
+    require __DIR__ . '/src/Api/Cli.php';
+
+    # traits
+    require __DIR__ . '/src/Traits/Cpt.php';
+    require __DIR__ . '/src/Traits/SettingsErrors.php';
+    require __DIR__ . '/src/Traits/Properties.php';
+    require __DIR__ . '/src/Traits/Utils.php';
+
+    # base command
+    require __DIR__ . '/src/Commands/BaseCommand.php';
+
+    # commands
+    require __DIR__ . '/src/Commands/Api.php';
+    require __DIR__ . '/src/Commands/Doctor.php';
+    require __DIR__ . '/src/Commands/Option.php';
+    require __DIR__ . '/src/Commands/Taxonomy.php';
+    require __DIR__ . '/src/Commands/Flag.php';
+    require __DIR__ . '/src/Commands/Post.php';
+    require __DIR__ . '/src/Commands/Term.php';
+    require __DIR__ . '/src/Commands/Cache.php';
+    require __DIR__ . '/src/Commands/Lang.php';
+    require __DIR__ . '/src/Commands/PostType.php';
 
     WP_CLI::add_hook( 'before_wp_load', function() {
         WP_CLI::add_wp_hook( 'init', function() {
