@@ -41,6 +41,7 @@ before_script:
 before_script:
   - phpenv config-rm xdebug.ini
   - composer validate
+  - composer install --no-interaction --prefer-dist
   - bash bin/install-package-tests.sh
 
 script: ./vendor/bin/behat --format progress --strict
