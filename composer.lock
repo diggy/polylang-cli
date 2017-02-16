@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e71eaccbe792f2e42e48a5c664f08ece",
+    "content-hash": "b031440b5031a5405f77c1b2f84a41db",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -1415,16 +1415,16 @@
         },
         {
             "name": "wp-cli/wp-cli",
-            "version": "dev-master",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-cli.git",
-                "reference": "f900a4b04139d03125b78cef27f1e27d83e30285"
+                "reference": "5a28b49f7e725c74f747620fb5b1d6060953abf1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/f900a4b04139d03125b78cef27f1e27d83e30285",
-                "reference": "f900a4b04139d03125b78cef27f1e27d83e30285",
+                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/5a28b49f7e725c74f747620fb5b1d6060953abf1",
+                "reference": "5a28b49f7e725c74f747620fb5b1d6060953abf1",
                 "shasum": ""
             },
             "require": {
@@ -1478,7 +1478,7 @@
                 "cli",
                 "wordpress"
             ],
-            "time": "2017-02-16 04:46:00"
+            "time": "2017-02-01T14:20:12+00:00"
         }
     ],
     "packages-dev": [
