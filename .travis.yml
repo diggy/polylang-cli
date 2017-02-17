@@ -34,6 +34,7 @@ matrix:
     - php: 5.3
     - php: 5.4
     - php: 5.5
+    - env: WP_VERSION=trunk
 
 before_script:
   - phpenv config-rm xdebug.ini
