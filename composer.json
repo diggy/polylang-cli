@@ -14,9 +14,6 @@
     ],
     "minimum-stability": "dev",
     "autoload": {
-        "psr-4": {
-            "Polylang_CLI\\": "src"
-        },
         "files": ["command.php"]
     },
     "require": {

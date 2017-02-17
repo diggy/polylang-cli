@@ -6,6 +6,7 @@ namespace WP_CLI\Utils;
 
 use \Composer\Semver\Comparator;
 use \Composer\Semver\Semver;
+use \WP_CLI;
 use \WP_CLI\Dispatcher;
 use \WP_CLI\Iterators\Transform;
 
@@ -656,9 +657,16 @@ function get_named_sem_ver( $new_version, $original_version ) {
 	}
 
 	$parts = explode( '-', $original_version );
-	list( $major, $minor, $patch ) = explode( '.', $parts[0] );
+	$bits = explode( '.', $parts[0] );
+	$major = $bits[0];
+	if ( isset( $bits[1] ) ) {
+		$minor = $bits[1];
+	}
+	if ( isset( $bits[2] ) ) {
+		$patch = $bits[2];
+	}
 
-	if ( Semver::satisfies( $new_version, "{$major}.{$minor}.x" ) ) {
+	if ( ! is_null( $minor ) && Semver::satisfies( $new_version, "{$major}.{$minor}.x" ) ) {
 		return 'patch';
 	} else if ( Semver::satisfies( $new_version, "{$major}.x.x" ) ) {
 		return 'minor';
@@ -713,7 +721,7 @@ function get_temp_dir() {
 	}
 
 	if ( ! @is_writable( $temp ) ) {
-		WP_CLI::warning( "Temp directory isn't writable: {$temp}" );
+		\WP_CLI::warning( "Temp directory isn't writable: {$temp}" );
 	}
 
 	return $trailingslashit( $temp );
@@ -754,4 +762,64 @@ function parse_ssh_url( $url, $component = -1 ) {
 		default:
 			return $bits;
 	}
+}
+
+/**
+ * Report the results of the same operation against multiple resources.
+ *
+ * @access public
+ * @category Input
+ *
+ * @param string  $noun      Resource being affected (e.g. plugin)
+ * @param string  $verb      Type of action happening to the noun (e.g. activate)
+ * @param integer $total     Total number of resource being affected.
+ * @param integer $successes Number of successful operations.
+ * @param integer $failures  Number of failures.
+ */
+function report_batch_operation_results( $noun, $verb, $total, $successes, $failures ) {
+	$plural_noun = $noun . 's';
+	if ( in_array( $verb, array( 'reset' ), true ) ) {
+		$past_tense_verb = $verb;
+	} else {
+		$past_tense_verb = 'e' === substr( $verb, -1 ) ? $verb . 'd' : $verb . 'ed';
+	}
+	$past_tense_verb_upper = ucfirst( $past_tense_verb );
+	if ( $failures ) {
+		if ( $successes ) {
+			WP_CLI::error( "Only {$past_tense_verb} {$successes} of {$total} {$plural_noun}." );
+		} else {
+			WP_CLI::error( "No {$plural_noun} {$past_tense_verb}." );
+		}
+	} else {
+		if ( $successes ) {
+			WP_CLI::success( "{$past_tense_verb_upper} {$successes} of {$total} {$plural_noun}." );
+		} else {
+			$message = $total > 1 ? ucfirst( $plural_noun ) : ucfirst( $noun );
+			WP_CLI::success( "{$message} already {$past_tense_verb}." );
+		}
+	}
+}
+
+/**
+ * Parse a string of command line arguments into an $argv-esqe variable.
+ *
+ * @access public
+ * @category Input
+ *
+ * @param string $arguments
+ * @return array
+ */
+function parse_str_to_argv( $arguments ) {
+	preg_match_all ('/(?<=^|\s)([\'"]?)(.+?)(?<!\\\\)\1(?=$|\s)/', $arguments, $matches );
+	$argv = isset( $matches[0] ) ? $matches[0] : array();
+	$argv = array_map( function( $arg ){
+		foreach( array( '"', "'" ) as $char ) {
+			if ( $char === substr( $arg, 0, 1 ) && $char === substr( $arg, -1 ) ) {
+				$arg = substr( $arg, 1, -1 );
+				break;
+			}
+		}
+		return $arg;
+	}, $argv );
+	return $argv;
 }
