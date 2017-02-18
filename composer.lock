@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b031440b5031a5405f77c1b2f84a41db",
+    "content-hash": "4a2b918d75d08fc05d6a2365f4b3e8d9",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -71,12 +71,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "363bab90fa1f45a3801f012d5b544175dab816d8"
+                "reference": "b3fe9fa1a5cac1c33009f4668933e43b737fb8db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/363bab90fa1f45a3801f012d5b544175dab816d8",
-                "reference": "363bab90fa1f45a3801f012d5b544175dab816d8",
+                "url": "https://api.github.com/repos/composer/composer/zipball/b3fe9fa1a5cac1c33009f4668933e43b737fb8db",
+                "reference": "b3fe9fa1a5cac1c33009f4668933e43b737fb8db",
                 "shasum": ""
             },
             "require": {
@@ -140,7 +140,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2017-02-10 12:32:08"
+            "time": "2017-02-17 21:17:27"
         },
         {
             "name": "composer/semver",
@@ -148,12 +148,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "69407bb2f739d25a5da5c69b8cc7e3f2d4fe01d4"
+                "reference": "1dd67fe56c0587d0d119947061a6bfc9863c101c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/69407bb2f739d25a5da5c69b8cc7e3f2d4fe01d4",
-                "reference": "69407bb2f739d25a5da5c69b8cc7e3f2d4fe01d4",
+                "url": "https://api.github.com/repos/composer/semver/zipball/1dd67fe56c0587d0d119947061a6bfc9863c101c",
+                "reference": "1dd67fe56c0587d0d119947061a6bfc9863c101c",
                 "shasum": ""
             },
             "require": {
@@ -202,7 +202,7 @@
                 "validation",
                 "versioning"
             ],
-            "time": "2016-12-19 14:02:58"
+            "time": "2017-02-17 21:53:13"
         },
         {
             "name": "composer/spdx-licenses",
@@ -1256,12 +1256,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "c359dda8d7ad6d92f5c3ce29fd68a62f356c93a2"
+                "reference": "47a913c88abac33c54db36c4cd88f026f454f735"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/c359dda8d7ad6d92f5c3ce29fd68a62f356c93a2",
-                "reference": "c359dda8d7ad6d92f5c3ce29fd68a62f356c93a2",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/47a913c88abac33c54db36c4cd88f026f454f735",
+                "reference": "47a913c88abac33c54db36c4cd88f026f454f735",
                 "shasum": ""
             },
             "require": {
@@ -1312,7 +1312,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-16 22:43:37"
+            "time": "2017-02-17 16:10:57"
         },
         {
             "name": "symfony/yaml",
@@ -1446,7 +1446,7 @@
                 "symfony/process": "~2.1",
                 "symfony/translation": "~2.7",
                 "symfony/yaml": "~2.7",
-                "wp-cli/php-cli-tools": "~0.11.2"
+                "wp-cli/php-cli-tools": "~0.11.1"
             },
             "require-dev": {
                 "behat/behat": "2.5.*",

@@ -35,6 +35,7 @@
             "pll doctor translate",
             "pll flag",
             "pll flag list",
+            "pll flag set",
             "pll lang",
             "pll lang create",
             "pll lang delete",
