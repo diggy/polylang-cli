@@ -4,6 +4,34 @@ Feature: Manage Polylang flags
   Background:
     Given a WP install
 
+  Scenario: Set flag for language
+
+    When I run `wp pll flag set nl nl`
+    Then STDOUT should contain:
+      """
+      Success: Language updated.
+      """
+
+    When I run `wp pll flag set nl ""`
+    Then STDOUT should contain:
+      """
+      Success: Language updated.
+      """
+
+    When I run `wp pll flag set foo nl`
+    Then STDERR should contain:
+      """
+      Error: Invalid language code. Run `wp pll lang list --field=locale` to get a list of valid language codes.
+      """
+    And the return code should be 0
+
+    When I run `wp pll flag set nl foo`
+    Then STDERR should contain:
+      """
+      Error: The flag does not exist
+      """
+    And the return code should be 0
+
   Scenario: List flags
 
     When I run `wp pll flag list`

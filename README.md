@@ -212,6 +212,35 @@ wp pll flag list [--format=<format>]
 
 
 
+### wp pll flag set
+
+Set Polylang flag for language.
+
+~~~
+wp pll flag set <language-code> <flag-code>
+~~~
+
+Run `wp pll flag list` to get a list of valid flag values.
+Pass an empty string as second parameter to delete the flag value.
+
+**OPTIONS**
+
+	<language-code>
+		Language code (slug) for the language to update. Required.
+
+	<flag-code>
+		Valid flag code for the language to update. Required.
+
+**EXAMPLES**
+
+    # set flag for Dutch language
+    $ wp pll flag set nl nl
+
+    # delete flag for Dutch language
+    $ wp pll flag set nl ""
+
+
+
 ### wp pll lang
 
 Class Lang
@@ -746,7 +775,7 @@ Creates a specified number of sets of new posts with dummy data.
 
 ### wp pll post get
 
-Get post for a language.
+List a post and its translations, or get a post for a language.
 
 ~~~
 wp pll post get <post_id> [<language-code>] [--api]
@@ -765,8 +794,8 @@ wp pll post get <post_id> [<language-code>] [--api]
 
 **EXAMPLES**
 
-    wp pll post get 2
-    wp pll post get 67 es
+    wp pll post get 12
+    wp pll post get 1 es --api
 
 
 

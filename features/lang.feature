@@ -3,6 +3,7 @@ Feature: Manage Polylang languages
 
   Background:
     Given a WP install
+    And an empty cache
     And I run `wp core version`
     And save STDOUT as {WP_VERSION}
 

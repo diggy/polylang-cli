@@ -56,4 +56,33 @@ class Flag extends BaseCommand {
         $formatter->display_items( $flag_objects );
     }
 
+    /**
+     * Set Polylang flag for language.
+     *
+     * Run `wp pll flag list` to get a list of valid flag values.
+     * Pass an empty string as second parameter to delete the flag value.
+     *
+     * ## OPTIONS
+     *
+     * <language-code>
+     * : Language code (slug) for the language to update. Required.
+     *
+     * <flag-code>
+     * : Valid flag code for the language to update. Required.
+     *
+     * ## EXAMPLES
+     *
+     *     # set flag for Dutch language
+     *     $ wp pll flag set nl nl
+     *
+     *     # delete flag for Dutch language
+     *     $ wp pll flag set nl ""
+     */
+    public function set( $args, $assoc_args )
+    {
+        $this->cli->runcommand(
+            "pll lang update {$args[0]} --flag={$args[1]}",
+            array( 'return' => false, 'launch' => true, 'exit_error' => false )
+        );
+    }
 }
