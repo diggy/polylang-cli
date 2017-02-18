@@ -5,7 +5,7 @@ namespace Polylang_CLI\Commands;
 use \Polylang_CLI\Traits\Cpt;
 
 /**
- * Class PostType
+ * Inspect and manage WordPress post types and their translation status.
  *
  * @package Polylang_CLI
  */

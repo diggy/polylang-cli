@@ -5,7 +5,7 @@ namespace Polylang_CLI\Commands;
 use \Polylang_CLI\Traits\Cpt;
 
 /**
- * Class Taxonomy
+ * Inspect and manage WordPress taxonomies and their translation status.
  *
  * @package Polylang_CLI
  */
@@ -14,7 +14,7 @@ class Taxonomy extends BaseCommand
     use Cpt;
 
     /**
-     * Enable translation for taxonomies
+     * Enable translation for taxonomies.
      *
      * ## OPTIONS
      *
@@ -33,7 +33,7 @@ class Taxonomy extends BaseCommand
     }
 
     /**
-     * Disable translation for taxonomies
+     * Disable translation for taxonomies.
      *
      * ## OPTIONS
      *

@@ -13,7 +13,7 @@ This package implements the following commands:
 
 ### wp pll api
 
-Class Api
+Inspect Polylang procedural API functions.
 
 ~~~
 wp pll api 
@@ -47,7 +47,7 @@ wp pll api list [--format=<format>]
 
 ### wp pll cache
 
-Class Cache
+Inspect and manage Polylang languages cache.
 
 ~~~
 wp pll cache 
@@ -103,7 +103,7 @@ wp pll cache get [--format=<format>]
 
 ### wp pll doctor
 
-Class Doctor
+Troubleshoot Polylang.
 
 ~~~
 wp pll doctor 
@@ -166,7 +166,7 @@ to bring the count back to the correct value.
 
 ### wp pll doctor translate
 
-Translate untranslated posts and taxonomies in bulk
+Translate untranslated posts and taxonomies in bulk.
 
 ~~~
 wp pll doctor translate 
@@ -180,7 +180,7 @@ wp pll doctor translate
 
 ### wp pll flag
 
-Class Flag
+Inspect and manage Polylang country flags.
 
 ~~~
 wp pll flag 
@@ -194,7 +194,7 @@ wp pll flag
 
 ### wp pll flag list
 
-List Polylang flags.
+List Polylang country flags.
 
 ~~~
 wp pll flag list [--format=<format>]
@@ -214,7 +214,7 @@ wp pll flag list [--format=<format>]
 
 ### wp pll flag set
 
-Set Polylang flag for language.
+Set Polylang country flag for language.
 
 ~~~
 wp pll flag set <language-code> <flag-code>
@@ -243,7 +243,7 @@ Pass an empty string as second parameter to delete the flag value.
 
 ### wp pll lang
 
-Class Lang
+Manage Polylang language taxonomy and taxonomy terms.
 
 ~~~
 wp pll lang 
@@ -354,7 +354,7 @@ wp pll lang generate [--count=<number>]
 
 ### wp pll lang get
 
-Get a language
+Get a language.
 
 ~~~
 wp pll lang get <language-code> [--field=<field>] [--fields=<fields>] [--format=<format>]
@@ -382,7 +382,7 @@ wp pll lang get <language-code> [--field=<field>] [--fields=<fields>] [--format=
 
 ### wp pll lang list
 
-List terms in a taxonomy.
+List all installed languages.
 
 ~~~
 wp pll lang list [--<field>=<value>] [--field=<field>] [--fields=<fields>] [--format=<format>]
@@ -463,7 +463,7 @@ wp pll lang update <language-code> [--name=<name>] [--slug=<slug>] [--locale=<lo
 
 ### wp pll lang url
 
-Get language url
+Get the URL for a language.
 
 ~~~
 wp pll lang url <language-code>
@@ -483,7 +483,7 @@ wp pll lang url <language-code>
 
 ### wp pll option
 
-Class Option
+Inspect and manage Polylang settings.
 
 ~~~
 wp pll option 
@@ -497,7 +497,7 @@ wp pll option
 
 ### wp pll option default
 
-Gets or sets the default language
+Gets or sets the default language.
 
 ~~~
 wp pll option default [<language-code>]
@@ -510,8 +510,8 @@ wp pll option default [<language-code>]
 
 **EXAMPLES**
 
-  wp polylang default
-  wp polylang default nl
+  wp pll option default
+  wp pll option default nl
 
 
 
@@ -536,7 +536,7 @@ wp pll option get <option_name>
 
 ### wp pll option list
 
-List Polylang settings
+List Polylang settings.
 
 ~~~
 wp pll option list [--format=<format>]
@@ -556,7 +556,7 @@ wp pll option list [--format=<format>]
 
 ### wp pll option reset
 
-Reset Polylang settings
+Reset Polylang settings.
 
 ~~~
 wp pll option reset 
@@ -674,7 +674,7 @@ wp pll post
 
 ### wp pll post count
 
-Count posts for a language
+Count posts for a language.
 
 ~~~
 wp pll post count <language-code> [--post_type=<post_type>]
@@ -807,7 +807,8 @@ Get a list of posts in a language.
 wp pll post list <language-code> [--<field>=<value>] [--field=<field>] [--fields=<fields>] [--format=<format>]
 ~~~
 
-NB: Like Polylang, this command passes a `lang` parameter to WP_Query, i.e. `wp post list --lang=<language-code>`.
+NB: Like Polylang, this command passes a `lang` parameter to WP_Query,
+i.e. `wp post list --lang=<language-code>`.
 
 **OPTIONS**
 
@@ -908,7 +909,7 @@ These fields are optionally available:
 
 ### wp pll post-type
 
-Class PostType
+Inspect and manage WordPress post types and their translation status.
 
 ~~~
 wp pll post-type 
@@ -974,7 +975,7 @@ wp pll post-type list
 
 ### wp pll taxonomy
 
-Class Taxonomy
+Inspect and manage WordPress taxonomies and their translation status.
 
 ~~~
 wp pll taxonomy 
@@ -988,7 +989,7 @@ wp pll taxonomy
 
 ### wp pll taxonomy disable
 
-Disable translation for taxonomies
+Disable translation for taxonomies.
 
 ~~~
 wp pll taxonomy disable <taxonomies>
@@ -1007,7 +1008,7 @@ wp pll taxonomy disable <taxonomies>
 
 ### wp pll taxonomy enable
 
-Enable translation for taxonomies
+Enable translation for taxonomies.
 
 ~~~
 wp pll taxonomy enable <taxonomies>
@@ -1055,7 +1056,7 @@ wp pll taxonomy list [--format=<format>]
 
 ### wp pll term
 
-Class Term
+Inspect and manage WordPress taxonomy terms and their translations.
 
 ~~~
 wp pll term 

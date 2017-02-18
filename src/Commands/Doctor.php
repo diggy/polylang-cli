@@ -3,7 +3,7 @@
 namespace Polylang_CLI\Commands;
 
 /**
- * Class Doctor
+ * Troubleshoot Polylang.
  *
  * @package Polylang_CLI
  */
@@ -85,7 +85,7 @@ class Doctor extends BaseCommand {
     }
 
     /**
-     * Translate untranslated posts and taxonomies in bulk
+     * Translate untranslated posts and taxonomies in bulk.
      *
      * ## EXAMPLES
      *
@@ -138,7 +138,7 @@ class Doctor extends BaseCommand {
     }
 
     /**
-     * Mass install, update and prune core, theme and plugin language files
+     * Mass install, update and prune core, theme and plugin language files.
      *
      * ## EXAMPLES
      *
@@ -216,7 +216,7 @@ class Doctor extends BaseCommand {
     }
 
     /**
-     * Detect changes in Polylang API functions
+     * Detect changes in Polylang API functions.
      *
      * ## EXAMPLES
      *
