@@ -3,14 +3,14 @@
 namespace Polylang_CLI\Commands;
 
 /**
- * Class Flag
+ * Inspect and manage Polylang country flags.
  *
  * @package Polylang_CLI
  */
 class Flag extends BaseCommand {
 
     /**
-     * List Polylang flags.
+     * List Polylang country flags.
      *
      * ## OPTIONS
      *
@@ -57,7 +57,7 @@ class Flag extends BaseCommand {
     }
 
     /**
-     * Set Polylang flag for language.
+     * Set Polylang country flag for language.
      *
      * Run `wp pll flag list` to get a list of valid flag values.
      * Pass an empty string as second parameter to delete the flag value.

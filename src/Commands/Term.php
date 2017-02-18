@@ -3,7 +3,7 @@
 namespace Polylang_CLI\Commands;
 
 /**
- * Class Term
+ * Inspect and manage WordPress taxonomy terms and their translations.
  *
  * @package Polylang_CLI
  */

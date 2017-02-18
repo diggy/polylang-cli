@@ -67,7 +67,7 @@ class Post extends BaseCommand {
     }
 
     /**
-     * Count posts for a language
+     * Count posts for a language.
      *
      * ## OPTIONS
      *
@@ -92,7 +92,8 @@ class Post extends BaseCommand {
     /**
      * Get a list of posts in a language.
      *
-     * NB: Like Polylang, this command passes a `lang` parameter to WP_Query, i.e. `wp post list --lang=<language-code>`.
+     * NB: Like Polylang, this command passes a `lang` parameter to WP_Query,
+     * i.e. `wp post list --lang=<language-code>`.
      *
      * ## OPTIONS
      *

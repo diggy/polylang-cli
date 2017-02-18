@@ -3,7 +3,7 @@
 namespace Polylang_CLI\Commands;
 
 /**
- * Class Lang
+ * Manage Polylang language taxonomy and taxonomy terms.
  *
  * @package Polylang_CLI
  */
@@ -12,7 +12,7 @@ class Lang extends BaseCommand
     /* LIST METHODS ***********************************************************/
 
     /**
-     * List terms in a taxonomy.
+     * List all installed languages.
      *
      * ## OPTIONS
      *
@@ -75,7 +75,7 @@ class Lang extends BaseCommand
     }
 
     /**
-     * Get language url
+     * Get the URL for a language.
      *
      * ## OPTIONS
      *
@@ -101,7 +101,7 @@ class Lang extends BaseCommand
     /* CRUD METHODS ***********************************************************/
 
     /**
-     * Get a language
+     * Get a language.
      *
      * ## OPTIONS
      *

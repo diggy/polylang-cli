@@ -3,7 +3,7 @@
 namespace Polylang_CLI\Commands;
 
 /**
- * Class Option
+ * Inspect and manage Polylang settings.
  *
  * @package Polylang_CLI
  */
@@ -20,7 +20,7 @@ class Option extends BaseCommand
     }
 
     /**
-     * List Polylang settings
+     * List Polylang settings.
      *
      * ## OPTIONS
      *
@@ -48,7 +48,7 @@ class Option extends BaseCommand
     }
 
     /**
-     * Reset Polylang settings
+     * Reset Polylang settings.
      *
      * ## EXAMPLES
      *
@@ -161,7 +161,7 @@ class Option extends BaseCommand
     }
 
     /**
-     * Gets or sets the default language
+     * Gets or sets the default language.
      *
      * ## OPTIONS
      *
@@ -170,8 +170,8 @@ class Option extends BaseCommand
      *
      * ## EXAMPLES
      *
-     *   wp polylang default
-     *   wp polylang default nl
+     *   wp pll option default
+     *   wp pll option default nl
      *
      * @synopsis [<language-code>]
      *

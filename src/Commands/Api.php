@@ -3,7 +3,7 @@
 namespace Polylang_CLI\Commands;
 
 /**
- * Class Api
+ * Inspect Polylang procedural API functions.
  *
  * @package Polylang_CLI
  */

@@ -3,7 +3,7 @@
 namespace Polylang_CLI\Commands;
 
 /**
- * Class Cache
+ * Inspect and manage Polylang languages cache.
  *
  * @package Polylang_CLI
  */

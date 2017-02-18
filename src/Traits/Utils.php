@@ -5,7 +5,7 @@ namespace Polylang_CLI\Traits;
 trait Utils {
 
     /**
-     * Gets term ID by slug
+     * Gets term ID by slug.
      *
      * @access protected
      * @param  string $slug The language code (slug) to get the term ID for.
