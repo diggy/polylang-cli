@@ -56,6 +56,11 @@ class Lang extends BaseCommand
 
         $languages  = $this->pll->model->get_languages_list();
 
+        if ( empty( $languages ) ) {
+
+            $this->cli->error( 'There are currently no languages configured.' );
+        }
+
         $properties = get_object_vars( $languages[0] );
         $properties = array_intersect_key( array_flip( $this->fields_language ), $properties );
 
