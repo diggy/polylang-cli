@@ -3,7 +3,7 @@
 namespace Polylang_CLI\Commands;
 
 /**
- * Class Post
+ * Manage posts and their translations.
  *
  * @package Polylang_CLI
  */
@@ -64,6 +64,41 @@ class Post extends BaseCommand {
                 array( 'return' => false, 'launch' => false, 'exit_error' => false )
             );
         }
+    }
+
+    /**
+     * Delete a post and its translations.
+     *
+     * ## OPTIONS
+     *
+     * <post_id>
+     * : Post ID of the a translated post to delete. Required.
+     *
+     * [--force]
+     * : Skip the trash bin.
+     *
+     * [--defer-term-counting]
+     * : Recalculate term count in batch, for a performance boost.
+     *
+     * ## EXAMPLES
+     *
+     *     wp pll post delete 32
+     */
+    public function delete( $args, $assoc_args ) {
+
+        list( $post_id ) = $args;
+
+        if ( ! $post = get_post( $post_id ) ) {
+            $this->cli->error( sprintf( '%d is not a valid post object', $post_id ) );
+        }
+
+        if ( ! $this->api->is_translated_post_type( $post->post_type ) ) {
+            $this->cli->error( 'Polylang does not manage languages and translations for this post type.' );
+        }
+
+        $post_ids = $this->api->get_post_translations( $post_id );
+
+        $this->cli->command( array( 'post', 'delete', implode( ' ', $post_ids ) ), $assoc_args );
     }
 
     /**

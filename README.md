@@ -660,7 +660,7 @@ wp pll option update <option_name> <new_value>
 
 ### wp pll post
 
-Class Post
+Manage posts and their translations.
 
 ~~~
 wp pll post 
@@ -796,6 +796,31 @@ wp pll post get <post_id> [<language-code>] [--api]
 
     wp pll post get 12
     wp pll post get 1 es --api
+
+
+
+### wp pll post delete
+
+Delete a post and its translations.
+
+~~~
+wp pll post delete <post_id> [--force] [--defer-term-counting]
+~~~
+
+**OPTIONS**
+
+	<post_id>
+		Post ID of the a translated post to delete. Required.
+
+	[--force]
+		Skip the trash bin.
+
+	[--defer-term-counting]
+		Recalculate term count in batch, for a performance boost.
+
+**EXAMPLES**
+
+    wp pll post delete 32
 
 
 
