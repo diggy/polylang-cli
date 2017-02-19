@@ -973,6 +973,34 @@ wp pll post-type list
 
 
 
+### wp pll plugin uninstall
+
+Uninstall Polylang and optionally remove all data.
+
+~~~
+wp pll plugin uninstall [--yes] [--force] [--skip-delete]
+~~~
+
+**OPTIONS**
+
+	[--yes]
+		Do not prompt for confirmation.
+
+	[--force]
+		Ignores the Polylang `uninstall` setting and force deletes all data.
+
+	[--skip-delete]
+		If set, the plugin files will not be deleted. Only the uninstall procedure
+		will be run.
+
+**EXAMPLES**
+
+    $ wp pll uninstall
+    $ wp pll uninstall --force
+    $ wp pll uninstall --force --skip-delete
+
+
+
 ### wp pll taxonomy
 
 Inspect and manage WordPress taxonomies and their translation status.
