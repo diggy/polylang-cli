@@ -1121,6 +1121,53 @@ wp pll term
 
 
 
+### wp pll term generate
+
+Generate some taxonomy terms and their translations.
+
+~~~
+wp pll term generate <taxonomy> [--count=<number>] [--max_depth=<number>] [--format=<format>]
+~~~
+
+Creates a specified number of sets of new terms and their translations with dummy data.
+
+**OPTIONS**
+
+	<taxonomy>
+		The taxonomy for the generated terms.
+
+	[--count=<number>]
+		How many sets of terms to generate?
+		---
+		default: 5
+		---
+
+	[--max_depth=<number>]
+		Generate child terms down to a certain depth.
+		---
+		default: 1
+		---
+
+	[--format=<format>]
+		Render output in a particular format.
+		---
+		default: table
+		options:
+		  - table
+		  - csv
+		  - json
+		  - yaml
+		  - ids
+		---
+
+**EXAMPLES**
+
+    # Generate some post categories, and translations.
+    $ wp pll term generate category --count=3 --format=ids
+    115 116 117 118 119 120
+
+
+
 ### wp pll term get
 
 Get details about a translated term.
@@ -1161,6 +1208,35 @@ wp pll term get <taxonomy> <term-id> [--field=<field>] [--fields=<fields>] [--fo
 
     # Get details about a category with term ID 18.
     $ wp pll term get category 18
+
+
+
+### wp pll term delete
+
+Delete an existing taxonomy term and its translations.
+
+~~~
+wp pll term delete <taxonomy> <term-id>...
+~~~
+
+Errors if the term doesn't exist, or there was a problem in deleting it.
+
+**OPTIONS**
+
+	<taxonomy>
+		Taxonomy of the term to delete.
+
+	<term-id>...
+		One or more IDs of terms to delete.
+
+**EXAMPLES**
+
+    # Delete a term (English) and its translations (Spanish, French)
+    $ wp pll term delete post_tag 56
+    Deleted post_tag 56.
+    Deleted post_tag 57.
+    Deleted post_tag 58.
+    Success: Deleted 3 of 3 terms.
 
 ## Installing
 
