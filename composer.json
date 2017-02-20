@@ -68,7 +68,9 @@
             "pll taxonomy enable",
             "pll taxonomy list",
             "pll term",
-            "pll term get"
+            "pll term generate",
+            "pll term get",
+            "pll term delete"
         ]
     }
 }

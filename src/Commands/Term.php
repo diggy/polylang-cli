@@ -95,6 +95,65 @@ class Term extends BaseCommand {
     }
 
     /**
+     * Delete an existing taxonomy term and its translations.
+     *
+     * Errors if the term doesn't exist, or there was a problem in deleting it.
+     *
+     * ## OPTIONS
+     *
+     * <taxonomy>
+     * : Taxonomy of the term to delete.
+     *
+     * <term-id>...
+     * : One or more IDs of terms to delete.
+     *
+     * ## EXAMPLES
+     *
+     *     # Delete a term (English) and its translations (Spanish, French)
+     *     $ wp pll term delete post_tag 56
+     *     Deleted post_tag 56.
+     *     Deleted post_tag 57.
+     *     Deleted post_tag 58.
+     *     Success: Deleted 3 of 3 terms.
+     */
+    public function delete( $args, $assoc_args ) {
+
+        $taxonomy    = array_shift( $args );
+        $is_taxonomy = get_taxonomy( $taxonomy );
+
+        if ( empty( $is_taxonomy ) ) {
+            $this->cli->error( sprintf( '%s is not a registered taxonomy.', sanitize_text_field( $taxonomy ) ) );
+        }
+
+        if ( ! $this->api->is_translated_taxonomy( $taxonomy ) ) {
+            $this->cli->error( 'Polylang does not manage languages and translations for this taxonomy.' );
+        }
+
+        $term_ids = array_filter( wp_parse_id_list( $args ) );
+
+        $all_term_ids = array();
+
+        foreach ( $term_ids as $term_id ) {
+
+            $all_term_ids[] = $term_id;
+
+            $term_translations = $this->api->get_term_translations( $term_id );
+
+            if ( ! empty( $term_translations ) ) {
+
+                foreach ( $term_translations as $translation ) {
+                    $all_term_ids[] = $translation;
+                }
+            }
+        }
+
+        $this->cli->runcommand(
+            "term delete $taxonomy  " . implode( ' ', array_unique( array_filter( $all_term_ids ) ) ),
+            array( 'return' => false, 'launch' => false, 'exit_error' => true )
+        );
+    }
+
+    /**
      * Generate some taxonomy terms and their translations.
      *
      * Creates a specified number of sets of new terms and their translations with dummy data.
