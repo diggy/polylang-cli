@@ -1003,13 +1003,10 @@ wp pll post-type list
 Uninstall Polylang and optionally remove all data.
 
 ~~~
-wp pll plugin uninstall [--yes] [--force] [--skip-delete]
+wp pll plugin uninstall [--force] [--skip-delete]
 ~~~
 
 **OPTIONS**
-
-	[--yes]
-		Do not prompt for confirmation.
 
 	[--force]
 		Ignores the Polylang `uninstall` setting and force deletes all data.
