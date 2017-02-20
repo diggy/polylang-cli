@@ -14,9 +14,6 @@ class Plugin extends BaseCommand {
      *
      * ## OPTIONS
      *
-     * [--yes]
-     * : Do not prompt for confirmation.
-     *
      * [--force]
      * : Ignores the Polylang `uninstall` setting and force deletes all data.
      *
@@ -31,8 +28,6 @@ class Plugin extends BaseCommand {
      *     $ wp pll uninstall --force --skip-delete
      */
     public function uninstall( $args, $assoc_args ) {
-
-        $this->cli->confirm( 'Are you sure you wish to uninstall the Polylang plugin?', $assoc_args );
 
         $force = $this->cli->flag( $assoc_args, 'force' );
 

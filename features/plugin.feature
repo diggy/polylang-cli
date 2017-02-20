@@ -6,14 +6,14 @@ Feature: Manage the Polylang plugin
 
   Scenario: Uninstall the Polylang plugin
 
-    When I try `wp pll plugin uninstall --yes`
+    When I try `wp pll plugin uninstall`
     Then STDERR should be:
       """
       Error: The Polylang plugin could not be uninstalled due to the plugin's settings. Use --force to override.
       """
     And the return code should be 1
 
-    When I run `wp pll plugin uninstall --yes --skip-delete --force`
+    When I run `wp pll plugin uninstall --skip-delete --force`
     Then STDOUT should contain:
       """
       Deactivating 'polylang'...
@@ -46,7 +46,7 @@ Feature: Manage the Polylang plugin
       """
     And the return code should be 1
 
-    When I run `wp pll plugin uninstall --yes --force`
+    When I run `wp pll plugin uninstall --force`
     Then STDOUT should contain:
       """
       Deactivating 'polylang'...
