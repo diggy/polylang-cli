@@ -142,7 +142,7 @@ class Doctor extends BaseCommand {
      *
      * ## EXAMPLES
      *
-     *     wp pll doctor language
+     *     $ wp pll doctor language
      */
     public function language() {
 

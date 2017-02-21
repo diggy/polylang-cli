@@ -143,6 +143,20 @@ wp pll doctor check [--format=<format>]
 
 
 
+### wp pll doctor language
+
+Mass install, update and prune core, theme and plugin language files.
+
+~~~
+wp pll doctor language 
+~~~
+
+**EXAMPLES**
+
+    $ wp pll doctor language
+
+
+
 ### wp pll doctor recount
 
 Recalculate number of posts assigned to each language taxonomy term.
