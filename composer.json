@@ -31,6 +31,7 @@
             "pll cache get",
             "pll doctor",
             "pll doctor check",
+            "pll doctor language",
             "pll doctor recount",
             "pll doctor translate",
             "pll flag",
