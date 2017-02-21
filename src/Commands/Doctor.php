@@ -144,7 +144,7 @@ class Doctor extends BaseCommand {
      *
      *     $ wp pll doctor language
      */
-    public function language() {
+    public function language( $args, $assoc_args ) {
 
         $languages   = wp_list_pluck( $this->pll->model->get_languages_list(), 'locale', 'slug' );
         $locales_pll = array_unique( array_values( $languages ) );
