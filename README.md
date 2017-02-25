@@ -5,7 +5,7 @@ CLI interface for the Polylang plugin
 
 [![Build Status](https://travis-ci.org/diggy/polylang-cli.svg?branch=master)](https://travis-ci.org/diggy/polylang-cli)
 
-Quick links: [Using](#using) | [Installing](#installing) | [Contributing](#contributing)
+Quick links: [Using](#using) | [Installation](#installation) | [Contributing](#contributing)
 
 ## Using
 
@@ -1249,11 +1249,10 @@ Errors if the term doesn't exist, or there was a problem in deleting it.
     Deleted post_tag 58.
     Success: Deleted 3 of 3 terms.
 
-## Installing
+## Installation
 
-Installing this package requires WP-CLI v1.0.0 or greater. Update to the latest stable release with `wp cli update`.
-
-Once you've done so, you can install this package with `wp package install diggy/polylang-cli`.
+Installing this package requires WP-CLI v1.1.0 or greater. Update to the latest stable release with `wp cli update`. 
+Once you've done so, you can install this package with `wp package install git@github.com:diggy/polylang-cli.git`.
 
 ## Contributing
 
