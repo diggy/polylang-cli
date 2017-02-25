@@ -34,7 +34,7 @@ Feature: Manage Polylang languages
       """
     And STDERR should be:
       """
-      Warning: Language already installed.
+      Warning: Language 'nl_NL' already installed.
       """
     And the return code should be 0
 
