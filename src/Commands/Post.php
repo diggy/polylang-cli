@@ -322,9 +322,9 @@ class Post extends BaseCommand {
 
         $this->cli->command( array( 'post', 'generate' ), $assoc_args );
 
-        $ids = ob_get_clean();
+        $post_ids = ob_get_clean();
 
-        $ids = array_chunk( explode( ' ', $ids ), count( $languages ) );
+        $ids = array_chunk( explode( ' ', $post_ids ), count( $languages ) );
 
         foreach ( $ids as $i => $chunk ) {
 
@@ -338,7 +338,11 @@ class Post extends BaseCommand {
             $this->api->save_post_translations( $ids[$i] );
         }
 
-        $this->cli->success( sprintf( 'Generated %d posts.', $assoc_args['count'] ) );
+        if ( 'ids' === $this->cli->flag( $assoc_args, 'format' ) ) {
+            echo $post_ids; // compare \Post_Command::list_()
+        } else {
+            $this->cli->success( sprintf( 'Generated %d posts.', $assoc_args['count'] ) );
+        }
     }
 
 }
