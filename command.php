@@ -42,15 +42,29 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
     require __DIR__ . '/src/Commands/Lang.php';
     require __DIR__ . '/src/Commands/PostType.php';
     require __DIR__ . '/src/Commands/Plugin.php';
+    require __DIR__ . '/src/Commands/Menu.php';
 
     WP_CLI::add_hook( 'before_wp_load', function() {
+
         WP_CLI::add_wp_hook( 'init', function() {
+
             # make sure polylang_mo post type is always registered
             if ( ! post_type_exists( 'polylang_mo' ) ) {
                 $labels = array( 'name' => __( 'Strings translations', 'polylang' ) );
                 register_post_type( 'polylang_mo', array( 'labels' => $labels, 'rewrite' => false, 'query_var' => false, '_pll' => true ) );
             }
+
         });
+
+    });
+
+    WP_CLI::add_hook( 'before_invoke:pll menu', function() {
+
+            # make sure localized (temporary) nav menu locations are always registered
+            require_once PLL_INC . '/nav-menu.php';
+            $pll_nav_menu = new \PLL_Nav_Menu( \PLL() );
+            $pll_nav_menu->create_nav_menu_locations();
+
     });
 
     // WP_CLI::add_command( 'pll',        Polylang_CLI\Cli::class );
@@ -60,6 +74,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
     WP_CLI::add_command( 'pll doctor',    Polylang_CLI\Commands\Doctor::class );
     WP_CLI::add_command( 'pll flag',      Polylang_CLI\Commands\Flag::class );
     WP_CLI::add_command( 'pll lang',      Polylang_CLI\Commands\Lang::class );
+    WP_CLI::add_command( 'pll menu',      Polylang_CLI\Commands\Menu::class );
     WP_CLI::add_command( 'pll option',    Polylang_CLI\Commands\Option::class );
     WP_CLI::add_command( 'pll post',      Polylang_CLI\Commands\Post::class );
     WP_CLI::add_command( 'pll post-type', Polylang_CLI\Commands\PostType::class );

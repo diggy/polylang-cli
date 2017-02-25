@@ -45,6 +45,8 @@
             "pll lang list",
             "pll lang update",
             "pll lang url",
+            "pll menu",
+            "pll menu create",
             "pll option",
             "pll option default",
             "pll option get",
