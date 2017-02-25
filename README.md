@@ -495,6 +495,51 @@ wp pll lang url <language-code>
 
 
 
+### wp pll menu
+
+Manage the WP Nav Menus.
+
+~~~
+wp pll menu 
+~~~
+
+
+
+
+
+
+
+### wp pll menu create
+
+Create a new menu for each language, AND assign it to a location.
+
+~~~
+wp pll menu create <menu-name> <location> [--porcelain]
+~~~
+
+**OPTIONS**
+
+	<menu-name>
+		A descriptive name for the menu.
+
+	<location>
+		Location’s slug.
+
+	[--porcelain]
+		Output just the new menu ids.
+
+**EXAMPLES**
+
+    $ wp pll menu create "Primary Menu" primary
+    Success: Assigned location to menu.
+    Success: Assigned location to menu.
+    Success: Assigned location to menu.
+
+    $ wp pll menu create "Secondary Menu" secondary --porcelain
+    21 22 23
+
+
+
 ### wp pll option
 
 Inspect and manage Polylang settings.
