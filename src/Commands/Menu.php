@@ -39,7 +39,7 @@ class Menu extends BaseCommand {
 
         list( $menu_name, $location ) = $args;
 
-        $post_ids = $assigned = array();
+        $post_ids = array();
 
         $languages = wp_list_pluck( $this->pll->model->get_languages_list(), 'slug' );
 
