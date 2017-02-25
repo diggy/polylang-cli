@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0948854b6c751be4eae1a89b1abb0e36",
+    "content-hash": "35d9446b31def11c7abbb5af5a3c401e",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -71,12 +71,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "b3fe9fa1a5cac1c33009f4668933e43b737fb8db"
+                "reference": "667f1d7815c004b0d50b161fd1582c181435947a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/b3fe9fa1a5cac1c33009f4668933e43b737fb8db",
-                "reference": "b3fe9fa1a5cac1c33009f4668933e43b737fb8db",
+                "url": "https://api.github.com/repos/composer/composer/zipball/667f1d7815c004b0d50b161fd1582c181435947a",
+                "reference": "667f1d7815c004b0d50b161fd1582c181435947a",
                 "shasum": ""
             },
             "require": {
@@ -140,7 +140,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2017-02-17 21:17:27"
+            "time": "2017-02-21 12:53:19"
         },
         {
             "name": "composer/semver",
@@ -379,16 +379,16 @@
         },
         {
             "name": "mustangostang/spyc",
-            "version": "0.6.1",
+            "version": "0.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mustangostang/spyc.git",
-                "reference": "022532641d61d383fd3ae666982bd46e61e5915e"
+                "reference": "23c35ae854d835f2d7bcc3e3ad743d7e57a8c14d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mustangostang/spyc/zipball/022532641d61d383fd3ae666982bd46e61e5915e",
-                "reference": "022532641d61d383fd3ae666982bd46e61e5915e",
+                "url": "https://api.github.com/repos/mustangostang/spyc/zipball/23c35ae854d835f2d7bcc3e3ad743d7e57a8c14d",
+                "reference": "23c35ae854d835f2d7bcc3e3ad743d7e57a8c14d",
                 "shasum": ""
             },
             "require": {
@@ -425,7 +425,7 @@
                 "yaml",
                 "yml"
             ],
-            "time": "2016-10-21T00:03:34+00:00"
+            "time": "2017-02-24T16:06:33+00:00"
         },
         {
             "name": "nb/oxymel",
@@ -753,12 +753,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "3688bfa136d51d1b8ad3db1f7b19e4a177b91884"
+                "reference": "284c23a90ca0876381dc3285e97d0aafd79e44bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/3688bfa136d51d1b8ad3db1f7b19e4a177b91884",
-                "reference": "3688bfa136d51d1b8ad3db1f7b19e4a177b91884",
+                "url": "https://api.github.com/repos/symfony/config/zipball/284c23a90ca0876381dc3285e97d0aafd79e44bf",
+                "reference": "284c23a90ca0876381dc3285e97d0aafd79e44bf",
                 "shasum": ""
             },
             "require": {
@@ -801,7 +801,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-21 08:33:48"
+            "time": "2017-02-21 09:00:26"
         },
         {
             "name": "symfony/console",
@@ -809,12 +809,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "98bba2703a433e0563753a519ae9f8246b1dde36"
+                "reference": "42645e1a6d36fd4177751bea0e607d039c9a1b7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/98bba2703a433e0563753a519ae9f8246b1dde36",
-                "reference": "98bba2703a433e0563753a519ae9f8246b1dde36",
+                "url": "https://api.github.com/repos/symfony/console/zipball/42645e1a6d36fd4177751bea0e607d039c9a1b7d",
+                "reference": "42645e1a6d36fd4177751bea0e607d039c9a1b7d",
                 "shasum": ""
             },
             "require": {
@@ -862,7 +862,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-21 08:33:48"
+            "time": "2017-02-21 14:21:52"
         },
         {
             "name": "symfony/debug",
@@ -1256,12 +1256,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "ad2d6ef97fc90441d95d17ce1d00d3ea31210430"
+                "reference": "cd41812e11f31df0566d758a58cd3b164b6ef677"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/ad2d6ef97fc90441d95d17ce1d00d3ea31210430",
-                "reference": "ad2d6ef97fc90441d95d17ce1d00d3ea31210430",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/cd41812e11f31df0566d758a58cd3b164b6ef677",
+                "reference": "cd41812e11f31df0566d758a58cd3b164b6ef677",
                 "shasum": ""
             },
             "require": {
@@ -1274,7 +1274,7 @@
             "require-dev": {
                 "psr/log": "~1.0",
                 "symfony/config": "~2.8",
-                "symfony/intl": "~2.4|~3.0.0",
+                "symfony/intl": "~2.7.25|^2.8.18|~3.2.5",
                 "symfony/yaml": "~2.2|~3.0.0"
             },
             "suggest": {
@@ -1312,7 +1312,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-02-21 08:33:48"
+            "time": "2017-02-21 14:21:52"
         },
         {
             "name": "symfony/yaml",
