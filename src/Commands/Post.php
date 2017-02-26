@@ -111,6 +111,12 @@ class Post extends BaseCommand {
             if ( empty( $data ) ) {
                 $this->cli->error( 'Invalid JSON.' );
             }
+
+            $diff = array_diff( $this->api->languages_list(), array_keys( $data ) );
+
+            if ( ! empty( $diff ) ) {
+                $this->cli->error( sprintf( 'Please provide input for all languages: %s', implode( ', ', $this->api->languages_list() ) ) );
+            }
         }
 
         if ( empty( $data ) ) {
