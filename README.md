@@ -320,30 +320,37 @@ wp pll lang create <name> <language-code> <locale> [--rtl=<bool>] [--order=<int>
 
 ### wp pll lang delete
 
-Delete a language.
+Delete one, some or all languages.
 
 ~~~
-wp pll lang delete <language-code> [--keep_default=<bool>]
+wp pll lang delete [<language-code>] [--all] [--keep_default]
 ~~~
+
+Deletes Polylang languages and uninstalls core language packs if not in use by other languages.
 
 **OPTIONS**
 
-	<language-code>
-		Comma-separated slugs of the languages to delete. Pass `all` to delete all currently installed languages.
+	[<language-code>]
+		Comma-separated slugs of the languages to delete.
 
-	[--keep_default=<bool>]
-		Whether to keep the default language. Default: true
+	[--all]
+		Delete all languages
+
+	[--keep_default]
+		Whether to keep the default language.
 
 **EXAMPLES**
 
-    # delete the Spanish language
-    wp pll lang delete es
-
-    # delete all languages except the default language
-    wp pll lang delete all
+    # delete the Afrikaans language and uninstall the `af` WordPress core language pack
+    $ wp pll lang delete af
+    Success: Language deleted. af (af)
+    Success: Language uninstalled.
 
     # delete all languages including the default language
-    wp pll lang delete all --keep_default=0
+    $ wp pll lang delete --all
+
+    # delete all languages except the default language
+    $ wp pll lang delete --all --keep_default
 
 
 

@@ -284,48 +284,59 @@ class Lang extends BaseCommand
     }
 
     /**
-     * Delete a language.
+     * Delete one, some or all languages.
+     *
+     * Deletes Polylang languages and uninstalls core language packs if not in use by other languages.
      *
      * ## OPTIONS
      *
-     * <language-code>
-     * : Comma-separated slugs of the languages to delete. Pass `all` to delete all currently installed languages.
+     * [<language-code>]
+     * : Comma-separated slugs of the languages to delete.
      *
-     * [--keep_default=<bool>]
-     * : Whether to keep the default language. Default: true
+     * [--all]
+     * : Delete all languages
+     *
+     * [--keep_default]
+     * : Whether to keep the default language.
      *
      * ## EXAMPLES
      *
-     *     # delete the Spanish language
-     *     wp pll lang delete es
-     *
-     *     # delete all languages except the default language
-     *     wp pll lang delete all
+     *     # delete the Afrikaans language and uninstall the `af` WordPress core language pack
+     *     $ wp pll lang delete af
+     *     Success: Language deleted. af (af)
+     *     Success: Language uninstalled.
      *
      *     # delete all languages including the default language
-     *     wp pll lang delete all --keep_default=0
+     *     $ wp pll lang delete --all
+     *
+     *     # delete all languages except the default language
+     *     $ wp pll lang delete --all --keep_default
      */
     public function delete( $args, $assoc_args ) {
 
-        $assoc_args = wp_parse_args( $assoc_args, array( 'keep_default' => true ) );
+        if ( ! $this->cli->flag( $assoc_args, 'all' ) && empty( $args ) ) {
+            $this->cli->error( "You must specify at least one language or use --all." );
+        }
 
-        $slugs = explode( ',', $args[0] );
+        if ( $this->cli->flag( $assoc_args, 'all' ) ) {
+            $args = array();
+        }
 
-        $all_slugs = wp_list_pluck( $this->pll->model->get_languages_list(), 'locale', 'slug' );
+        $slugs = wp_list_pluck( $this->pll->model->get_languages_list(), 'locale', 'slug' );
 
-        $slugs = ( $slugs[0] === 'all' ) ? $all_slugs : array_intersect_key( $all_slugs, array_flip( $slugs ) );
+        $slugs = ( $this->cli->flag( $assoc_args, 'all' ) )
+            ? $slugs
+            : array_intersect_key( $slugs, array_flip( explode( ',', $args[0] ) ) );
 
         if ( empty( $slugs ) ) {
             $this->cli->error( 'Please enter 1 or more valid language codes. Run `wp pll lang list` to get a list of installed languages.' );
         }
 
-        $default = $this->api->default_language();
-
         $i = 0;
 
         foreach ( $slugs as $slug => $locale ) {
 
-            if ( $slug == $default && ! empty( $assoc_args['keep_default'] ) ) {
+            if ( $slug === $this->api->default_language() && $this->cli->flag( $assoc_args, 'keep_default' ) ) {
                 $this->cli->log( sprintf( 'Notice: Keeping default language %s (%s).', $slug, $locale ) );
                 continue;
             }
@@ -347,16 +358,21 @@ class Lang extends BaseCommand
             # Polylang uses wp settings errors to display admin messages
             $this->clear_settings_errors();
 
-            # uninstall core language files
-            $this->cli->runcommand(
-                "core language uninstall $locale",
-                array( 'return' => false, 'launch' => true, 'exit_error' => false )
-            );
+            # uninstall core language files, if not in use by another language
+            $locales = array_count_values( wp_list_pluck( $this->pll->model->get_languages_list(), 'locale' ) );
+
+            if ( ! isset( $locales[$locale] ) ) {
+
+                $this->cli->runcommand(
+                    "core language uninstall $locale",
+                    array( 'return' => false, 'launch' => true, 'exit_error' => false )
+                );
+            }
 
             $i++;
         }
 
-        $func = ( $i == count( $slugs ) ) ? 'success' : ( ( $i > 0 ) ? 'warning' : 'error' );
+        $func = ( $i === count( $slugs ) ) ? 'success' : ( ( $i > 0 ) ? 'warning' : 'error' );
 
         $this->cli->$func( sprintf( '%d of %d languages deleted', $i, count( $slugs ) ) );
     }

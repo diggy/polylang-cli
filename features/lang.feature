@@ -60,3 +60,36 @@ Feature: Manage Polylang languages
       """
       http://example.com/?lang=nl
       """
+
+    When I run `wp pll lang delete klingon`
+    Then STDOUT should contain:
+      """
+      Success: Language deleted. klingon (tlh)
+      Success: 1 of 1 languages deleted
+      """
+    And STDERR should be:
+      """
+      Error: Language not installed.
+      """
+
+    When I run `wp pll lang delete --all --keep_default`
+    Then STDOUT should contain:
+      """
+      Notice: Keeping default language nl (nl_NL).
+      Success: Language deleted. af (af)
+      Success: Language uninstalled.
+      Success: Language deleted. nl-be (nl_NL)
+      """
+    And STDERR should be:
+      """
+      Warning: 2 of 3 languages deleted
+      """
+    And the return code should be 0
+
+    When I run `wp pll lang delete --all`
+    Then STDOUT should contain:
+      """
+      Success: Language deleted. nl (nl_NL)
+      Success: Language uninstalled.
+      Success: 1 of 1 languages deleted
+      """
