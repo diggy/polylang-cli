@@ -20,3 +20,14 @@ Feature: Manage WordPress nav menus
       """
       11 12
       """
+
+    When I run `wp theme mod get nav_menu_locations`
+    Then STDOUT should contain:
+      """
+      key	value
+      nav_menu_locations	=>
+          primary	9
+          primary___de	10
+          social	11
+          social___de	12
+      """
