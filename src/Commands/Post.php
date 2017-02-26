@@ -101,6 +101,8 @@ class Post extends BaseCommand {
             $this->cli->error( 'Polylang does not manage languages and translations for this post type.' );
         }
 
+        $languages = $this->api->languages_list();
+
         $data = $post_ids = array();
 
         if ( $this->cli->flag( $assoc_args, 'stdin' ) ) {
@@ -112,20 +114,25 @@ class Post extends BaseCommand {
                 $this->cli->error( 'Invalid JSON.' );
             }
 
-            $diff = array_diff( $this->api->languages_list(), array_keys( $data ) );
+            $diff = array_diff( $languages, array_keys( $data ) );
 
             if ( ! empty( $diff ) ) {
-                $this->cli->error( sprintf( 'Please provide input for all languages: %s', implode( ', ', $this->api->languages_list() ) ) );
+                $this->cli->error( sprintf( 'Please provide input for all languages: %s', implode( ', ', $languages ) ) );
             }
         }
 
         if ( empty( $data ) ) {
-            foreach ( $this->api->languages_list() as $slug ) {
+            foreach ( $languages as $slug ) {
                 $data[$slug] = array();
             }
         }
 
         foreach ( $data as $slug => $_assoc_args ) {
+
+            if ( ! in_array( $slug, $languages ) ) {
+                $this->cli->warning( sprintf( '%s is not a valid language.', $slug ) );
+                continue;
+            }
 
             $_assoc_args = array_merge( $assoc_args, $_assoc_args );
             $_assoc_args['porcelain'] = true;
