@@ -67,6 +67,82 @@ class Post extends BaseCommand {
     }
 
     /**
+     * Create a new post and its translations.
+     *
+     * ## OPTIONS
+     *
+     * --post_type=<type>
+     * : The type of the new posts. Required.
+     *
+     * [--<field>=<value>]
+     * : Associative args for the new posts. See wp_insert_post(). These values will take precendence over input from STDIN.
+     *
+     * [--stdin]
+     * : Read structured JSON from STDIN.
+     *
+     * [--porcelain]
+     * : Output just the new post ids.
+     *
+     * ## EXAMPLES
+     *
+     *     # Create a post and duplicate it to all languages
+     *     $ wp pll post create --post_type=page --post_title="Blog" --post_status=publish
+     *     Success: Created and linked 2 posts of the page post type.
+     *
+     *     # Create a post and its translations using structured JSON
+     *     $ echo '{"nl":{"post_title":"Dutch title","post_content":"Dutch content"},"de":{"post_title":"German title","post_content":"German content"}}' | wp pll post create --stdin
+     *     Success: Created and linked 2 posts of the post post type.
+     */
+    public function create( $args, $assoc_args ) {
+
+        $post_type = $this->cli->flag( $assoc_args, 'post_type' );
+
+        if ( ! $this->api->is_translated_post_type( $post_type ) ) {
+            $this->cli->error( 'Polylang does not manage languages and translations for this post type.' );
+        }
+
+        $data = $post_ids = array();
+
+        if ( $this->cli->flag( $assoc_args, 'stdin' ) ) {
+
+            $stdin = file_get_contents( 'php://stdin' );
+            $data  = json_decode( $stdin, true );
+
+            if ( empty( $data ) ) {
+                $this->cli->error( 'Invalid JSON.' );
+            }
+        }
+
+        if ( empty( $data ) ) {
+            foreach ( $this->api->languages_list() as $slug ) {
+                $data[$slug] = array();
+            }
+        }
+
+        foreach ( $data as $slug => $_assoc_args ) {
+
+            $_assoc_args = array_merge( $assoc_args, $_assoc_args );
+            $_assoc_args['porcelain'] = true;
+
+            ob_start();
+
+            $this->cli->command( array( 'post', 'create' ), $_assoc_args );
+
+            $post_id = $post_ids[$slug] = ob_get_clean();
+
+            $this->api->set_post_language( $post_id, $slug );
+        }
+
+        $this->api->save_post_translations( $post_ids );
+
+        if ( $this->cli->flag( $assoc_args, 'porcelain' ) ) {
+            echo implode( ' ', array_map( 'absint', $post_ids ) );
+        } else {
+            $this->cli->success( sprintf( "Created and linked %d posts of the %s post type.", count( $post_ids ), $post_type ) );
+        }
+    }
+
+    /**
      * Delete a post and its translations.
      *
      * ## OPTIONS

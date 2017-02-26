@@ -57,6 +57,7 @@
             "pll option update",
             "pll post",
             "pll post count",
+            "pll post create",
             "pll post generate",
             "pll post get",
             "pll post delete",
