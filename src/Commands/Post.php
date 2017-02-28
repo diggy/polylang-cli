@@ -105,6 +105,7 @@ class Post extends BaseCommand {
 
         $data = $post_ids = array();
 
+        # handle input from STDIN
         if ( $this->cli->flag( $assoc_args, 'stdin' ) ) {
 
             $stdin = file_get_contents( 'php://stdin' );
@@ -114,6 +115,7 @@ class Post extends BaseCommand {
                 $this->cli->error( 'Invalid JSON.' );
             }
 
+            # check if we have content for all languages
             $diff = array_diff( $languages, array_keys( $data ) );
 
             if ( ! empty( $diff ) ) {
@@ -121,6 +123,7 @@ class Post extends BaseCommand {
             }
         }
 
+        # input from $assoc_args
         if ( empty( $data ) ) {
             foreach ( $languages as $slug ) {
                 $data[$slug] = array();
@@ -134,6 +137,7 @@ class Post extends BaseCommand {
                 continue;
             }
 
+            # prioritize input from $assoc_args
             $_assoc_args = array_merge( $assoc_args, $_assoc_args );
             $_assoc_args['porcelain'] = true;
 
@@ -148,11 +152,11 @@ class Post extends BaseCommand {
 
         $this->api->save_post_translations( $post_ids );
 
-        if ( $this->cli->flag( $assoc_args, 'porcelain' ) ) {
-            echo implode( ' ', array_map( 'absint', $post_ids ) );
-        } else {
+        if ( ! $this->cli->flag( $assoc_args, 'porcelain' ) ) {
             $this->cli->success( sprintf( "Created and linked %d posts of the %s post type.", count( $post_ids ), $post_type ) );
         }
+
+        echo implode( ' ', array_map( 'absint', $post_ids ) );
     }
 
     /**
