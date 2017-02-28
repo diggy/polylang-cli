@@ -11,8 +11,8 @@ Feature: Manage WordPress nav menus
     When I run `wp pll menu create "Primary menu" primary`
     Then STDOUT should contain:
       """
-      Success: Assigned location to menu.
-      Success: Assigned location to menu.
+      Success: Assigned location primary to menu 9.
+      Success: Assigned location primary___de to menu 10.
       """
 
     When I run `wp pll menu create "Follow us!" social --porcelain`
