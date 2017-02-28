@@ -90,7 +90,7 @@ class Post extends BaseCommand {
      *     Success: Created and linked 2 posts of the page post type.
      *
      *     # Create a post and its translations using structured JSON
-     *     $ echo '{"nl":{"post_title":"Dutch title","post_content":"Dutch content"},"de":{"post_title":"German title","post_content":"German content"}}' | wp pll post create --stdin
+     *     $ echo '{"nl":{"post_title":"Dutch title","post_content":"Dutch content"},"de":{"post_title":"German title","post_content":"German content"}}' | wp pll post create --post_type=post --stdin
      *     Success: Created and linked 2 posts of the post post type.
      */
     public function create( $args, $assoc_args ) {
