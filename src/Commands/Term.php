@@ -7,7 +7,7 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class Term extends BaseCommand {
+class TermCommand extends BaseCommand {
 
     /**
      * Get details about a translated term.

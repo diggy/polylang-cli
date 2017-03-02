@@ -7,7 +7,7 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class Option extends BaseCommand
+class OptionCommand extends BaseCommand
 {
     public function __construct()
     {

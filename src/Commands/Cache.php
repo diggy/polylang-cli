@@ -7,7 +7,7 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class Cache extends BaseCommand {
+class CacheCommand extends BaseCommand {
 
     /**
      * Gets the Polylang languages cache.

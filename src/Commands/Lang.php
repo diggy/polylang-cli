@@ -7,7 +7,7 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class Lang extends BaseCommand
+class LangCommand extends BaseCommand
 {
     /* LIST METHODS ***********************************************************/
 
