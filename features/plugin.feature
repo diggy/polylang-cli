@@ -39,12 +39,11 @@ Feature: Manage the Polylang plugin
     When I run `wp plugin activate polylang`
     Then STDOUT should not be empty
 
-    When I try `wp pll lang list`
-    Then STDERR should be:
+    When I try `wp pll lang list --format=count`
+    Then STDOUT should contain:
       """
-      Error: There are currently no languages configured.
+      0
       """
-    And the return code should be 1
 
     When I run `wp pll plugin uninstall --force`
     Then STDOUT should contain:
