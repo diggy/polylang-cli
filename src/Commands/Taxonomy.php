@@ -9,7 +9,7 @@ use \Polylang_CLI\Traits\Cpt;
  *
  * @package Polylang_CLI
  */
-class Taxonomy extends BaseCommand
+class TaxonomyCommand extends BaseCommand
 {
     use Cpt;
 

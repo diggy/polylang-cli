@@ -7,7 +7,7 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class Flag extends BaseCommand {
+class FlagCommand extends BaseCommand {
 
     /**
      * List Polylang country flags.

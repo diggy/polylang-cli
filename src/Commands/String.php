@@ -7,7 +7,7 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class String extends BaseCommand {
+class StringCommand extends BaseCommand {
 
     /**
      * List string translations.

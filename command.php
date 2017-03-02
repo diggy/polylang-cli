@@ -70,18 +70,18 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 
     // WP_CLI::add_command( 'pll',        Polylang_CLI\Cli::class );
 
-    WP_CLI::add_command( 'pll api',       Polylang_CLI\Commands\Api::class );
-    WP_CLI::add_command( 'pll cache',     Polylang_CLI\Commands\Cache::class );
-    WP_CLI::add_command( 'pll doctor',    Polylang_CLI\Commands\Doctor::class );
-    WP_CLI::add_command( 'pll flag',      Polylang_CLI\Commands\Flag::class );
-    WP_CLI::add_command( 'pll lang',      Polylang_CLI\Commands\Lang::class );
-    WP_CLI::add_command( 'pll menu',      Polylang_CLI\Commands\Menu::class );
-    WP_CLI::add_command( 'pll option',    Polylang_CLI\Commands\Option::class );
-    WP_CLI::add_command( 'pll post',      Polylang_CLI\Commands\Post::class );
-    WP_CLI::add_command( 'pll post-type', Polylang_CLI\Commands\PostType::class );
-    WP_CLI::add_command( 'pll taxonomy',  Polylang_CLI\Commands\Taxonomy::class );
-    WP_CLI::add_command( 'pll term',      Polylang_CLI\Commands\Term::class );
-    WP_CLI::add_command( 'pll plugin',    Polylang_CLI\Commands\Plugin::class );
-    WP_CLI::add_command( 'pll string',    Polylang_CLI\Commands\String::class );
+    WP_CLI::add_command( 'pll api',       Polylang_CLI\Commands\ApiCommand::class );
+    WP_CLI::add_command( 'pll cache',     Polylang_CLI\Commands\CacheCommand::class );
+    WP_CLI::add_command( 'pll doctor',    Polylang_CLI\Commands\DoctorCommand::class );
+    WP_CLI::add_command( 'pll flag',      Polylang_CLI\Commands\FlagCommand::class );
+    WP_CLI::add_command( 'pll lang',      Polylang_CLI\Commands\LangCommand::class );
+    WP_CLI::add_command( 'pll menu',      Polylang_CLI\Commands\MenuCommand::class );
+    WP_CLI::add_command( 'pll option',    Polylang_CLI\Commands\OptionCommand::class );
+    WP_CLI::add_command( 'pll plugin',    Polylang_CLI\Commands\PluginCommand::class );
+    WP_CLI::add_command( 'pll post',      Polylang_CLI\Commands\PostCommand::class );
+    WP_CLI::add_command( 'pll post-type', Polylang_CLI\Commands\PostTypeCommand::class );
+    WP_CLI::add_command( 'pll string',    Polylang_CLI\Commands\StringCommand::class );
+    WP_CLI::add_command( 'pll taxonomy',  Polylang_CLI\Commands\TaxonomyCommand::class );
+    WP_CLI::add_command( 'pll term',      Polylang_CLI\Commands\TermCommand::class );
 
 }

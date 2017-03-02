@@ -9,7 +9,7 @@ use \Polylang_CLI\Traits\Cpt;
  *
  * @package Polylang_CLI
  */
-class PostType extends BaseCommand
+class PostTypeCommand extends BaseCommand
 {
     use Cpt;
 
