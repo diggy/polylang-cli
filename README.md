@@ -16,7 +16,7 @@ This package implements the following commands:
 Inspect Polylang procedural API functions.
 
 ~~~
-wp pll api 
+wp pll api
 ~~~
 
 
@@ -50,7 +50,7 @@ wp pll api list [--format=<format>]
 Inspect and manage Polylang languages cache.
 
 ~~~
-wp pll cache 
+wp pll cache
 ~~~
 
 
@@ -106,7 +106,7 @@ wp pll cache get [--format=<format>]
 Troubleshoot Polylang.
 
 ~~~
-wp pll doctor 
+wp pll doctor
 ~~~
 
 
@@ -197,7 +197,7 @@ wp pll doctor translate
 Inspect and manage Polylang country flags.
 
 ~~~
-wp pll flag 
+wp pll flag
 ~~~
 
 
@@ -260,7 +260,7 @@ Pass an empty string as second parameter to delete the flag value.
 Manage Polylang language taxonomy and taxonomy terms.
 
 ~~~
-wp pll lang 
+wp pll lang
 ~~~
 
 
@@ -507,7 +507,7 @@ wp pll lang url <language-code>
 Manage the WP Nav Menus.
 
 ~~~
-wp pll menu 
+wp pll menu
 ~~~
 
 
@@ -552,7 +552,7 @@ wp pll menu create <menu-name> <location> [--porcelain]
 Inspect and manage Polylang settings.
 
 ~~~
-wp pll option 
+wp pll option
 ~~~
 
 
@@ -615,8 +615,8 @@ wp pll option list [--format=<format>]
 
 **EXAMPLES**
 
-    wp pll option list
-    wp pll option list --format=csv
+    $ wp pll option list
+    $ wp pll option list --format=csv
 
 
 
@@ -729,7 +729,7 @@ wp pll option update <option_name> <new_value>
 Manage posts and their translations.
 
 ~~~
-wp pll post 
+wp pll post
 ~~~
 
 
@@ -1003,7 +1003,7 @@ These fields are optionally available:
 Inspect and manage WordPress post types and their translation status.
 
 ~~~
-wp pll post-type 
+wp pll post-type
 ~~~
 
 
@@ -1089,12 +1089,45 @@ wp pll plugin uninstall [--force] [--skip-delete]
 
 
 
+### wp pll string
+
+Inspect and manage Polylang string translations.
+
+~~~
+wp pll string
+~~~
+
+
+
+
+
+
+
+### wp pll string list
+
+List string translations.
+
+~~~
+wp pll string list [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	[--format=<format>]
+		Accepted values: table, csv, json, count, yaml. Default: table
+
+**EXAMPLES**
+
+    $ wp pll string list
+
+
+
 ### wp pll taxonomy
 
 Inspect and manage WordPress taxonomies and their translation status.
 
 ~~~
-wp pll taxonomy 
+wp pll taxonomy
 ~~~
 
 
@@ -1175,7 +1208,7 @@ wp pll taxonomy list [--format=<format>]
 Inspect and manage WordPress taxonomy terms and their translations.
 
 ~~~
-wp pll term 
+wp pll term
 ~~~
 
 

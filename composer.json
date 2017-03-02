@@ -66,6 +66,8 @@
             "pll post-type enable",
             "pll post-type list",
             "pll plugin uninstall",
+            "pll string",
+            "pll string list",
             "pll taxonomy",
             "pll taxonomy disable",
             "pll taxonomy enable",
