@@ -403,11 +403,13 @@ wp pll lang get <language-code> [--field=<field>] [--fields=<fields>] [--format=
 
 ### wp pll lang list
 
-List all installed languages.
+List installed languages.
 
 ~~~
-wp pll lang list [--<field>=<value>] [--field=<field>] [--fields=<fields>] [--format=<format>]
+wp pll lang list [--<field>=<value>] [--field=<field>] [--fields=<fields>] [--format=<format>] [--pll=<value>]
 ~~~
+
+List installed languages as Polylang objects. Passing `--pll=0` will output the result of `wp term list language`
 
 **OPTIONS**
 
@@ -423,7 +425,40 @@ wp pll lang list [--<field>=<value>] [--field=<field>] [--fields=<fields>] [--fo
 	[--format=<format>]
 		Accepted values: table, csv, json, count, yaml. Default: table
 
-**AVAILABLE FIELDS**
+	[--pll=<value>]
+		Pass 0 to list languages as WP term objects.
+
+**AVAILABLE FIELDS (POLYLANG OBJECT)**
+
+These fields will be displayed by default for each term:
+
+* term_id
+* name
+* slug
+* term_group
+* count
+* locale
+* is_rtl
+* flag_code
+* ---
+* term_taxonomy_id
+* taxonomy
+* description
+* parent
+* tl_term_id
+* tl_term_taxonomy_id
+* tl_count
+* flag_url
+* flag
+* home_url
+* search_url
+* host
+* mo_id
+* page_on_front
+* page_for_posts
+* filter
+
+**AVAILABLE FIELDS (WP TERM OBJECT)**
 
 These fields will be displayed by default for each term:
 
@@ -439,9 +474,11 @@ There are no optionally available fields.
 
 **EXAMPLES**
 
-    wp pll lang list --format=csv
+    # list languages as wp term objects
+    $ wp pll lang list --pll=0
 
-    wp pll lang list --fields=name,slug
+    # list properties of languages as Polylang objects
+    $ wp pll lang list --fields=host,mo_id,flag_code
 
 
 
