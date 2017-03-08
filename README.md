@@ -1145,17 +1145,38 @@ wp pll string
 List string translations.
 
 ~~~
-wp pll string list [--format=<format>]
+wp pll string list [<language-code>] [--fields=<value>] [--format=<format>] [--s=<value>] [--orderby=<value>] [--order=<value>]
 ~~~
 
 **OPTIONS**
 
+	[<language-code>]
+		The language code (slug) to get the string translations for. Optional.
+
+	[--fields=<value>]
+		Limit the output to specific object fields. Valid values are: name, string, context, multiline, translations, row.
+
 	[--format=<format>]
 		Accepted values: table, csv, json, count, yaml. Default: table
 
+	[--s=<value>]
+		Search for a string in `name` and `string` fields.
+
+	[--orderby=<value>]
+		Define which column to sort.
+
+	[--order=<value>]
+		Define the order of the results, asc or desc.
+
 **EXAMPLES**
 
-    $ wp pll string list
+    $ wp pll string list --s="WordPress site"
+
+    $ wp pll string list --order=asc --orderby=string
+
+    $ wp pll string list de --fields=string,translations
+
+    $ wp pll string list es --format=csv
 
 
 
