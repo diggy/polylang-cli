@@ -7,12 +7,14 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class Lang extends BaseCommand
+class LangCommand extends BaseCommand
 {
     /* LIST METHODS ***********************************************************/
 
     /**
-     * List all installed languages.
+     * List installed languages.
+     *
+     * List installed languages as Polylang objects. Passing `--pll=0` will output the result of `wp term list language`
      *
      * ## OPTIONS
      *
@@ -28,7 +30,40 @@ class Lang extends BaseCommand
      * [--format=<format>]
      * : Accepted values: table, csv, json, count, yaml. Default: table
      *
-     * ## AVAILABLE FIELDS
+     * [--pll=<value>]
+     * : Pass 0 to list languages as WP term objects.
+     *
+     * ## AVAILABLE FIELDS (POLYLANG OBJECT)
+     *
+     * These fields will be displayed by default for each term:
+     *
+     * * term_id
+     * * name
+     * * slug
+     * * term_group
+     * * count
+     * * locale
+     * * is_rtl
+     * * flag_code
+     * * ---
+     * * term_taxonomy_id
+     * * taxonomy
+     * * description
+     * * parent
+     * * tl_term_id
+     * * tl_term_taxonomy_id
+     * * tl_count
+     * * flag_url
+     * * flag
+     * * home_url
+     * * search_url
+     * * host
+     * * mo_id
+     * * page_on_front
+     * * page_for_posts
+     * * filter
+     *
+     * ## AVAILABLE FIELDS (WP TERM OBJECT)
      *
      * These fields will be displayed by default for each term:
      *
@@ -44,30 +79,26 @@ class Lang extends BaseCommand
      *
      * ## EXAMPLES
      *
-     *     wp pll lang list --format=csv
+     *     # list languages as wp term objects
+     *     $ wp pll lang list --pll=0
      *
-     *     wp pll lang list --fields=name,slug
+     *     # list properties of languages as Polylang objects
+     *     $ wp pll lang list --fields=host,mo_id,flag_code
      *
      * @subcommand list
      */
     public function list_( $args, $assoc_args ) {
 
-        // $this->cli->command( array( 'term', 'list', $this->taxonomy ), $assoc_args );
-
-        $languages  = $this->pll->model->get_languages_list();
-
-        if ( empty( $languages ) ) {
-
-            $this->cli->error( 'There are currently no languages configured.' );
+        if ( '0' === $this->cli->flag( $assoc_args, 'pll' ) ) {
+            return $this->cli->command( array( 'term', 'list', $this->taxonomy ), $assoc_args );
         }
 
-        $properties = get_object_vars( $languages[0] );
-        $properties = array_intersect_key( array_flip( $this->fields_language ), $properties );
+        $languages = $this->pll->model->get_languages_list();
 
         # invoke formatter
-        $formatter = $this->cli->formatter( $assoc_args, array_keys( $properties ), 'language' );
+        $formatter = $this->cli->formatter( $assoc_args, $this->fields_language, 'language' );
 
-        # force LTR for table and csv display, see https://github.com/wp-cli/wp-cli/issues/3038
+        # force LTR for table and csv display, see https://git.io/vynJY and https://git.io/vynJZ
         foreach ( $languages as $language ) {
 
             if ( wp_validate_boolean( $language->is_rtl ) ) {

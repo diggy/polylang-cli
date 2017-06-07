@@ -7,7 +7,7 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class Post extends BaseCommand {
+class PostCommand extends BaseCommand {
 
     /**
      * List a post and its translations, or get a post for a language.

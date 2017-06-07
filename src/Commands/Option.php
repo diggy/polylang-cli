@@ -7,7 +7,7 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class Option extends BaseCommand
+class OptionCommand extends BaseCommand
 {
     public function __construct()
     {
@@ -29,8 +29,8 @@ class Option extends BaseCommand
      *
      * ## EXAMPLES
      *
-     *     wp pll option list
-     *     wp pll option list --format=csv
+     *     $ wp pll option list
+     *     $ wp pll option list --format=csv
      *
      * @subcommand list
      */
@@ -42,9 +42,18 @@ class Option extends BaseCommand
             $this->cli->error( 'The option `polylang` is empty or does not exist.' );
         }
 
-        $formatter = $this->cli->formatter( $assoc_args, array_keys( $option ) );
+        $items = array();
 
-        $formatter->display_items( array( (object) $option ) );
+        foreach ( $option as $key => $value ) {
+            $obj               = new \stdClass();
+            $obj->option_name  = $key;
+            $obj->option_value = $value;
+            $items[]           = $obj;
+        }
+
+        $formatter = $this->cli->formatter( $assoc_args, array( 'option_name', 'option_value' ) );
+
+        $formatter->display_items( $items );
     }
 
     /**

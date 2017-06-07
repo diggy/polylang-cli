@@ -7,7 +7,7 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class Menu extends BaseCommand {
+class MenuCommand extends BaseCommand {
 
     /**
 	 * Create a new menu for each language, AND assign it to a location.

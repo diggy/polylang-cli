@@ -7,7 +7,7 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class Api extends BaseCommand {
+class ApiCommand extends BaseCommand {
 
     /**
      * List Polylang procedural API functions.

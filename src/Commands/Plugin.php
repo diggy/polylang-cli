@@ -7,7 +7,7 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class Plugin extends BaseCommand {
+class PluginCommand extends BaseCommand {
 
     /**
      * Uninstall Polylang and optionally remove all data.

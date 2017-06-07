@@ -16,7 +16,7 @@ This package implements the following commands:
 Inspect Polylang procedural API functions.
 
 ~~~
-wp pll api 
+wp pll api
 ~~~
 
 
@@ -50,7 +50,7 @@ wp pll api list [--format=<format>]
 Inspect and manage Polylang languages cache.
 
 ~~~
-wp pll cache 
+wp pll cache
 ~~~
 
 
@@ -106,7 +106,7 @@ wp pll cache get [--format=<format>]
 Troubleshoot Polylang.
 
 ~~~
-wp pll doctor 
+wp pll doctor
 ~~~
 
 
@@ -197,7 +197,7 @@ wp pll doctor translate
 Inspect and manage Polylang country flags.
 
 ~~~
-wp pll flag 
+wp pll flag
 ~~~
 
 
@@ -260,7 +260,7 @@ Pass an empty string as second parameter to delete the flag value.
 Manage Polylang language taxonomy and taxonomy terms.
 
 ~~~
-wp pll lang 
+wp pll lang
 ~~~
 
 
@@ -403,11 +403,13 @@ wp pll lang get <language-code> [--field=<field>] [--fields=<fields>] [--format=
 
 ### wp pll lang list
 
-List all installed languages.
+List installed languages.
 
 ~~~
-wp pll lang list [--<field>=<value>] [--field=<field>] [--fields=<fields>] [--format=<format>]
+wp pll lang list [--<field>=<value>] [--field=<field>] [--fields=<fields>] [--format=<format>] [--pll=<value>]
 ~~~
+
+List installed languages as Polylang objects. Passing `--pll=0` will output the result of `wp term list language`
 
 **OPTIONS**
 
@@ -423,7 +425,40 @@ wp pll lang list [--<field>=<value>] [--field=<field>] [--fields=<fields>] [--fo
 	[--format=<format>]
 		Accepted values: table, csv, json, count, yaml. Default: table
 
-**AVAILABLE FIELDS**
+	[--pll=<value>]
+		Pass 0 to list languages as WP term objects.
+
+**AVAILABLE FIELDS (POLYLANG OBJECT)**
+
+These fields will be displayed by default for each term:
+
+* term_id
+* name
+* slug
+* term_group
+* count
+* locale
+* is_rtl
+* flag_code
+* ---
+* term_taxonomy_id
+* taxonomy
+* description
+* parent
+* tl_term_id
+* tl_term_taxonomy_id
+* tl_count
+* flag_url
+* flag
+* home_url
+* search_url
+* host
+* mo_id
+* page_on_front
+* page_for_posts
+* filter
+
+**AVAILABLE FIELDS (WP TERM OBJECT)**
 
 These fields will be displayed by default for each term:
 
@@ -439,9 +474,11 @@ There are no optionally available fields.
 
 **EXAMPLES**
 
-    wp pll lang list --format=csv
+    # list languages as wp term objects
+    $ wp pll lang list --pll=0
 
-    wp pll lang list --fields=name,slug
+    # list properties of languages as Polylang objects
+    $ wp pll lang list --fields=host,mo_id,flag_code
 
 
 
@@ -507,7 +544,7 @@ wp pll lang url <language-code>
 Manage the WP Nav Menus.
 
 ~~~
-wp pll menu 
+wp pll menu
 ~~~
 
 
@@ -552,7 +589,7 @@ wp pll menu create <menu-name> <location> [--porcelain]
 Inspect and manage Polylang settings.
 
 ~~~
-wp pll option 
+wp pll option
 ~~~
 
 
@@ -615,8 +652,8 @@ wp pll option list [--format=<format>]
 
 **EXAMPLES**
 
-    wp pll option list
-    wp pll option list --format=csv
+    $ wp pll option list
+    $ wp pll option list --format=csv
 
 
 
@@ -729,7 +766,7 @@ wp pll option update <option_name> <new_value>
 Manage posts and their translations.
 
 ~~~
-wp pll post 
+wp pll post
 ~~~
 
 
@@ -1037,7 +1074,7 @@ These fields are optionally available:
 Inspect and manage WordPress post types and their translation status.
 
 ~~~
-wp pll post-type 
+wp pll post-type
 ~~~
 
 
@@ -1123,12 +1160,66 @@ wp pll plugin uninstall [--force] [--skip-delete]
 
 
 
+### wp pll string
+
+Inspect and manage Polylang string translations.
+
+~~~
+wp pll string
+~~~
+
+
+
+
+
+
+
+### wp pll string list
+
+List string translations.
+
+~~~
+wp pll string list [<language-code>] [--fields=<value>] [--format=<format>] [--s=<value>] [--orderby=<value>] [--order=<value>]
+~~~
+
+**OPTIONS**
+
+	[<language-code>]
+		The language code (slug) to get the string translations for. Optional.
+
+	[--fields=<value>]
+		Limit the output to specific object fields. Valid values are: name, string, context, multiline, translations, row.
+
+	[--format=<format>]
+		Accepted values: table, csv, json, count, yaml. Default: table
+
+	[--s=<value>]
+		Search for a string in `name` and `string` fields.
+
+	[--orderby=<value>]
+		Define which column to sort.
+
+	[--order=<value>]
+		Define the order of the results, asc or desc.
+
+**EXAMPLES**
+
+    $ wp pll string list --s="WordPress site"
+
+    $ wp pll string list --order=asc --orderby=string
+
+    $ wp pll string list de --fields=string,translations
+
+    $ wp pll string list es --format=csv
+
+
+
 ### wp pll taxonomy
 
 Inspect and manage WordPress taxonomies and their translation status.
 
 ~~~
-wp pll taxonomy 
+wp pll taxonomy
 ~~~
 
 
@@ -1209,7 +1300,7 @@ wp pll taxonomy list [--format=<format>]
 Inspect and manage WordPress taxonomy terms and their translations.
 
 ~~~
-wp pll term 
+wp pll term
 ~~~
 
 

@@ -7,7 +7,7 @@ namespace Polylang_CLI\Commands;
  *
  * @package Polylang_CLI
  */
-class Doctor extends BaseCommand {
+class DoctorCommand extends BaseCommand {
 
     /**
      * List untranslated post and term objects (translatable).
