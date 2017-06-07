@@ -2,6 +2,11 @@ sudo: false
 
 language: php
 
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
 php:
     - "nightly"
 
@@ -9,9 +14,15 @@ branches:
   only:
     - master
 
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
 env:
   global:
-    - WP_CLI_BIN_DIR=/tmp/wp-cli-phar
+    - PATH="$TRAVIS_BUILD_DIR/vendor/bin:$PATH"
+    - WP_CLI_BIN_DIR="$TRAVIS_BUILD_DIR/vendor/bin"
   matrix:
     - WP_VERSION=latest
 
@@ -36,18 +47,16 @@ matrix:
     - php: 5.5
     - env: WP_VERSION=trunk
 
-before_script:
+before_install:
   - phpenv config-rm xdebug.ini
-  - composer validate
+
+install:
+  - composer require wp-cli/wp-cli:dev-master
+  - composer install
   - bash bin/install-package-tests.sh
 
-script: ./vendor/bin/behat --format progress --strict
+before_script:
+  - composer validate
 
-cache:
-  - composer
-  - $HOME/.composer/cache
-
-notifications:
-  email:
-    on_success: never
-    on_failure: change
+script:
+  - bash bin/test.sh
