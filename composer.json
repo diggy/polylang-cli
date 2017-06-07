@@ -58,6 +58,7 @@
             "pll post",
             "pll post count",
             "pll post generate",
+            "pll post create",
             "pll post get",
             "pll post delete",
             "pll post list",

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c7366574f3663f48e2114f5ea130fcc9",
+    "content-hash": "763de5d403a2de2beeb7378858ca6759",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -2869,7 +2869,7 @@
                 "Behat",
                 "Symfony2"
             ],
-            "time": "2016-08-29T07:27:43+00:00"
+            "time": "2016-08-29 07:27:43"
         },
         {
             "name": "behat/gherkin",
@@ -2930,7 +2930,7 @@
                 "Symfony2",
                 "parser"
             ],
-            "time": "2014-06-06T00:48:18+00:00"
+            "time": "2014-06-06 00:48:18"
         }
     ],
     "aliases": [],
