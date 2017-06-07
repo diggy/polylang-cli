@@ -17,11 +17,10 @@
         "files": ["command.php"]
     },
     "require": {
-        "wp-cli/wp-cli": "^1.2.1"
+        "wp-cli/wp-cli": "~1.2.1"
     },
     "require-dev": {
-        "behat/behat": "~2.5",
-        "wp-cli/wp-cli": "^1.2.1"
+        "behat/behat": "~2.5"
     },
     "extra": {
         "commands": [
