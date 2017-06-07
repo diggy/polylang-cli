@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Traits;
 
+if ( ! trait_exists( 'Polylang_CLI\Traits\SettingsErrors' ) ) {
+
 trait SettingsErrors {
 
     /**
@@ -53,5 +55,7 @@ trait SettingsErrors {
 
         $GLOBALS['wp_settings_errors'] = array();
     }
+
+}
 
 }

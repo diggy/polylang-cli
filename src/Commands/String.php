@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Commands;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\StringCommand' ) ) {
+
 /**
  * Inspect and manage Polylang string translations.
  *
@@ -91,5 +93,7 @@ class StringCommand extends BaseCommand {
 
         $formatter->display_items( $items );
     }
+
+}
 
 }

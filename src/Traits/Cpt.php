@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Traits;
 
+if ( ! trait_exists( 'Polylang_CLI\Traits\Cpt' ) ) {
+
 trait Cpt {
 
     private function manage( $action, $type, $data )
@@ -100,5 +102,7 @@ trait Cpt {
 */
 
     }
+
+}
 
 }

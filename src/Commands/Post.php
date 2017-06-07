@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Commands;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\PostCommand' ) ) {
+
 /**
  * Manage posts and their translations.
  *
@@ -344,5 +346,7 @@ class PostCommand extends BaseCommand {
             $this->cli->success( sprintf( 'Generated %d posts.', $assoc_args['count'] ) );
         }
     }
+
+}
 
 }

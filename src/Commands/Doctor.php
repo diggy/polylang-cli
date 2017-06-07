@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Commands;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\DoctorCommand' ) ) {
+
 /**
  * Troubleshoot Polylang.
  *
@@ -229,5 +231,7 @@ class DoctorCommand extends BaseCommand {
 
         return ( $raw == $ref ) ? $this->cli->success( 'There are no Polylang API changes.' ) : $this->cli->warning( 'Polylang API changes detected.' );
     }
+
+}
 
 }

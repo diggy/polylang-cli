@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Traits;
 
+if ( ! trait_exists( 'Polylang_CLI\Traits\Utils' ) ) {
+
 trait Utils {
 
     /**
@@ -17,5 +19,7 @@ trait Utils {
 
         return isset( $languages[$slug] ) ? (int) $languages[$slug] : 0;
     }
+
+}
 
 }

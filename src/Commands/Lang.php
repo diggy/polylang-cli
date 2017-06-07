@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Commands;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\LangCommand' ) ) {
+
 /**
  * Manage Polylang language taxonomy and taxonomy terms.
  *
@@ -532,5 +534,7 @@ class LangCommand extends BaseCommand
         # success message
         $this->cli->success( sprintf( 'Generated %1$d of %2$d languages. New term IDs: %3$s', (int) $i, (int) $count, implode( ',', $term_ids ) ) );
     }
+
+}
 
 }
