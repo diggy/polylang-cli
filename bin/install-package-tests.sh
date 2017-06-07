@@ -8,5 +8,3 @@ install_db() {
 }
 
 install_db
-
-composer install
