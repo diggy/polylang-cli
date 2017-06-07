@@ -109,7 +109,7 @@ $steps->Given( '/^download:$/',
 	}
 );
 
-$steps->Given( '/^save (STDOUT|STDERR) ([\'].+[^\'])?as \{(\w+)\}$/',
+$steps->Given( '/^save (STDOUT|STDERR) ([\'].+[^\'])?\s?as \{(\w+)\}$/',
 	function ( $world, $stream, $output_filter, $key ) {
 
 		$stream = strtolower( $stream );
@@ -127,9 +127,15 @@ $steps->Given( '/^save (STDOUT|STDERR) ([\'].+[^\'])?as \{(\w+)\}$/',
 	}
 );
 
-$steps->Given( '/^a new Phar(?: with version "([^"]+)")$/',
-	function ( $world, $version ) {
+$steps->Given( '/^a new Phar with (?:the same version|version "([^"]+)")$/',
+	function ( $world, $version = 'same' ) {
 		$world->build_phar( $version );
+	}
+);
+
+$steps->Given( '/^a downloaded Phar with (?:the same version|version "([^"]+)")$/',
+	function ( $world, $version = 'same' ) {
+		$world->download_phar( $version );
 	}
 );
 

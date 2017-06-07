@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Commands;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\FlagCommand' ) ) {
+
 /**
  * Inspect and manage Polylang country flags.
  *
@@ -85,4 +87,6 @@ class FlagCommand extends BaseCommand {
             array( 'return' => false, 'launch' => true, 'exit_error' => false )
         );
     }
+}
+
 }

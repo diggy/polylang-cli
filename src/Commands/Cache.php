@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Commands;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\CacheCommand' ) ) {
+
 /**
  * Inspect and manage Polylang languages cache.
  *
@@ -56,4 +58,6 @@ class CacheCommand extends BaseCommand {
 
         $this->cli->success( 'Languages cache cleared.' );
     }
+}
+
 }

@@ -13,6 +13,8 @@ use \Polylang_CLI\Traits\SettingsErrors;
 if( ! defined( 'PLL_ADMIN' ) )    define( 'PLL_ADMIN',    true );
 if( ! defined( 'PLL_SETTINGS' ) ) define( 'PLL_SETTINGS', true );
 
+if ( ! class_exists( 'Polylang_CLI\Commands\BaseCommand' ) ) {
+
 /**
  * Class BaseCommand
  *
@@ -45,5 +47,7 @@ class BaseCommand extends \WP_CLI_Command
         # make Polylang API functions available
         $this->api = new Api( PLL_INC . '/api.php' );
     }
+
+}
 
 }

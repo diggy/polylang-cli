@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Commands;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\PluginCommand' ) ) {
+
 /**
  * Manage the Polylang plugin itself.
  *
@@ -47,5 +49,7 @@ class PluginCommand extends BaseCommand {
             array( 'return' => false, 'launch' => false, 'exit_error' => true )
         );
     }
+
+}
 
 }

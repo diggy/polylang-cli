@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Api;
 
+if ( ! class_exists( 'Polylang_CLI\Api\Cli' ) ) {
+
 class Cli {
 
     /**
@@ -172,5 +174,7 @@ class Cli {
 
         \WP_CLI::log( $message );
     }
+
+}
 
 }

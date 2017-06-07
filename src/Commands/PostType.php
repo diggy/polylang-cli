@@ -4,6 +4,8 @@ namespace Polylang_CLI\Commands;
 
 use \Polylang_CLI\Traits\Cpt;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\PostTypeCommand' ) ) {
+
 /**
  * Inspect and manage WordPress post types and their translation status.
  *
@@ -75,5 +77,7 @@ class PostTypeCommand extends BaseCommand
 
         $formatter->display_items( $post_types );
     }
+
+}
 
 }

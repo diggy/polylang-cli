@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Api;
 
+if ( ! class_exists( 'Polylang_CLI\Api\Api' ) ) {
+
 class Api {
 
     protected static $path     = null;
@@ -116,5 +118,7 @@ class Api {
             ,'PLL'
         );
     }
+
+}
 
 }

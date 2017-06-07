@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Traits;
 
+if ( ! trait_exists( 'Polylang_CLI\Traits\Properties' ) ) {
+
 trait Properties {
 
     protected $cli = null;
@@ -52,5 +54,7 @@ trait Properties {
         'filter',
         'flag_code',
     );
+
+}
 
 }

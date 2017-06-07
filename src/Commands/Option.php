@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Commands;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\OptionCommand' ) ) {
+
 /**
  * Inspect and manage Polylang settings.
  *
@@ -349,5 +351,7 @@ class OptionCommand extends BaseCommand
 
         $this->cli->success( 'Polylang `sync` option updated.' );
     }
+
+}
 
 }

@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Commands;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\MenuCommand' ) ) {
+
 /**
  * Manage the WP Nav Menus.
  *
@@ -67,5 +69,7 @@ class MenuCommand extends BaseCommand {
             echo implode( ' ', array_map( 'absint', $post_ids ) );
         }
     }
+
+}
 
 }

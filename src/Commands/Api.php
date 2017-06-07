@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Commands;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\ApiCommand' ) ) {
+
 /**
  * Inspect Polylang procedural API functions.
  *
@@ -42,5 +44,7 @@ class ApiCommand extends BaseCommand {
 
         $formatter->display_items( $api_functions );
     }
+
+}
 
 }

@@ -4,6 +4,8 @@ namespace Polylang_CLI\Commands;
 
 use \Polylang_CLI\Traits\Cpt;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\TaxonomyCommand' ) ) {
+
 /**
  * Inspect and manage WordPress taxonomies and their translation status.
  *
@@ -99,5 +101,7 @@ class TaxonomyCommand extends BaseCommand
 
         $formatter->display_items( $taxonomies );
     }
+
+}
 
 }

@@ -2,6 +2,8 @@
 
 namespace Polylang_CLI\Commands;
 
+if ( ! class_exists( 'Polylang_CLI\Commands\TermCommand' ) ) {
+
 /**
  * Inspect and manage WordPress taxonomy terms and their translations.
  *
@@ -244,5 +246,7 @@ class TermCommand extends BaseCommand {
 
         echo implode( ' ', $term_ids );
     }
+
+}
 
 }
