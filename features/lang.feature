@@ -55,10 +55,10 @@ Feature: Manage Polylang languages
       {"term_id":2,"name":"Dutch","slug":"nl","term_group":0,"term_taxonomy_id":2,"taxonomy":"language","description":"a:3:{s:6:\"locale\";s:5:\"nl_NL\";s:3:\"rtl\";i:0;s:9:\"flag_code\";s:0:\"\";}","parent":0,"count":2,"filter":"raw"}
       """
 
-    When I run `wp pll lang url nl`
+    When I run `wp pll lang url nl-be`
     Then STDOUT should contain:
       """
-      http://example.com/?lang=nl
+      http://example.com/?lang=nl-be
       """
 
     When I run `wp pll lang delete klingon`
