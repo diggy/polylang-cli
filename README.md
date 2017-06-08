@@ -803,6 +803,40 @@ wp pll post count <language-code> [--post_type=<post_type>]
 
 
 
+### wp pll post create
+
+Create a new post and its translations.
+
+~~~
+wp pll post create --post_type=<type> [--<field>=<value>] [--stdin] [--porcelain]
+~~~
+
+**OPTIONS**
+
+	--post_type=<type>
+		The type of the new posts. Required.
+
+	[--<field>=<value>]
+		Associative args for the new posts. See wp_insert_post(). These values will take precendence over input from STDIN.
+
+	[--stdin]
+		Read structured JSON from STDIN.
+
+	[--porcelain]
+		Output just the new post ids.
+
+**EXAMPLES**
+
+    # Create a post and duplicate it to all languages
+    $ wp pll post create --post_type=page --post_title="Blog" --post_status=publish
+    Success: Created and linked 2 posts of the page post type.
+
+    # Create a post and its translations using structured JSON
+    $ echo '{"nl":{"post_title":"Dutch title","post_content":"Dutch content"},"de":{"post_title":"German title","post_content":"German content"}}' | wp pll post create --post_type=post --stdin
+    Success: Created and linked 2 posts of the post post type.
+
+
+
 ### wp pll post generate
 
 Generate some posts and their translations.
