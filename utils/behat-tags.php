@@ -34,7 +34,9 @@ function version_tags( $prefix, $current, $operator = '<' ) {
 $wp_version_reqs = array();
 // Only apply @require-wp tags when WP_VERSION isn't 'latest' or 'nightly'
 // 'latest' and 'nightly' are expected to work with all features
-if ( ! in_array( getenv( 'WP_VERSION' ), array( 'latest', 'nightly', 'trunk' ), true ) ) {
+if ( in_array( getenv( 'WP_VERSION' ), array( 'latest', 'nightly', 'trunk' ), true ) ) {
+	$wp_version_reqs = array( '~@core-language' );
+} else {
 	$wp_version_reqs = version_tags( 'require-wp', getenv( 'WP_VERSION' ), '<' );
 }
 
