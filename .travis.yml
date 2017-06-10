@@ -56,7 +56,7 @@ install:
   - bash bin/install-package-tests.sh
 
 before_script:
-  - composer self-update
+  - composer self-update --rollback
   - composer validate
 
 script:
