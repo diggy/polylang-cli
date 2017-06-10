@@ -445,7 +445,7 @@ These fields will be displayed by default for each term:
 * locale
 * is_rtl
 * flag_code
-* ---
+---
 * term_taxonomy_id
 * taxonomy
 * description
