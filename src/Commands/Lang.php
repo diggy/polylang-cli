@@ -47,7 +47,7 @@ class LangCommand extends BaseCommand
      * * locale
      * * is_rtl
      * * flag_code
-     * * ---
+     * ---
      * * term_taxonomy_id
      * * taxonomy
      * * description

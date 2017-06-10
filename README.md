@@ -5,7 +5,7 @@ CLI for the Polylang plugin
 
 [![Build Status](https://travis-ci.org/diggy/polylang-cli.svg?branch=master)](https://travis-ci.org/diggy/polylang-cli)
 
-Quick links: [Installation](#installation) | [Using](#using) | [Contributing](#contributing)
+Quick links: [Installation](#installation) | [Using](#using) | [Contributing](#contributing) | [Development](#development)
 
 ## Installation
 
@@ -445,7 +445,7 @@ These fields will be displayed by default for each term:
 * locale
 * is_rtl
 * flag_code
-* ---
+---
 * term_taxonomy_id
 * taxonomy
 * description
@@ -878,6 +878,40 @@ Creates a specified number of sets of new posts with dummy data.
     Success: Added custom field.
     Success: Added custom field.
     Success: Added custom field.
+
+
+
+### wp pll post create
+
+Create a new post and its translations.
+
+~~~
+wp pll post create --post_type=<type> [--<field>=<value>] [--stdin] [--porcelain]
+~~~
+
+**OPTIONS**
+
+	--post_type=<type>
+		The type of the new posts. Required.
+
+	[--<field>=<value>]
+		Associative args for the new posts. See wp_insert_post(). These values will take precendence over input from STDIN.
+
+	[--stdin]
+		Read structured JSON from STDIN.
+
+	[--porcelain]
+		Output just the new post ids.
+
+**EXAMPLES**
+
+    # Create a post and duplicate it to all languages
+    $ wp pll post create --post_type=page --post_title="Blog" --post_status=publish
+    Success: Created and linked 2 posts of the page post type.
+
+    # Create a post and its translations using structured JSON
+    $ echo '{"nl":{"post_title":"Dutch title","post_content":"Dutch content"},"de":{"post_title":"German title","post_content":"German content"}}' | wp pll post create --post_type=post --stdin
+    Success: Created and linked 2 posts of the post post type.
 
 
 
@@ -1427,6 +1461,11 @@ Once you've decided to commit the time to seeing your pull request through, plea
 2. Submit your pull request early for feedback.
 3. Include functional tests with your changes. [Read the WP-CLI documentation](https://wp-cli.org/docs/pull-requests/#functional-tests) for an introduction.
 4. Follow the [WordPress Coding Standards](http://make.wordpress.org/core/handbook/coding-standards/).
+
+## Development
+
+### Behat Tests
+To run the Behat tests for polylang-cli, `cd` into the package directory and run `$ ./vendor/bin/behat --expand` from the command line. To run a specific group of tests use the `tags` parameter; e.g.: `$ ./vendor/bin/behat --expand --tags @pll-lang`
 
 
 *This README.md is generated dynamically from the project's codebase using `wp scaffold package-readme` ([doc](https://github.com/wp-cli/scaffold-package-command#wp-scaffold-package-readme)). To suggest changes, please submit a pull request against the corresponding part of the codebase.*

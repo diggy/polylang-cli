@@ -61,6 +61,19 @@ Feature: Manage Polylang languages
       http://example.com/?lang=nl-be
       """
 
+    When I run `wp pll lang url nl`
+    Then STDOUT should contain:
+      """
+      http://example.com/
+      """
+
+    When I run `wp pll option update hide_default 0`
+    And I run `wp pll lang url nl`
+    Then STDOUT should contain:
+      """
+      http://example.com/?lang=nl
+      """
+
     When I run `wp pll lang delete klingon`
     Then STDOUT should contain:
       """
