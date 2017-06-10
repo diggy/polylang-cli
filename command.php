@@ -13,8 +13,8 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
         WP_CLI::error( sprintf( 'This WP-CLI package requires PHP version %s or higher.', '5.5' ) );
     }
 
-    if ( version_compare( WP_CLI_VERSION, '1.0.0', '<' ) ) {
-        WP_CLI::error( sprintf( 'This WP-CLI package requires WP-CLI version %s or higher. Please visit %s', '1.0.0', 'https://wp-cli.org/#updating' ) );
+    if ( version_compare( WP_CLI_VERSION, '1.2.1', '<' ) ) {
+        WP_CLI::error( sprintf( 'This WP-CLI package requires WP-CLI version %s or higher. Please visit %s', '1.2.1', 'https://wp-cli.org/#updating' ) );
     }
 
     # api, cli
