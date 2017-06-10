@@ -6,6 +6,10 @@ Feature: Manage Polylang languages
     And an empty cache
     And I run `wp core version`
     And save STDOUT as {WP_VERSION}
+    And I run `wp plugin install polylang`
+    And I run `wp plugin activate polylang`
+    And I run `wp pll lang create Dutch nl nl_NL`
+    And I run `wp pll doctor translate`
 
   @core-language
   Scenario: Language CRUD commands

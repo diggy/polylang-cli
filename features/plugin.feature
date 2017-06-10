@@ -3,6 +3,10 @@ Feature: Manage the Polylang plugin
 
   Background:
     Given a WP install
+    And I run `wp plugin install polylang`
+    And I run `wp plugin activate polylang`
+    And I run `wp pll lang create Dutch nl nl_NL`
+    And I run `wp pll doctor translate`
 
   Scenario: Uninstall the Polylang plugin
 
