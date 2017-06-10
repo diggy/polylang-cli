@@ -38,6 +38,11 @@ if ( ! in_array( getenv( 'WP_VERSION' ), array( 'latest', 'nightly', 'trunk' ), 
 	$wp_version_reqs = version_tags( 'require-wp', getenv( 'WP_VERSION' ), '<' );
 }
 
+// Translations may not be available for trunk
+if ( 'trunk' === getenv( 'WP_VERSION' ) ) {
+	$wp_version_reqs = array( '~@core-language' );
+}
+
 $skip_tags = array_merge(
 	$wp_version_reqs,
 	version_tags( 'require-php', PHP_VERSION, '<' ),
