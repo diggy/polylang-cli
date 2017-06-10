@@ -82,10 +82,14 @@
             "sections": [
                 "Installation",
                 "Using",
-                "Contributing"
+                "Contributing",
+                "Development"
             ],
             "installation": {
                 "body": "Installing this package requires WP-CLI v1.2.1 or greater. Update to the latest stable release with `wp cli update`. \nOnce you've done so, you can install this package with `wp package install git@github.com:diggy/polylang-cli.git`."
+            },
+            "development": {
+                "body": "### Behat Tests\nTo run the Behat tests for polylang-cli, `cd` into the package directory and run `$ ./vendor/bin/behat --expand` from the command line. To run a specific group of tests use the `tags` parameter; e.g.: `$ ./vendor/bin/behat --expand --tags @pll-lang`"
             }
         }
     }
