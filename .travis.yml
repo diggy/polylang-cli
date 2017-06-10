@@ -51,12 +51,12 @@ before_install:
   - phpenv config-rm xdebug.ini
 
 install:
-  - composer selfupdate
   - composer require wp-cli/wp-cli:dev-master
   - composer install
   - bash bin/install-package-tests.sh
 
 before_script:
+  - composer self-update
   - composer validate
 
 script:
