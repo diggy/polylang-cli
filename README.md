@@ -1431,6 +1431,74 @@ Errors if the term doesn't exist, or there was a problem in deleting it.
     Deleted post_tag 58.
     Success: Deleted 3 of 3 terms.
 
+
+
+### wp pll widget
+
+Manage localized sidebar widgets.
+
+~~~
+wp pll widget
+~~~
+
+
+
+
+
+
+
+### wp pll widget list
+
+List localized widgets associated with a sidebar.
+
+~~~
+wp pll widget list <language-code> <sidebar-id> [--fields=<fields>] [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	<language-code>
+		The language code (slug) to get widgets for. Required.
+
+	<sidebar-id>
+		ID for the corresponding sidebar. Required.
+
+	[--fields=<fields>]
+		Limit the output to specific object fields.
+
+	[--format=<format>]
+		Render output in a particular format.
+		---
+		default: table
+		options:
+		  - table
+		  - csv
+		  - ids
+		  - json
+		  - count
+		  - yaml
+		---
+
+**AVAILABLE FIELDS**
+
+These fields will be displayed by default for each widget:
+
+* name
+* id
+* position
+* options
+
+There are no optionally available fields.
+
+**EXAMPLES**
+
+    $ wp pll widget list nl sidebar-1
+    +------+--------+----------+-------------------------------------------------------------------+
+    | name | id     | position | options                                                           |
+    +------+--------+----------+-------------------------------------------------------------------+
+    | text | text-2 | 2        | {"title":"test","text":"test","filter":"content","pll_lang":"nl"} |
+    +------+--------+----------+-------------------------------------------------------------------+
+
 ## Contributing
 
 We appreciate you taking the initiative to contribute to this project.
