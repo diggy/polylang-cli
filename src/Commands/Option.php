@@ -255,7 +255,7 @@ class OptionCommand extends BaseCommand
 
         if ( $args[0] === 'all' ) {
 
-            $this->pll->model->options['sync'] = array_fill_keys( array_keys( $this->options_sync ), 1 );
+            $this->pll->model->options['sync'] = array_keys( $this->options_sync );
 
             # update options, default category and nav menu locations
             $this->pll->model->update_default_lang( $this->api->default_language() );
@@ -277,7 +277,7 @@ class OptionCommand extends BaseCommand
         $settings = (array) $this->pll->model->options['sync'];
 
         # update current settings
-        $settings = array_merge( $settings, array_fill_keys( $args, 1 ) );
+        $settings = array_merge( $settings, $args );
 
         $this->pll->model->options['sync'] = $settings;
 
@@ -332,9 +332,10 @@ class OptionCommand extends BaseCommand
         $args = explode( ',', $args[0] );
 
         # validate args
-        foreach ( $args as $key ) {
+        foreach ( $args as $i => $key ) {
             if ( ! in_array( $key, array_keys( $this->options_sync ) ) ) {
-                return $this->cli->error( sprintf( 'Invalid key: %s', $key ) );
+                unset( $args[$i] );
+                $this->cli->warning( sprintf( 'Invalid key: %s', $key ) );
             }
         }
 
@@ -342,9 +343,9 @@ class OptionCommand extends BaseCommand
         $settings = (array) $this->pll->model->options['sync'];
 
         # update current settings
-        $settings = array_diff_key( $settings, array_fill_keys( $args, 1 ) );
+        $settings = array_diff( $settings, $args );
 
-        $this->pll->model->options['sync'] = $settings;
+        $this->pll->model->options['sync'] = array_values( $settings );
 
         # update options, default category and nav menu locations
         $this->pll->model->update_default_lang( $this->api->default_language() );
