@@ -56,7 +56,7 @@ matrix:
     - env: WP_VERSION=trunk
 
 before_install:
-  - phpenv config-rm xdebug.ini
+  - if [[ $TRAVIS_PHP_VERSION != '7.2' ]]; then phpenv config-rm xdebug.ini; fi
 
 install:
   - composer require wp-cli/wp-cli:dev-master
