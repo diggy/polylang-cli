@@ -62,6 +62,8 @@ class StringCommand extends BaseCommand {
 
         add_filter( 'pll_strings_per_page', function( $per_page ) { return PHP_INT_MAX; } );
 
+        $GLOBALS['hook_suffix'] = null;
+
         $string_table = new \PLL_Table_String( $this->pll->model->get_languages_list() );
 
         $string_table->prepare_items();
