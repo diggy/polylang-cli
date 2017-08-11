@@ -9,7 +9,7 @@ Quick links: [Installation](#installation) | [Using](#using) | [Contributing](#c
 
 ## Installation
 
-Installing this package requires WP-CLI v1.2.1 or greater. Update to the latest stable release with `wp cli update`. 
+Installing this package requires WP-CLI v1.3.0 or greater. Update to the latest stable release with `wp cli update`. 
 Once you've done so, you can install this package with `wp package install git@github.com:diggy/polylang-cli.git`.
 
 ## Using

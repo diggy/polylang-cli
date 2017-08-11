@@ -341,6 +341,8 @@ function pick_fields( $item, $fields ) {
  */
 function launch_editor_for_input( $input, $filename = 'WP-CLI' ) {
 
+	check_proc_available( 'launch_editor_for_input' );
+
 	$tmpdir = get_temp_dir();
 
 	do {
@@ -415,6 +417,8 @@ function mysql_host_to_cli_args( $raw_host ) {
 }
 
 function run_mysql_command( $cmd, $assoc_args, $descriptors = null ) {
+	check_proc_available( 'run_mysql_command' );
+
 	if ( !$descriptors )
 		$descriptors = array( STDIN, STDOUT, STDERR );
 
@@ -453,7 +457,7 @@ function mustache_render( $template_name, $data = array() ) {
 	$template = file_get_contents( $template_name );
 
 	$m = new \Mustache_Engine( array(
-		'escape' => function ( $val ) { return $val; }
+		'escape' => function ( $val ) { return $val; },
 	) );
 
 	return $m->render( $template, $data );
@@ -522,7 +526,7 @@ function is_windows() {
 function replace_path_consts( $source, $path ) {
 	$replacements = array(
 		'__FILE__' => "'$path'",
-		'__DIR__'  => "'" . dirname( $path ) . "'"
+		'__DIR__'  => "'" . dirname( $path ) . "'",
 	);
 
 	$old = array_keys( $replacements );
@@ -568,7 +572,7 @@ function http_request( $method, $url, $data = null, $headers = array(), $options
 			}
 		}
 		if ( empty( $options['verify'] ) ){
-			WP_CLI::error_log( "Cannot find SSL certificate." );
+			WP_CLI::error( "Cannot find SSL certificate." );
 		}
 	}
 
@@ -695,6 +699,37 @@ function get_flag_value( $assoc_args, $flag, $default = null ) {
 }
 
 /**
+ * Get the home directory.
+ *
+ * @access public
+ * @category System
+ *
+ * @return string
+ */
+function get_home_dir() {
+	$home = getenv( 'HOME' );
+	if ( ! $home ) {
+		// In Windows $HOME may not be defined
+		$home = getenv( 'HOMEDRIVE' ) . getenv( 'HOMEPATH' );
+	}
+
+	return rtrim( $home, '/\\' );
+}
+
+/**
+ * Appends a trailing slash.
+ *
+ * @access public
+ * @category System
+ *
+ * @param string $string What to add the trailing slash to.
+ * @return string String with trailing slash added.
+ */
+function trailingslashit( $string ) {
+	return rtrim( $string, '/\\' ) . '/';
+}
+
+/**
  * Get the system's temp directory. Warns user if it isn't writable.
  *
  * @access public
@@ -705,17 +740,15 @@ function get_flag_value( $assoc_args, $flag, $default = null ) {
 function get_temp_dir() {
 	static $temp = '';
 
-	$trailingslashit = function( $path ) {
-		return rtrim( $path ) . '/';
-	};
+	if ( $temp ) {
+		return $temp;
+	}
 
-	if ( $temp )
-		return $trailingslashit( $temp );
-
-	if ( function_exists( 'sys_get_temp_dir' ) ) {
-		$temp = sys_get_temp_dir();
-	} else if ( ini_get( 'upload_tmp_dir' ) ) {
-		$temp = ini_get( 'upload_tmp_dir' );
+	// `sys_get_temp_dir()` introduced PHP 5.2.1.
+	if ( $try = sys_get_temp_dir() ) {
+		$temp = trailingslashit( $try );
+	} elseif ( $try = ini_get( 'upload_tmp_dir' ) ) {
+		$temp = trailingslashit( $try );
 	} else {
 		$temp = '/tmp/';
 	}
@@ -724,7 +757,7 @@ function get_temp_dir() {
 		\WP_CLI::warning( "Temp directory isn't writable: {$temp}" );
 	}
 
-	return $trailingslashit( $temp );
+	return $temp;
 }
 
 /**
@@ -741,18 +774,24 @@ function get_temp_dir() {
  * @return mixed
  */
 function parse_ssh_url( $url, $component = -1 ) {
-	preg_match( '#^([^:/~]+)(:([\d]+))?((/|~)(.+))?$#', $url, $matches );
+	preg_match( '#^((docker|docker\-compose|ssh):)?(([^@:]+)@)?([^:/~]+)(:([\d]*))?((/|~)(.+))?$#', $url, $matches );
 	$bits = array();
 	foreach( array(
-		1 => 'host',
-		3 => 'port',
-		4 => 'path',
+		2 => 'scheme',
+		4 => 'user',
+		5 => 'host',
+		7 => 'port',
+		8 => 'path',
 	) as $i => $key ) {
 		if ( ! empty( $matches[ $i ] ) ) {
 			$bits[ $key ] = $matches[ $i ];
 		}
 	}
 	switch ( $component ) {
+		case PHP_URL_SCHEME:
+			return isset( $bits['scheme'] ) ? $bits['scheme'] : null;
+		case PHP_URL_USER:
+			return isset( $bits['user'] ) ? $bits['user'] : null;
 		case PHP_URL_HOST:
 			return isset( $bits['host'] ) ? $bits['host'] : null;
 		case PHP_URL_PATH:
@@ -1004,4 +1043,27 @@ function force_env_on_nix_systems( $command ) {
 		}
 	}
 	return $command;
+}
+
+/**
+ * Check that `proc_open()` and `proc_close()` haven't been disabled.
+ *
+ * @param string $context Optional. If set will appear in error message. Default null.
+ * @param bool   $return  Optional. If set will return false rather than error out. Default false.
+ *
+ * @return bool
+ */
+function check_proc_available( $context = null, $return = false ) {
+	if ( ! function_exists( 'proc_open' ) || ! function_exists( 'proc_close' ) ) {
+		if ( $return ) {
+			return false;
+		}
+		$msg = 'The PHP functions `proc_open()` and/or `proc_close()` are disabled. Please check your PHP ini directive `disable_functions` or suhosin settings.';
+		if ( $context ) {
+			WP_CLI::error( sprintf( "Cannot do '%s': %s", $context, $msg ) );
+		} else {
+			WP_CLI::error( $msg );
+		}
+	}
+	return true;
 }
