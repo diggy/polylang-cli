@@ -172,12 +172,12 @@ $steps->Then( '/^the (.+) (file|directory) should (exist|not exist|be:|contain:|
 		switch ( $action ) {
 		case 'exist':
 			if ( ! $test( $path ) ) {
-				throw new Exception( $world->result );
+				throw new Exception( "$path doesn't exist." );
 			}
 			break;
 		case 'not exist':
 			if ( $test( $path ) ) {
-				throw new Exception( $world->result );
+				throw new Exception( "$path exists." );
 			}
 			break;
 		default:
@@ -209,3 +209,10 @@ $steps->Then( '/^an email should (be sent|not be sent)$/', function( $world, $ex
 		throw new Exception( 'Invalid expectation' );
 	}
 });
+
+$steps->Then( '/^the HTTP status code should be (\d+)$/',
+	function ( $world, $return_code ) {
+		$response = \Requests::request( 'http://localhost:8080' );
+		assertEquals( $return_code, $response->status_code );
+	}
+);

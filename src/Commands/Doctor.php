@@ -172,7 +172,7 @@ class DoctorCommand extends BaseCommand {
             foreach( $locales_orphan as $locale ) {
 
                 $this->cli->runcommand(
-                    "core language uninstall $locale",
+                    "language core uninstall $locale",
                     array( 'return' => false, 'launch' => true, 'exit_error' => false )
                 );
             }
@@ -186,7 +186,7 @@ class DoctorCommand extends BaseCommand {
             foreach( $locales_missing as $locale ) {
 
                 $this->cli->runcommand(
-                    "core language install $locale",
+                    "language core install $locale",
                     array( 'return' => false, 'launch' => true, 'exit_error' => false )
                 );
             }
@@ -197,7 +197,7 @@ class DoctorCommand extends BaseCommand {
 
         ob_start();
 
-        $this->cli->command( array( 'core', 'language', 'list' ), array( 'field' => 'language', 'update' => 'available', 'format' => 'json' ) );
+        $this->cli->command( array( 'language', 'core', 'list' ), array( 'field' => 'language', 'update' => 'available', 'format' => 'json' ) );
 
         $locales_outdated = ob_get_clean();
 
@@ -208,7 +208,7 @@ class DoctorCommand extends BaseCommand {
             $this->cli->confirm( sprintf( "%d core language packs have updates available (%s).\nUpdate outdated language files?", count( $locales_outdated ), implode( ', ', $locales_outdated ) ), $assoc_args );
 
             $this->cli->runcommand(
-                "core language update",
+                "language core update",
                 array( 'return' => false, 'launch' => true, 'exit_error' => false )
             );
         }

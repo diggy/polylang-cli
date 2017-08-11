@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e48f4cec95314856fba510a46a808e4",
+    "content-hash": "60ec914270e12d18cce10db8e352d9a2",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -71,12 +71,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "5a16b25879b5828e9ba00c516e293e80038d91c7"
+                "reference": "82c27a68bc5cb76f3d00b82c27496e3cdbb6d4ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/5a16b25879b5828e9ba00c516e293e80038d91c7",
-                "reference": "5a16b25879b5828e9ba00c516e293e80038d91c7",
+                "url": "https://api.github.com/repos/composer/composer/zipball/82c27a68bc5cb76f3d00b82c27496e3cdbb6d4ff",
+                "reference": "82c27a68bc5cb76f3d00b82c27496e3cdbb6d4ff",
                 "shasum": ""
             },
             "require": {
@@ -140,7 +140,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2017-08-08 16:40:52"
+            "time": "2017-08-09 14:23:46"
         },
         {
             "name": "composer/semver",
@@ -880,12 +880,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "51a04a05fdea674ad591ee448d1c860e6191e6e9"
+                "reference": "fbeea992f0d30e3c400694c85f60c9bfd10454a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/51a04a05fdea674ad591ee448d1c860e6191e6e9",
-                "reference": "51a04a05fdea674ad591ee448d1c860e6191e6e9",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/fbeea992f0d30e3c400694c85f60c9bfd10454a3",
+                "reference": "fbeea992f0d30e3c400694c85f60c9bfd10454a3",
                 "shasum": ""
             },
             "require": {
@@ -935,7 +935,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2017-08-08 21:33:56"
+            "time": "2017-08-10 14:42:21"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1415,12 +1415,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/checksum-command.git",
-                "reference": "64536b68de9348b4f5b4c0e75d8c0e5b020a16c0"
+                "reference": "88ccde2e82de5c2232842a9fccc2e6ade232dec6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/checksum-command/zipball/64536b68de9348b4f5b4c0e75d8c0e5b020a16c0",
-                "reference": "64536b68de9348b4f5b4c0e75d8c0e5b020a16c0",
+                "url": "https://api.github.com/repos/wp-cli/checksum-command/zipball/88ccde2e82de5c2232842a9fccc2e6ade232dec6",
+                "reference": "88ccde2e82de5c2232842a9fccc2e6ade232dec6",
                 "shasum": ""
             },
             "require-dev": {
@@ -1458,7 +1458,7 @@
             ],
             "description": "Verify WordPress core checksums.",
             "homepage": "https://github.com/wp-cli/checksum-command",
-            "time": "2017-08-04 12:20:23"
+            "time": "2017-08-09 23:34:29"
         },
         {
             "name": "wp-cli/config-command",
@@ -2717,16 +2717,16 @@
         },
         {
             "name": "wp-cli/wp-cli",
-            "version": "v1.2.1",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-cli.git",
-                "reference": "9a9b6a63e08e7827669677faa97312972c0f1da2"
+                "reference": "4ab0d99da0ad5e6ca39453ff5c82d4f06aecb086"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/9a9b6a63e08e7827669677faa97312972c0f1da2",
-                "reference": "9a9b6a63e08e7827669677faa97312972c0f1da2",
+                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/4ab0d99da0ad5e6ca39453ff5c82d4f06aecb086",
+                "reference": "4ab0d99da0ad5e6ca39453ff5c82d4f06aecb086",
                 "shasum": ""
             },
             "require": {
@@ -2746,7 +2746,7 @@
                 "symfony/process": "^2.1|^3.0",
                 "symfony/translation": "^2.7|^3.0",
                 "symfony/yaml": "^2.7|^3.0",
-                "wp-cli/autoload-splitter": "^0.1",
+                "wp-cli/autoload-splitter": "^0.1.5",
                 "wp-cli/cache-command": "^1.0",
                 "wp-cli/checksum-command": "^1.0",
                 "wp-cli/config-command": "^1.0",
@@ -2775,7 +2775,6 @@
             "require-dev": {
                 "behat/behat": "2.5.*",
                 "phpunit/phpunit": "3.7.*",
-                "pyrech/composer-changelogs": "dev-php53 as 1.5.1",
                 "roave/security-advisories": "dev-master"
             },
             "suggest": {
@@ -2812,7 +2811,7 @@
                 "cli",
                 "wordpress"
             ],
-            "time": "2017-06-06T12:14:53+00:00"
+            "time": "2017-08-08T14:28:58+00:00"
         }
     ],
     "packages-dev": [
