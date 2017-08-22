@@ -74,3 +74,45 @@ Feature: Manage posts and their translations
     Success: Trashed post 10 11.
     """
     And the return code should be 0
+
+  @pll-post-duplicate
+  Scenario: Duplicate a post to one or more languages
+
+    When I run `wp pll lang create de de de_DE`
+    And I run `wp post create --post_type=page --post_title='Just another page' --porcelain`
+    And save STDOUT as {POST_ID}
+    And I run `wp pll doctor translate`
+    And I run `wp pll post duplicate {POST_ID}`
+    Then STDOUT should contain:
+    """
+    Success: Created post 6 (de) < post 5 (nl)
+    """
+    And the return code should be 0
+
+    When I run `wp pll lang create es es es_ES`
+    And I run `wp pll post duplicate {POST_ID}`
+    Then STDOUT should contain:
+    """
+    Success: Updated post 6 (de) < post 5 (nl)
+    Success: Created post 9 (es) < post 5 (nl)
+    """
+    And the return code should be 0
+
+    When I run `wp pll post duplicate {POST_ID} de,es,r2d2`
+    Then STDOUT should contain:
+    """
+    Success: Updated post 6 (de) < post 5 (nl)
+    Success: Updated post 9 (es) < post 5 (nl)
+    """
+    And STDERR should be:
+    """
+    Warning: r2d2 is not a valid language.
+    """
+    And the return code should be 0
+
+    When I run `wp pll post duplicate {POST_ID} nl`
+    Then STDERR should be:
+    """
+    Warning: Post 5 (nl) cannot be duplicated to itself.
+    """
+    And the return code should be 0
