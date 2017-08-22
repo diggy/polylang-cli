@@ -941,6 +941,37 @@ wp pll post get <post_id> [<language-code>] [--api]
 
 
 
+### wp pll post duplicate
+
+Duplicate a post to one or more languages.
+
+~~~
+wp pll post duplicate <post_id> [<language-code>]
+~~~
+
+Syncs metadata and taxonomy terms, based on Polylang settings. Run `wp pll option list` to inspect current settings.
+
+**OPTIONS**
+
+	<post_id>
+		Post ID of the post to duplicate. Required.
+
+	[<language-code>]
+		Language code (slug), or comma-separated list of language codes, to duplicate the post to. Omit to duplicate to all languages. Optional.
+
+**EXAMPLES**
+
+    # Duplicate post 23 (Dutch) to German
+    $ wp pll post duplicate 23 de
+    Success: Created post 68 (de) < post 23 (nl)
+
+    # Duplicate post 23 (Dutch) to all languages (Dutch and Spanish)
+    $ wp pll post duplicate 23
+    Success: Updated post 68 (de) < post 23 (nl)
+    Success: Created post 69 (es) < post 23 (nl)
+
+
+
 ### wp pll post delete
 
 Delete a post and its translations.
@@ -1437,30 +1468,21 @@ We appreciate you taking the initiative to contribute to this project.
 
 Contributing isn’t limited to just code. We encourage you to contribute in the way that best fits your abilities, by writing tutorials, giving a demo at your local meetup, helping other users with their support questions, or revising our documentation.
 
+For a more thorough introduction, [check out WP-CLI's guide to contributing](https://make.wordpress.org/cli/handbook/contributing/). This package follows those policy and guidelines.
+
 ### Reporting a bug
 
 Think you’ve found a bug? We’d love for you to help us get it fixed.
 
 Before you create a new issue, you should [search existing issues](https://github.com/diggy/polylang-cli/issues?q=label%3Abug%20) to see if there’s an existing resolution to it, or if it’s already been fixed in a newer version.
 
-Once you’ve done a bit of searching and discovered there isn’t an open or fixed issue for your bug, please [create a new issue](https://github.com/diggy/polylang-cli/issues/new) with the following:
-
-1. What you were doing (e.g. "When I run `wp post list`").
-2. What you saw (e.g. "I see a fatal about a class being undefined.").
-3. What you expected to see (e.g. "I expected to see the list of posts.")
-
-Include as much detail as you can, and clear steps to reproduce if possible.
+Once you’ve done a bit of searching and discovered there isn’t an open or fixed issue for your bug, please [create a new issue](https://github.com/diggy/polylang-cli/issues/new). Include as much detail as you can, and clear steps to reproduce if possible. For more guidance, [review our bug report documentation](https://make.wordpress.org/cli/handbook/bug-reports/).
 
 ### Creating a pull request
 
 Want to contribute a new feature? Please first [open a new issue](https://github.com/diggy/polylang-cli/issues/new) to discuss whether the feature is a good fit for the project.
 
-Once you've decided to commit the time to seeing your pull request through, please follow our guidelines for creating a pull request to make sure it's a pleasant experience:
-
-1. Create a feature branch for each contribution.
-2. Submit your pull request early for feedback.
-3. Include functional tests with your changes. [Read the WP-CLI documentation](https://wp-cli.org/docs/pull-requests/#functional-tests) for an introduction.
-4. Follow the [WordPress Coding Standards](http://make.wordpress.org/core/handbook/coding-standards/).
+Once you've decided to commit the time to seeing your pull request through, [please follow our guidelines for creating a pull request](https://make.wordpress.org/cli/handbook/pull-requests/) to make sure it's a pleasant experience. See "[Setting up](https://make.wordpress.org/cli/handbook/pull-requests/#setting-up)" for details specific to working on this package locally.
 
 ## Development
 

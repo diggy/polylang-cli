@@ -197,6 +197,114 @@ class PostCommand extends BaseCommand {
     }
 
     /**
+     * Duplicate a post to one or more languages.
+     *
+     * Syncs metadata and taxonomy terms, based on Polylang settings. Run `wp pll option list` to inspect current settings.
+     *
+     * ## OPTIONS
+     *
+     * <post_id>
+     * : Post ID of the post to duplicate. Required.
+     *
+     * [<language-code>]
+     * : Language code (slug), or comma-separated list of language codes, to duplicate the post to. Omit to duplicate to all languages. Optional.
+     *
+     * ## EXAMPLES
+     *
+     *     # Duplicate post 23 (Dutch) to German
+     *     $ wp pll post duplicate 23 de
+     *     Success: Created post 68 (de) < post 23 (nl)
+     *
+     *     # Duplicate post 23 (Dutch) to all languages (Dutch and Spanish)
+     *     $ wp pll post duplicate 23
+     *     Success: Updated post 68 (de) < post 23 (nl)
+     *     Success: Created post 69 (es) < post 23 (nl)
+     */
+    public function duplicate( $args, $assoc_args ) {
+
+        list( $post_id ) = $args;
+
+        if ( ! $post = get_post( $post_id, ARRAY_A ) ) {
+            $this->cli->error( sprintf( '%d is not a valid post object', $post_id ) );
+        }
+
+        if ( ! $this->api->is_translated_post_type( $post['post_type'] ) ) {
+            $this->cli->error( 'Polylang does not manage languages and translations for this post type.' );
+        }
+
+        $slugs = isset( $args[1] ) && $args[1]
+            ? array_map( 'sanitize_title_with_dashes', explode( ',', $args[1] ) )
+            : array_diff( $this->api->languages_list(), array( pll_get_post_language( $post_id ) ) );
+
+        foreach ( $slugs as $slug ) {
+
+            if ( ! in_array( $slug, $this->api->languages_list() ) ) {
+
+                $this->cli->warning( sprintf( '%s is not a valid language.', $slug ) );
+                continue;
+            }
+
+            $this->duplicate_post( $post, $slug );
+        }
+    }
+
+    private function duplicate_post( $post, $slug )
+    {
+        $post_id           = absint( $post['ID'] );
+        $post_language     = pll_get_post_language( $post_id );
+        $post_translations = $this->api->get_post_translations( $post_id );
+
+        $post_data = $post;
+
+        if ( $slug === $post_language ) {
+
+            $this->cli->warning( sprintf( 'Post %d (%s) cannot be duplicated to itself.', $post_id, $slug ) );
+
+        } else {
+
+            # check for translated post parent
+            if ( ( $post_parent_id = wp_get_post_parent_id( $post_id ) ) && ( $parent = $this->pll->model->post->get_translation( $post_parent_id, $slug ) ) ) {
+                $post_data['post_parent'] = absint( $parent );
+            }
+
+            # check if translation already exists
+            $exists = $this->api->get_post( $post_id, $slug );
+
+            # insert or update translation
+            if ( ! empty( $exists ) ) {
+                $post_data['ID']   = absint( $exists );
+                $duplicate = wp_update_post( wp_slash( $post_data ), true );
+            } else {
+                unset( $post_data['ID'] );
+                $duplicate = wp_insert_post( wp_slash( $post_data ), true );
+            }
+
+            if ( empty( $duplicate ) ) {
+                $this->cli->warning( sprintf( 'Could not duplicate post %d to %s.', $post_id, $slug ) );
+            } elseif ( is_wp_error( $duplicate ) ) {
+                $this->cli->warning( $duplicate->get_error_message() );
+            } else {
+
+                # set post language
+                $this->api->set_post_language( $duplicate, $slug );
+
+                # save post translations
+                $this->api->save_post_translations( array_unique( array_merge( array( $post_language => $post_id, $slug => $duplicate ), $post_translations ) ) );
+
+                # sync taxonomies and post meta, if applicable
+                $sync = new \PLL_Admin_Sync( $this->pll );
+                $sync->pll_save_post( $post_id, get_post( $post_id, 'OBJECT' ), $this->api->get_post_translations( $post_id ) );
+
+                # success message
+                $msg = $exists
+                    ? 'Updated post %3$d (%4$s) < post %1$d (%2$s)'
+                    : 'Created post %3$d (%4$s) < post %1$d (%2$s)';
+                $this->cli->success( sprintf( $msg, $post_id, $post_language, $duplicate, $slug ) );
+            }
+        }
+    }
+
+    /**
      * Count posts for a language.
      *
      * ## OPTIONS

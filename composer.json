@@ -61,6 +61,7 @@
             "pll post generate",
             "pll post create",
             "pll post get",
+            "pll post duplicate",
             "pll post delete",
             "pll post list",
             "pll post-type",
