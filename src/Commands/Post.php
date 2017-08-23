@@ -162,6 +162,52 @@ class PostCommand extends BaseCommand {
     }
 
     /**
+     * Update one or more existing posts and their translations.
+     *
+     * ## OPTIONS
+     *
+     * <id>...
+     * : One or more IDs of posts to update.
+     *
+     * [<file>]
+     * : Read post content from <file>. If this value is present, the
+     *     `--post_content` argument will be ignored.
+     *
+     *   Passing `-` as the filename will cause post content to
+     *   be read from STDIN.
+     *
+     * --<field>=<value>
+     * : One or more fields to update. See wp_update_post().
+     *
+     * [--defer-term-counting]
+     * : Recalculate term count in batch, for a performance boost.
+     *
+     * ## EXAMPLES
+     *
+     *     $ wp pll post update 13 --comment_status=closed
+     *     Success: Updated post 13.
+     */
+    public function update( $args, $assoc_args ) {
+
+        $this->pll->filters_post = new \PLL_Admin_Filters_Post( $this->pll );
+        $this->pll->sync         = new \PLL_Admin_Sync( $this->pll );
+
+        $GLOBALS['pagenow'] = 'post.php';
+
+        # get around Polylang's capability check
+        $current_user = wp_get_current_user();
+        $current_user->allcaps = get_role( 'administrator' )->capabilities;
+
+        $_args       = implode( ' ', array_merge( array( 'post', 'update' ), $args ) );
+        $_assoc_args = empty( $assoc_args ) ? '' : implode( ' ', array_map( function ( $v, $k ) { return "--{$k}='{$v}'"; }, $assoc_args, array_keys( $assoc_args ) ) );
+
+        $this->cli->runcommand(
+            sprintf( '%s %s', $_args, $_assoc_args ),
+            array( 'return' => false, 'launch' => false, 'exit_error' => false )
+        );
+    }
+
+    /**
      * Delete a post and its translations.
      *
      * ## OPTIONS
@@ -437,7 +483,7 @@ class PostCommand extends BaseCommand {
         $this->cli->command( array( 'post', 'list' ), $assoc_args );
     }
 
-	/**
+    /**
      * Generate some posts and their translations.
      *
      * Creates a specified number of sets of new posts with dummy data.
