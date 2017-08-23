@@ -156,6 +156,120 @@ class TermCommand extends BaseCommand {
     }
 
     /**
+     * Duplicate a taxonomy term to one or more languages.
+     *
+     * ## OPTIONS
+     *
+     * <taxonomy>
+     * : Taxonomy of the term to duplicate
+     *
+     * <term-id>
+     * : ID of the term to duplicate
+     *
+     * [<language-code>]
+     * : Language code (slug), or comma-separated list of language codes, to duplicate the term to. Omit to duplicate to all languages. Optional.
+     *
+     * ## EXAMPLES
+     *
+     *     # Duplicate term 18 of the category taxonomy to all other languages.
+     *     $ wp pll term duplicate category 18
+     */
+    public function duplicate( $args, $assoc_args ) {
+
+        list( $taxonomy, $term_id ) = $args;
+
+        if ( ! $this->api->is_translated_taxonomy( $taxonomy ) ) {
+            $this->cli->error( 'Polylang does not manage languages and translations for this taxonomy.' );
+        }
+
+        $term_id = absint( $term_id );
+
+        $term = get_term_by( 'id', $term_id, $taxonomy );
+
+        if ( empty( $term ) ) {
+            $this->cli->error( sprintf( '%d is not a valid taxonomy term object.', $term_id ) );
+        }
+
+        if ( empty( $this->api->get_term_language( $term_id ) ) ) {
+            $this->cli->error( sprintf( 'There is no language associated with term %d.', $term_id ) );
+        }
+
+        $slugs = isset( $args[2] ) && $args[2]
+            ? array_map( 'sanitize_title_with_dashes', explode( ',', $args[2] ) )
+            : array_diff( $this->api->languages_list(), array( $this->api->get_term_language( $term_id, 'slug' ) ) );
+
+        foreach ( $slugs as $slug ) {
+
+            if ( ! in_array( $slug, $this->api->languages_list() ) ) {
+                $this->cli->warning( sprintf( '%s is not a valid language.', $slug ) );
+                continue;
+            }
+
+            $this->duplicate_term( $taxonomy, $term, $slug );
+        }
+    }
+
+    private function duplicate_term( $taxonomy, $term, $slug )
+    {
+        $term_id           = absint( $term->term_id );
+        $term_language     = $this->api->get_term_language( $term_id );
+
+        if ( $slug === $term_language ) {
+
+            $this->cli->warning( sprintf( 'Term %d (%s) cannot be duplicated to itself.', $term_id, $slug ) );
+
+        } else {
+
+            $term_data = get_term( $term_id, $taxonomy, 'ARRAY_A' );
+
+            # check for translated post parent
+            if ( ( $term_parent_id = get_term( $term->parent, $taxonomy ) ) && ( $parent = $this->pll->model->term->get_translation( $term_parent_id, $slug ) ) ) {
+                if ( ! is_wp_error( $term_parent_id ) ) {
+                    $term_data['parent'] = absint( $parent );
+                }
+            }
+
+            # check if translation already exists
+            $exists = $this->api->get_term( $term_id, $slug );
+
+            $term_data['slug'] = sanitize_title( $term_data['name'] . '-' . $slug );
+
+            # insert or update translation
+            if ( ! empty( $exists ) ) {
+                $term_data['ID']   = absint( $exists );
+                $duplicate = wp_update_term( $term_data['ID'], $taxonomy, wp_slash( $term_data ) );
+            } else {
+                unset( $term_data['ID'] );
+                $duplicate = wp_insert_term( $term->name, $taxonomy, wp_slash( $term_data ) );
+            }
+
+            if ( empty( $duplicate ) ) {
+                $this->cli->warning( sprintf( 'Could not duplicate term %d to %s.', $term_id, $slug ) );
+            } elseif ( is_wp_error( $duplicate ) ) {
+                $this->cli->warning( sprintf( 'Term ID %d: %s (%s)', $term_id, $duplicate->get_error_message(), $slug ) );
+            } else {
+
+                # set term language
+                $this->api->set_term_language( $duplicate['term_id'], $slug );
+
+                # save term translations
+                $this->api->save_term_translations( array_unique( array_merge( array( $term_language => $term_id, $slug => $duplicate['term_id'] ), $this->api->get_term_translations( $term_id ) ) ) );
+
+                # sync taxonomies and post meta, if applicable
+                $sync = new \PLL_Admin_Sync( $this->pll );
+                $sync->pll_save_term( $term_id, $taxonomy, $this->api->get_term_translations( $term_id ) );
+
+                # success message
+                $msg = $exists
+                    ? 'Updated term %3$d (%4$s) < term %1$d (%2$s)'
+                    : 'Created term %3$d (%4$s) < term %1$d (%2$s)';
+
+                $this->cli->success( sprintf( $msg, $term_id, $term_language, $duplicate['term_id'], $slug ) );
+            }
+        }
+    }
+
+    /**
      * Get a list of taxonomy terms for a language.
      *
      * ## OPTIONS
