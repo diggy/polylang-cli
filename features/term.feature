@@ -66,3 +66,19 @@ Feature: Manage WordPress taxonomy terms and their translations.
     12 14 10
     """
     And the return code should be 0
+
+  @pll-term-duplicate
+  Scenario: Duplicate taxonomy term to one or more languages
+
+    When I run `wp pll lang create de de de_DE`
+    And I run `wp term create post_tag "Just a tag" --porcelain`
+    And save STDOUT as {TERM_ID}
+    And I run `wp pll doctor translate`
+    Then STDOUT should not be empty
+
+    When I run `wp pll term duplicate post_tag {TERM_ID}`
+    Then STDOUT should contain:
+    """
+    Success: Created term 11 (de) < term {TERM_ID} (nl)
+    """
+    And the return code should be 0
