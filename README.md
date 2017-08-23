@@ -951,6 +951,64 @@ wp pll post get <post_id> [<language-code>] [--api]
 
 
 
+### wp pll post update
+
+Update one or more existing posts and their translations.
+
+~~~
+wp pll post update <id>... [<file>] --<field>=<value> [--defer-term-counting]
+~~~
+
+**OPTIONS**
+
+	<id>...
+		One or more IDs of posts to update.
+
+	[<file>]
+		Read post content from <file>. If this value is present, the
+		    `--post_content` argument will be ignored.
+
+  Passing `-` as the filename will cause post content to
+  be read from STDIN.
+
+	--<field>=<value>
+		One or more fields to update. See wp_update_post().
+
+	[--defer-term-counting]
+		Recalculate term count in batch, for a performance boost.
+
+**EXAMPLES**
+
+    $ wp pll post update 13 --comment_status=closed
+    Success: Updated post 13.
+
+
+
+### wp pll post delete
+
+Delete a post and its translations.
+
+~~~
+wp pll post delete <post_id> [--force] [--defer-term-counting]
+~~~
+
+**OPTIONS**
+
+	<post_id>
+		Post ID of the a translated post to delete. Required.
+
+	[--force]
+		Skip the trash bin.
+
+	[--defer-term-counting]
+		Recalculate term count in batch, for a performance boost.
+
+**EXAMPLES**
+
+    wp pll post delete 32
+
+
+
 ### wp pll post duplicate
 
 Duplicate a post to one or more languages.
@@ -979,31 +1037,6 @@ Syncs metadata and taxonomy terms, based on Polylang settings. Run `wp pll optio
     $ wp pll post duplicate 23
     Success: Updated post 68 (de) < post 23 (nl)
     Success: Created post 69 (es) < post 23 (nl)
-
-
-
-### wp pll post delete
-
-Delete a post and its translations.
-
-~~~
-wp pll post delete <post_id> [--force] [--defer-term-counting]
-~~~
-
-**OPTIONS**
-
-	<post_id>
-		Post ID of the a translated post to delete. Required.
-
-	[--force]
-		Skip the trash bin.
-
-	[--defer-term-counting]
-		Recalculate term count in batch, for a performance boost.
-
-**EXAMPLES**
-
-    wp pll post delete 32
 
 
 

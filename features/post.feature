@@ -46,6 +46,28 @@ Feature: Manage posts and their translations
     Warning: tlh is not a valid language.
     """
 
+  @pll-post-update
+  Scenario: Update posts and their translations
+
+    When I run `wp pll option sync comment_status`
+    And I run `wp pll lang create de de de_DE`
+    And I run `wp pll post duplicate 1`
+    And I run `wp pll post update 1 --comment_status="closed"`
+    And I run `wp post list --fields=ID,comment_status`
+    Then STDOUT should be a table containing rows:
+    | ID | comment_status |
+    | 5  | closed         |
+    | 1  | closed         |
+    And STDERR should be empty
+
+    When I run `wp pll post update 5 --comment_status="open"`
+    And I run `wp post list --fields=ID,comment_status`
+    Then STDOUT should be a table containing rows:
+    | ID | comment_status |
+    | 5  | open           |
+    | 1  | open           |
+    And STDERR should be empty
+
   Scenario: Delete posts and their translations
 
     When I run `wp pll post delete 1`
