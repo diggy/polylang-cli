@@ -46,3 +46,23 @@ Feature: Manage WordPress taxonomy terms and their translations.
     Success: Deleted 2 of 2 terms.
     """
     And the return code should be 0
+
+  @pll-term-list
+  Scenario: List taxonomy terms for a language
+
+    When I run `wp pll lang create de de de_DE && wp pll term generate post_tag --count=3 --format=ids`
+    Then STDOUT should not be empty
+
+    When I run `wp pll term list post_tag nl --format=ids`
+    Then STDOUT should contain:
+    """
+    11 13 9
+    """
+    And the return code should be 0
+
+    When I run `wp pll term list post_tag de --format=ids`
+    Then STDOUT should contain:
+    """
+    12 14 10
+    """
+    And the return code should be 0

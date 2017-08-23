@@ -76,9 +76,10 @@
             "pll taxonomy enable",
             "pll taxonomy list",
             "pll term",
-            "pll term generate",
             "pll term get",
-            "pll term delete"
+            "pll term delete",
+            "pll term list",
+            "pll term generate"
         ],
         "readme": {
             "sections": [

@@ -1345,53 +1345,6 @@ wp pll term
 
 
 
-### wp pll term generate
-
-Generate some taxonomy terms and their translations.
-
-~~~
-wp pll term generate <taxonomy> [--count=<number>] [--max_depth=<number>] [--format=<format>]
-~~~
-
-Creates a specified number of sets of new terms and their translations with dummy data.
-
-**OPTIONS**
-
-	<taxonomy>
-		The taxonomy for the generated terms.
-
-	[--count=<number>]
-		How many sets of terms to generate?
-		---
-		default: 5
-		---
-
-	[--max_depth=<number>]
-		Generate child terms down to a certain depth.
-		---
-		default: 1
-		---
-
-	[--format=<format>]
-		Render output in a particular format.
-		---
-		default: table
-		options:
-		  - table
-		  - csv
-		  - json
-		  - yaml
-		  - ids
-		---
-
-**EXAMPLES**
-
-    # Generate some post categories, and translations.
-    $ wp pll term generate category --count=3 --format=ids
-    115 116 117 118 119 120
-
-
-
 ### wp pll term get
 
 Get details about a translated term.
@@ -1461,6 +1414,126 @@ Errors if the term doesn't exist, or there was a problem in deleting it.
     Deleted post_tag 57.
     Deleted post_tag 58.
     Success: Deleted 3 of 3 terms.
+
+
+
+### wp pll term list
+
+Get a list of taxonomy terms for a language.
+
+~~~
+wp pll term list <taxonomy> <language-code> [--<field>=<value>] [--field=<field>] [--fields=<fields>] [--format=<format>]
+~~~
+
+**OPTIONS**
+
+	<taxonomy>
+		List terms of one or more taxonomies. Required.
+
+	<language-code>
+		The language code (slug) to get the taxonomy terms for. Required.
+
+	[--<field>=<value>]
+		Filter by one or more fields (see get_terms() $args parameter for a list of fields).
+
+	[--field=<field>]
+		Prints the value of a single field for each term.
+
+	[--fields=<fields>]
+		Limit the output to specific object fields.
+
+	[--format=<format>]
+		Render output in a particular format.
+		---
+		default: table
+		options:
+		  - table
+		  - csv
+		  - ids
+		  - json
+		  - count
+		  - yaml
+		---
+
+**AVAILABLE FIELDS**
+
+These fields will be displayed by default for each term:
+
+* term_id
+* term_taxonomy_id
+* name
+* slug
+* description
+* parent
+* count
+
+These fields are optionally available:
+
+* url
+
+**EXAMPLES**
+
+    # List post categories
+    $ wp pll term list color nl --format=csv
+    term_id,term_taxonomy_id,name,slug,description,parent,count
+    2,2,Rood,rood,,0,1
+    3,3,Blauw,blauw,,0,1
+
+    # List post tags
+    $ wp pll term list post_tag en --fields=name,slug
+    +-----------+-------------+
+    | name      | slug        |
+    +-----------+-------------+
+    | Articles  | articles    |
+    | aside     | aside       |
+    +-----------+-------------+
+
+
+
+### wp pll term generate
+
+Generate some taxonomy terms and their translations.
+
+~~~
+wp pll term generate <taxonomy> [--count=<number>] [--max_depth=<number>] [--format=<format>]
+~~~
+
+Creates a specified number of sets of new terms and their translations with dummy data.
+
+**OPTIONS**
+
+	<taxonomy>
+		The taxonomy for the generated terms.
+
+	[--count=<number>]
+		How many sets of terms to generate?
+		---
+		default: 5
+		---
+
+	[--max_depth=<number>]
+		Generate child terms down to a certain depth.
+		---
+		default: 1
+		---
+
+	[--format=<format>]
+		Render output in a particular format.
+		---
+		default: table
+		options:
+		  - table
+		  - csv
+		  - json
+		  - yaml
+		  - ids
+		---
+
+**EXAMPLES**
+
+    # Generate some post categories, and translations.
+    $ wp pll term generate category --count=3 --format=ids
+    115 116 117 118 119 120
 
 ## Contributing
 
