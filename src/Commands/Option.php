@@ -63,7 +63,7 @@ class OptionCommand extends BaseCommand
      *
      * ## EXAMPLES
      *
-     *     wp pll option reset
+     *     $ wp pll option reset
      */
     public function reset( $args, $assoc_args ) {
 
@@ -99,9 +99,19 @@ class OptionCommand extends BaseCommand
      * <option_name>
      * : Option name. Use the options subcommand to get a list of accepted values. Required.
      *
+     * [--format=<format>]
+     * : Get value in a particular format.
+     * ---
+     * default: var_export
+     * options:
+     *   - var_export
+     *   - json
+     *   - yaml
+     * ---
+     *
      * ## EXAMPLES
      *
-     *     wp pll option get default_lang
+     *     $ wp pll option get default_lang
      */
     public function get( $args, $assoc_args ) {
 
@@ -118,7 +128,7 @@ class OptionCommand extends BaseCommand
             $this->cli->error( sprintf( 'Invalid option name: %s', $args[0] ) );
         }
 
-        $this->cli->success( sprintf( 'The value of %s is %s', $args[0], maybe_serialize( $option[$args[0]] ) ) );
+        $this->cli->print_value( $option[$args[0]], $assoc_args );
     }
 
     /**
@@ -134,7 +144,7 @@ class OptionCommand extends BaseCommand
      *
      * ## EXAMPLES
      *
-     *     wp pll option update default_lang nl
+     *     $ wp pll option update default_lang nl
      */
     public function update( $args, $assoc_args ) {
 
@@ -181,8 +191,8 @@ class OptionCommand extends BaseCommand
      *
      * ## EXAMPLES
      *
-     *   wp pll option default
-     *   wp pll option default nl
+     *     $ wp pll option default
+     *     $ wp pll option default nl
      *
      * @synopsis [<language-code>]
      *
@@ -194,13 +204,13 @@ class OptionCommand extends BaseCommand
             return $this->cli->warning( "No languages are currently configured." );
         }
 
-        # get the default language
-        $default = $this->api->default_language();
-
         # if no language provided, return the default language
         if ( empty( $args ) ) {
-            return $this->cli->success( "{$default} is currently the default language" );
+            return $this->get( array( 'default_lang' ), array() );
         }
+
+        # get the default language
+        $default = $this->api->default_language();
 
         # sanitize user input
         $language = isset( $args[0] ) && $args[0] ? sanitize_title_with_dashes( $args[0] ) : false;

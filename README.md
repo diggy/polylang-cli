@@ -618,8 +618,8 @@ wp pll option default [<language-code>]
 
 **EXAMPLES**
 
-  wp pll option default
-  wp pll option default nl
+    $ wp pll option default
+    $ wp pll option default nl
 
 
 
@@ -628,7 +628,7 @@ wp pll option default [<language-code>]
 Get Polylang settings.
 
 ~~~
-wp pll option get <option_name>
+wp pll option get <option_name> [--format=<format>]
 ~~~
 
 **OPTIONS**
@@ -636,9 +636,19 @@ wp pll option get <option_name>
 	<option_name>
 		Option name. Use the options subcommand to get a list of accepted values. Required.
 
+	[--format=<format>]
+		Get value in a particular format.
+		---
+		default: var_export
+		options:
+		  - var_export
+		  - json
+		  - yaml
+		---
+
 **EXAMPLES**
 
-    wp pll option get default_lang
+    $ wp pll option get default_lang
 
 
 
@@ -672,7 +682,7 @@ wp pll option reset
 
 **EXAMPLES**
 
-    wp pll option reset
+    $ wp pll option reset
 
 
 
@@ -762,7 +772,7 @@ wp pll option update <option_name> <new_value>
 
 **EXAMPLES**
 
-    wp pll option update default_lang nl
+    $ wp pll option update default_lang nl
 
 
 
