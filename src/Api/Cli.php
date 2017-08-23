@@ -175,6 +175,17 @@ class Cli {
         \WP_CLI::log( $message );
     }
 
+    /**
+     * Display a value, in various formats
+     *
+     * @param mixed $value Value to display.
+     * @param array $assoc_args Arguments passed to the command, determining format.
+     */
+    public function print_value( $value, $assoc_args ) {
+
+        \WP_CLI::print_value( $value, $assoc_args );
+    }
+
 }
 
 }
