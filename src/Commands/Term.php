@@ -250,10 +250,10 @@ class TermCommand extends BaseCommand {
             } else {
 
                 # set term language
-                $this->api->set_term_language( $duplicate, $slug );
+                $this->api->set_term_language( $duplicate['term_id'], $slug );
 
                 # save term translations
-                $this->api->save_term_translations( array_unique( array_merge( array( $term_language => $term_id, $slug => $duplicate ), $this->api->get_term_translations( $term_id ) ) ) );
+                $this->api->save_term_translations( array_unique( array_merge( array( $term_language => $term_id, $slug => $duplicate['term_id'] ), $this->api->get_term_translations( $term_id ) ) ) );
 
                 # sync taxonomies and post meta, if applicable
                 $sync = new \PLL_Admin_Sync( $this->pll );
