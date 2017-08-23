@@ -77,6 +77,7 @@
             "pll taxonomy list",
             "pll term",
             "pll term get",
+            "pll term duplicate",
             "pll term delete",
             "pll term list",
             "pll term generate"

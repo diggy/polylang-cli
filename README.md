@@ -1388,6 +1388,32 @@ wp pll term get <taxonomy> <term-id> [--field=<field>] [--fields=<fields>] [--fo
 
 
 
+### wp pll term duplicate
+
+Duplicate a taxonomy term to one or more languages.
+
+~~~
+wp pll term duplicate <taxonomy> <term-id> [<language-code>]
+~~~
+
+**OPTIONS**
+
+	<taxonomy>
+		Taxonomy of the term to duplicate
+
+	<term-id>
+		ID of the term to duplicate
+
+	[<language-code>]
+		Language code (slug), or comma-separated list of language codes, to duplicate the term to. Omit to duplicate to all languages. Optional.
+
+**EXAMPLES**
+
+    # Duplicate term 18 of the category taxonomy to all other languages.
+    $ wp pll term duplicate category 18
+
+
+
 ### wp pll term delete
 
 Delete an existing taxonomy term and its translations.
