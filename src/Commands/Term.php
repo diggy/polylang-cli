@@ -223,8 +223,10 @@ class TermCommand extends BaseCommand {
             $term_data = get_term( $term_id, $taxonomy, 'ARRAY_A' );
 
             # check for translated post parent
-            if ( ( $term_parent_id = get_term( $term->parent, $taxonomy ) ) && ( $parent = $this->pll->model->term->get_translation( $term_parent_id, $slug ) ) ) {
-                if ( ! is_wp_error( $term_parent_id ) ) {
+            $term_parent_id = get_term( $term->parent, $taxonomy );
+
+            if ( $term_parent_id && ! is_wp_error( $term_parent_id ) ) {
+                if ( $parent = $this->pll->model->term->get_translation( $term_parent_id, $slug ) ) {
                     $term_data['parent'] = absint( $parent );
                 }
             }
