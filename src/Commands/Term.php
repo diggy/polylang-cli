@@ -341,6 +341,7 @@ class TermCommand extends BaseCommand {
     {
         list ( $taxonomy, $language ) = $args;
 
+        $this->pll->curlang = $this->pll->model->get_language( $this->pll->options['default_lang'] );
         new \PLL_Frontend_Filters( $this->pll );
 
         $this->cli->command(
