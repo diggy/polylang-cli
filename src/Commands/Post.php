@@ -318,11 +318,38 @@ class PostCommand extends BaseCommand {
 
             # insert or update translation
             if ( ! empty( $exists ) ) {
-                $post_data['ID']   = absint( $exists );
+
+                $post_data['ID'] = absint( $exists );
                 $duplicate = wp_update_post( wp_slash( $post_data ), true );
+
             } else {
+
                 unset( $post_data['ID'] );
-                $duplicate = wp_insert_post( wp_slash( $post_data ), true );
+
+                if ( class_exists( '\WC_Admin_Duplicate_Product' ) && 'product' === $post_data['post_type'] ) {
+
+                    $this->cli->log( sprintf( 'Duplicating WooCommerce product %d.', $post_id ) );
+
+                    $product    = wc_get_product( $post_id );
+                    $duplicator = new \WC_Admin_Duplicate_Product();
+                    $duplicate = $duplicator->product_duplicate( $product );
+
+                    $this->cli->log( sprintf( 'Duplicated WooCommerce product ID: %d.', $duplicate->get_id() ) );
+
+                    $this->cli->log( 'Updating product data...' );
+
+                    $duplicate = wp_update_post( wp_slash( array(
+                        'ID'          => $duplicate->get_id(),
+                        'post_title'  => $post_data['post_title'],
+                        'post_status' => $post_data['post_status'],
+                        'post_name'   => sprintf( '%s-%s', $post_data['post_name'], $slug )
+                    ) ), true );
+
+                } else {
+
+                    $duplicate = wp_insert_post( wp_slash( $post_data ), true );
+
+                }
             }
 
             if ( empty( $duplicate ) ) {
@@ -338,6 +365,7 @@ class PostCommand extends BaseCommand {
                 $this->api->save_post_translations( array_unique( array_merge( array( $post_language => $post_id, $slug => $duplicate ), $post_translations ) ) );
 
                 # sync taxonomies and post meta, if applicable
+                $this->pll->filters_post = new \PLL_Admin_Filters_Post( $this->pll );
                 $sync = new \PLL_Admin_Sync( $this->pll );
                 $sync->pll_save_post( $post_id, get_post( $post_id, 'OBJECT' ), $this->api->get_post_translations( $post_id ) );
 
