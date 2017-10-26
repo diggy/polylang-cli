@@ -261,7 +261,7 @@ class PostCommand extends BaseCommand {
      *     $ wp pll post duplicate 23 de
      *     Success: Created post 68 (de) < post 23 (nl)
      *
-     *     # Duplicate post 23 (Dutch) to all languages (Dutch and Spanish)
+     *     # Duplicate post 23 (Dutch) to all languages (German and Spanish)
      *     $ wp pll post duplicate 23
      *     Success: Updated post 68 (de) < post 23 (nl)
      *     Success: Created post 69 (es) < post 23 (nl)
