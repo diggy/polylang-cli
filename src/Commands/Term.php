@@ -259,7 +259,7 @@ class TermCommand extends BaseCommand {
 
                 # sync taxonomies and post meta, if applicable
                 $sync = new \PLL_Admin_Sync( $this->pll );
-                $sync->pll_save_term( $term_id, $taxonomy, $this->api->get_term_translations( $term_id ) );
+                $sync->sync_term_parent( $term_id, $taxonomy, $this->api->get_term_translations( $term_id ) );
 
                 # success message
                 $msg = $exists

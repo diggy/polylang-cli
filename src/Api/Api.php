@@ -36,20 +36,20 @@ class Api {
         if ( ! in_array( $func, $this->functions ) )
             return \WP_CLI::error( "$func is not a Polylang API function." );
 
-        $this->debug_backtrace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 3 );
-
-        \WP_CLI::debug(
-            sprintf(
-                "Calling %s::__call('%s') from %s::%s with %d args: %s",
-                $this->debug_backtrace[1]['class'],
-                $this->debug_backtrace[1]['function'],
-                $this->debug_backtrace[2]['class'],
-                $this->debug_backtrace[2]['function'],
-                count( $args ),
-                json_encode( $args )
-            ),
-            __NAMESPACE__
-        );
+        // $this->debug_backtrace = debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS, 3 );
+        //
+        // \WP_CLI::debug(
+        //     sprintf(
+        //         "Calling %s::__call('%s') from %s::%s with %d args: %s",
+        //         $this->debug_backtrace[1]['class'],
+        //         $this->debug_backtrace[1]['function'],
+        //         $this->debug_backtrace[2]['class'],
+        //         $this->debug_backtrace[2]['function'],
+        //         count( $args ),
+        //         json_encode( $args )
+        //     ),
+        //     __NAMESPACE__
+        // );
 
         // \WP_CLI::debug(  ( new \Exception() )->getTraceAsString() );
 
