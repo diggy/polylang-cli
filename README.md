@@ -9,7 +9,7 @@ Quick links: [Installation](#installation) | [Using](#using) | [Contributing](#c
 
 ## Installation
 
-Installing this package requires WP-CLI v1.4.0 or greater. Update to the latest stable release with `wp cli update`. 
+Installing this package requires WP-CLI v1.5.0 or greater. Update to the latest stable release with `wp cli update`.
 Once you've done so, you can install this package with `wp package install git@github.com:diggy/polylang-cli.git`.
 
 ## Using
@@ -69,7 +69,7 @@ wp pll cache
 Clears the Polylang languages cache.
 
 ~~~
-wp pll cache clear 
+wp pll cache clear
 ~~~
 
 **EXAMPLES**
@@ -153,7 +153,7 @@ wp pll doctor check [--format=<format>]
 Mass install, update and prune core, theme and plugin language files.
 
 ~~~
-wp pll doctor language 
+wp pll doctor language
 ~~~
 
 **EXAMPLES**
@@ -167,7 +167,7 @@ wp pll doctor language
 Recalculate number of posts assigned to each language taxonomy term.
 
 ~~~
-wp pll doctor recount 
+wp pll doctor recount
 ~~~
 
 In instances where manual updates are made to the terms assigned to
@@ -188,7 +188,7 @@ to bring the count back to the correct value.
 Translate untranslated posts and taxonomies in bulk.
 
 ~~~
-wp pll doctor translate 
+wp pll doctor translate
 ~~~
 
 **EXAMPLES**
@@ -677,7 +677,7 @@ wp pll option list [--format=<format>]
 Reset Polylang settings.
 
 ~~~
-wp pll option reset 
+wp pll option reset
 ~~~
 
 **EXAMPLES**
@@ -1205,7 +1205,7 @@ wp pll post-type enable <post_types>
 List post types with their translation status.
 
 ~~~
-wp pll post-type list 
+wp pll post-type list
 ~~~
 
 **EXAMPLES**
