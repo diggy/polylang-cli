@@ -45,7 +45,7 @@ class BaseCommand extends \WP_CLI_Command
         $this->pll = \PLL();
 
         # make Polylang API functions available
-        $this->api = new Api( PLL_INC . '/api.php' );
+        $this->api = new Api( POLYLANG_DIR . '/include/api.php' );
     }
 
 }
